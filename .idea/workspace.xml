@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2e196384-3ec0-4b55-9f07-491b66cabfc2" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/com/jalasoft/search/SearchCriteria.java" afterPath="$PROJECT_DIR$/src/com/jalasoft/search/Controller/SearchCriteria.java" />
-    </list>
+    <list default="true" id="2e196384-3ec0-4b55-9f07-491b66cabfc2" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -58,7 +56,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="178" />
     <option name="y" value="16" />
     <option name="width" value="1400" />
@@ -224,7 +222,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1870" height="943" extended-state="7" />
+    <frame x="-8" y="-8" width="1870" height="943" extended-state="6" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
