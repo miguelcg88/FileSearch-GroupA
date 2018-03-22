@@ -5,7 +5,7 @@
  *Author : Miguel Calderon
  */
 
-package org.filesearch.gui;
+package com.jalasoft.search.gui;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -13,14 +13,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
+import java.awt.*;
 
 public class MainFileSearch extends JFrame {
 
-    private JButton searchButton,normalSearchButton,advancedSearchButton,videoSearchButton,musicSearchButton;
+    private JButton searchButton,normalSearchButton,advancedSearchButton,videoSearchButton,musicSearchButton,recentSearchsButton;
     private JTextField searchString;
     private JPanel searchOptionsPanel, leftPanel,northPanel,resultsPanel;
 
@@ -52,6 +49,7 @@ public class MainFileSearch extends JFrame {
     private void makeNorthPanel() {
         northPanel = new JPanel();
         northPanel.setLayout(new BorderLayout());
+        northPanel.setPreferredSize(new Dimension(650,250));
         makeSearchOptionsPanel();
         makeLeftPanel();
         northPanel.add(searchOptionsPanel,BorderLayout.CENTER);
@@ -63,7 +61,7 @@ public class MainFileSearch extends JFrame {
         searchOptionsPanel = new JPanel();
         searchOptionsPanel.setLayout(new FlowLayout());
         searchString = new JTextField();
-        searchString.setPreferredSize(new Dimension(200,50));
+        searchString.setPreferredSize(new Dimension(200,30));
         searchButton = new JButton("Go!");
         searchOptionsPanel.add(searchString);
         searchOptionsPanel.add(searchButton);
@@ -85,12 +83,14 @@ public class MainFileSearch extends JFrame {
         advancedSearchButton = new JButton("Advanced");
         videoSearchButton = new JButton("Video");
         musicSearchButton = new JButton("Music");
-        leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
+        recentSearchsButton = new JButton("Recent Searchs");
+        leftPanel.setLayout(new GridLayout(5,1));
         leftPanel.setBackground(Color.darkGray);
         leftPanel.add(normalSearchButton);
         leftPanel.add(advancedSearchButton);
         leftPanel.add(videoSearchButton);
         leftPanel.add(musicSearchButton);
+        leftPanel.add(recentSearchsButton);
     }
 
 
