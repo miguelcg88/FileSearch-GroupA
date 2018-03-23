@@ -45,6 +45,30 @@ public class Validator {
         return true;
     }
 
+    /* isFileExist validates if file exist - input string */
+    public static boolean isFileExist(String filePathString)
+    {
+        File f = new File(filePathString);
+
+        if(f.exists()) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /* isDirectory validates if file path is a valid Directory - input string */
+    public static boolean isDirectory(String filePathString)
+    {
+        File f = new File(filePathString);
+
+        if(f.isDirectory()) {
+            return true;
+        }
+
+        return false;
+    }
+
     /* isValidDate validates if date is valid - input string */
     public static boolean isValidDate(String date) {
         try {

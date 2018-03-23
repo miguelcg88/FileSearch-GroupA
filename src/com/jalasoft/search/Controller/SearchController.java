@@ -22,6 +22,9 @@ public class SearchController {
     /* Controller. */
     /**
      private model, view */
+
+    /*
+
     private SearchModel model;
     //private SearchCriteria criteria;
     //private SearchModel search = new SearchModel(criteria);
@@ -48,4 +51,9 @@ public class SearchController {
             }
         }
     }
+
+    */
+
 }
+
+
