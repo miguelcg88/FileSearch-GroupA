@@ -7,19 +7,23 @@
 
 package com.jalasoft.search.gui;
 
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.WindowConstants;
+import javax.swing.*;
 import java.awt.*;
 
 public class MainFileSearch extends JFrame {
 
-    private JButton searchButton,normalSearchButton,advancedSearchButton,videoSearchButton,musicSearchButton,recentSearchsButton;
+    private JButton searchButton;
+    private JButton normalSearchButton;
+    private JButton advancedSearchButton;
+    private JButton videoSearchButton;
+    private JButton musicSearchButton;
+    private JButton recentSearchsButton;
     private JTextField searchString;
-    private JPanel searchOptionsPanel, leftPanel,northPanel,resultsPanel;
+    private JPanel searchOptionsPanel;
+    private JPanel leftPanel;
+    private JPanel northPanel;
+    private JPanel resultsPanel;
+    private JLabel searchLabel;
 
 
     public MainFileSearch(String title) {
@@ -52,6 +56,7 @@ public class MainFileSearch extends JFrame {
         northPanel.setPreferredSize(new Dimension(650,250));
         makeSearchOptionsPanel();
         makeLeftPanel();
+        northPanel.add(searchLabel,BorderLayout.NORTH);
         northPanel.add(searchOptionsPanel,BorderLayout.CENTER);
         northPanel.add(leftPanel,BorderLayout.WEST);
     }
@@ -59,21 +64,17 @@ public class MainFileSearch extends JFrame {
     /* Initializes search panel that contains a text field to enter search criteria and button to start search*/
     private void makeSearchOptionsPanel() {
         searchOptionsPanel = new JPanel();
-        searchOptionsPanel.setLayout(new FlowLayout());
+        searchOptionsPanel.setLayout(new BoxLayout(searchOptionsPanel, BoxLayout.Y_AXIS));
+        searchLabel = new JLabel();
+        searchLabel.setText("Enter name of the file here");
         searchString = new JTextField();
         searchString.setPreferredSize(new Dimension(200,30));
         searchButton = new JButton("Go!");
+        searchOptionsPanel.add(searchLabel);
         searchOptionsPanel.add(searchString);
         searchOptionsPanel.add(searchButton);
 
 
-    }
-
-    /* Initializes result panel*/
-    private void makeResultsPanel() {
-        resultsPanel = new JPanel();
-        resultsPanel.setLayout(new BorderLayout());
-        resultsPanel.setBackground(Color.lightGray);
     }
 
     /* Initializes left panel that contains buttons to select what kind of search want you use*/
@@ -93,6 +94,12 @@ public class MainFileSearch extends JFrame {
         leftPanel.add(recentSearchsButton);
     }
 
+    /* Initializes result panel*/
+    private void makeResultsPanel() {
+        resultsPanel = new JPanel();
+        resultsPanel.setLayout(new BorderLayout());
+        resultsPanel.setBackground(Color.lightGray);
+    }
 
     public static void main(String[] args) {
         new MainFileSearch("File Search");
