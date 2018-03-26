@@ -1,72 +1,76 @@
 package com.jalasoft.search.gui;
 
-import javax.swing.BoxLayout;
-import javax.swing.JTextField;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.JFrame;
-import javax.swing.WindowConstants;
-import java.awt.*;
+import javax.swing.*;
+
 
 public class SimpleSearchPanel extends JPanel {
 
 
-    private JPanel panelSuperior, panelMedio;
-    private JLabel etiqueta1, pathLabel, etiqueta3;
-    private JTextField cajaTexto;
-    private JTextField cajaPass;
+    private  JPanel FileNamePanel;
+    private  JPanel pathPanel;
+    private  JPanel hiddenPanel;
+    private  JPanel principalPanel;
+    private JLabel simpleSearchPanelLabel;
+    private JLabel fileNameLabel;
+    private JLabel pathLabel;
+    private JLabel hiddenLabel;
+    private JTextField fileNameField;
+    private JTextField pathNameField;
+    private JCheckBox hiddenCheckbox ;
 
+    public void makeFileNamePanel(){
+        FileNamePanel =new JPanel();
+        fileNameLabel = new JLabel("File Name");
+        fileNameField = new JTextField(10);
+        FileNamePanel.setLayout(new BoxLayout(FileNamePanel, BoxLayout.X_AXIS));
+        FileNamePanel.add(fileNameLabel);
+        FileNamePanel.add(fileNameField);
 
-    public void construyePanelSuperior(){
-        panelSuperior =new JPanel();
+    }
+
+    public void makePathPanel(){
+        pathPanel =new JPanel();
         pathLabel = new JLabel("Path");
-        cajaTexto = new JTextField(10);
-        panelSuperior.setLayout(new BoxLayout(panelSuperior, BoxLayout.X_AXIS));
-        panelSuperior.add(pathLabel);
-        panelSuperior.add(cajaTexto);
+        pathNameField = new JTextField (10);
+        pathPanel.setLayout(new BoxLayout(pathPanel, BoxLayout.X_AXIS));
+        pathPanel.add(pathLabel);
+        pathPanel.add(pathNameField);
+
 
     }
 
-    public void construyePanelMedio(){
-        panelMedio=new JPanel();
-        etiqueta3= new JLabel("File Name");
-        cajaPass = new JTextField (10);
-        panelMedio.setLayout(new BoxLayout(panelMedio, BoxLayout.X_AXIS));
-        panelMedio.add(etiqueta3);
-        panelMedio.add(cajaPass);
+    public void makeHiddenPanel(){
+        hiddenPanel =new JPanel();
+        hiddenLabel = new JLabel("Show Hidden");
+        hiddenCheckbox = new JCheckBox();
+        hiddenPanel.setLayout(new BoxLayout(hiddenLabel, BoxLayout.X_AXIS));
+        hiddenPanel.add(hiddenLabel);
+        hiddenPanel.add(hiddenCheckbox);
 
     }
 
 
-    public void construyeVentana(){
-        JPanel principalPanel  = new JPanel();
-        etiqueta1 = new JLabel("Demo por inforux");
+    public void makePrincipalSimpleSearchPanel(){
+        principalPanel  = new JPanel();
+        simpleSearchPanelLabel = new JLabel("Enter your search criteria");
         principalPanel.setLayout(new BoxLayout(principalPanel, BoxLayout.Y_AXIS) );
-        principalPanel.add(etiqueta1);
-        principalPanel.add(panelSuperior);
-        principalPanel.add(panelMedio);
+        principalPanel.add(simpleSearchPanelLabel);
+        principalPanel.add(FileNamePanel);
+        principalPanel.add(pathPanel);
+        principalPanel.add(hiddenPanel);
 
     }
 
     public SimpleSearchPanel(){
-        construyePanelSuperior();
-        construyePanelMedio();
-        construyeVentana();
+        makeFileNamePanel();
+        makePathPanel();
+        makeHiddenPanel();
+        makePrincipalSimpleSearchPanel();
 
     }
 
-
-
-   /* public static void main (String [] args){
-        new SimpleSearchPanel();
-    } */
-     public static void main (String [] args){
-       JFrame test = new JFrame();
-       JPanel simpleSearchPanel =  new SimpleSearchPanel();
-       test.add(simpleSearchPanel);
-       test.pack();
-       test.setSize(300, 400);
-       test.setVisible(true);
-       test.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    public  JPanel getPrincipalPanel() {
+        return principalPanel;
     }
+
 }

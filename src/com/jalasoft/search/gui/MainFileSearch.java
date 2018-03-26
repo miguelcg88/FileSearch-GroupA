@@ -54,14 +54,16 @@ public class MainFileSearch extends JFrame {
     private void makeNorthPanel() {
         northPanel = new JPanel();
         northPanel.setLayout(new BorderLayout());
-        northPanel.setPreferredSize(new Dimension(650,250));
+        northPanel.setPreferredSize(new Dimension(750,350));
        // makeSearchOptionsPanel();
-        simpleSearchPanel = new SimpleSearchPanel();
-        simpleSearchPanel.setVisible(true);
+        SimpleSearchPanel simpleSearchPanel = new SimpleSearchPanel();
+        simpleSearchPanel.add(simpleSearchPanel.getPrincipalPanel());
+
         makeLeftPanel();
         //northPanel.add(searchLabel,BorderLayout.NORTH);
         northPanel.add(simpleSearchPanel,BorderLayout.CENTER);
         northPanel.add(leftPanel,BorderLayout.WEST);
+        northPanel.setVisible(true);
     }
 
     /* Initializes search panel that contains a text field to enter search criteria and button to start search
