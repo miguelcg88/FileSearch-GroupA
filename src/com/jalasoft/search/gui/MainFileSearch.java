@@ -53,34 +53,18 @@ public class MainFileSearch extends JFrame {
     other one is left panel that contains buttons to select what kind of search want to use*/
     private void makeNorthPanel() {
         northPanel = new JPanel();
+        searchButton = new JButton("Go !");
+       // searchButton.setPreferredSize(new Dimension(50, 50));
         northPanel.setLayout(new BorderLayout());
-        northPanel.setPreferredSize(new Dimension(750,350));
-       // makeSearchOptionsPanel();
+        northPanel.setPreferredSize(new Dimension(750,280));
         SimpleSearchPanel simpleSearchPanel = new SimpleSearchPanel();
-        simpleSearchPanel.add(simpleSearchPanel.getPrincipalPanel());
-
+        simpleSearchPanel.add(simpleSearchPanel.getSimpleSearchPrincipalPanel());
         makeLeftPanel();
-        //northPanel.add(searchLabel,BorderLayout.NORTH);
         northPanel.add(simpleSearchPanel,BorderLayout.CENTER);
         northPanel.add(leftPanel,BorderLayout.WEST);
+        northPanel.add(searchButton,BorderLayout.EAST);
         northPanel.setVisible(true);
     }
-
-    /* Initializes search panel that contains a text field to enter search criteria and button to start search
-    private void makeSearchOptionsPanel() {
-        searchOptionsPanel = new JPanel();
-        searchOptionsPanel.setLayout(new BoxLayout(searchOptionsPanel, BoxLayout.Y_AXIS));
-        searchLabel = new JLabel();
-        searchLabel.setText("Enter name of the file here");
-        searchString = new JTextField();
-        searchString.setPreferredSize(new Dimension(200,30));
-        searchButton = new JButton("Go!");
-        searchOptionsPanel.add(searchLabel);
-        searchOptionsPanel.add(searchString);
-        searchOptionsPanel.add(searchButton);
-
-
-    }*/
 
     /* Initializes left panel that contains buttons to select what kind of search want you use*/
     private void makeLeftPanel() {
