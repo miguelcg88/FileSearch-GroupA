@@ -1,6 +1,23 @@
+/*
+ * @(#)SearchController.java        1.00 3/22/18
+ *
+ * Copyright (c) Jalasoft
+ *
+ * This software is the confidential and proprietary information of Jalasoft
+ * ("Confidential Information").  You shall not
+ * disclose such Confidential Information and shall use it only in
+ * accordance with the terms of the license agreement you entered into
+ * with Jalasoft.
+ */
 package com.jalasoft.search.model;
-
+/**
+ * Search Criteria
+ *
+ * @version 1.00 26 Mar 2018
+ * @author Gabriel Rendon  */
 public class SearchCriteria {
+    /**
+     private variables */
     //private Assets asset;
     private String folderPath;
     private String name;
@@ -13,7 +30,7 @@ public class SearchCriteria {
      */
     public void setFolderPath(String folderPath) {
         this.folderPath = folderPath;
-        //this.asset.folderpath = folderPath;
+        //this.asset.folderPath = folderPath;
     }
 
     /**

@@ -10,8 +10,11 @@
  * with Jalasoft.
  */
 package com.jalasoft.search.common;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.sql.Timestamp;
 
 /**
  * Convertor
@@ -33,5 +36,19 @@ public class Convertor {
         SimpleDateFormat lastModifiedDateFormat = new SimpleDateFormat("MM/dd/yyyy");
 
         return lastModifiedDateFormat.format(date);
+    }
+
+    /* convertStringToTimestamp converts date in string to timeStampDate - input string*/
+    public static Timestamp convertStringToTimestamp(String stringDate) {
+        try {
+            DateFormat formatter;
+            formatter = new SimpleDateFormat("MM/dd/yyyy");
+            Date date = formatter.parse(stringDate);
+            java.sql.Timestamp timeStampDate = new Timestamp(date.getTime());
+            return timeStampDate;
+        } catch (ParseException e) {
+            System.out.println("Exception :" + e);
+            return null;
+        }
     }
 }
