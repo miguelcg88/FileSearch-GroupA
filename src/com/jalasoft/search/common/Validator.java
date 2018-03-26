@@ -29,7 +29,7 @@ public class Validator {
      DATE_FORMAT has the format wanted
      Petterm fileExtnPtrn has the valid format*/
 
-    final static String DATE_FORMAT = "MM-dd-yyyy";
+    final static String DATE_FORMAT = "MM/dd/yyyy";
     private static Pattern fileExtnPtrn = Pattern.compile("([^\\s]+(\\.(?i)(txt|doc|csv|pdf))$)"); //Add here all valid extensions
 
     /* isValidPath validates if path is valid - input string */
@@ -81,10 +81,10 @@ public class Validator {
         }
     }
 
-    /* isValidExtension validates if file has a valid extension - input file */
-    public static boolean isValidExtension(File file) {
-        String extension = getFileExtension(file);
-        Matcher mtch = fileExtnPtrn.matcher(extension);
+    /* isValidExtension validates if file has a valid extension - input extension file */
+    public static boolean isValidExtension(String fileNameWithextension) {
+        //String extension = getFileExtension(file);
+        Matcher mtch = fileExtnPtrn.matcher(fileNameWithextension);
         if (mtch.matches()) {
             return true;
         }

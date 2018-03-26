@@ -1,9 +1,7 @@
 package com.jalasoft.search.common;
 import org.junit.jupiter.api.Test;
 
-import static com.jalasoft.search.common.Validator.isDirectory;
-import static com.jalasoft.search.common.Validator.isFileExist;
-import static com.jalasoft.search.common.Validator.isValidPath;
+import static com.jalasoft.search.common.Validator.*;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -23,7 +21,7 @@ public class ValidatorTest {
     @Test
     public void validateIfFileExist() {
         //assertTrue(isFileExist("C:\\TestFolder"));
-        assertTrue(isFileExist("TestFiles"));
+        assertTrue(isFileExist("\\TestFiles"));
     }
 
     @Test
@@ -42,5 +40,25 @@ public class ValidatorTest {
     public void validateFileIsNotDirectory() {
         assertFalse(isDirectory("C:\\TestFolder\\Test.txt"));
         //assertFalse(isFileExist("\\TestFilesFake"));
+    }
+
+    @Test
+    public void validateDateIsValid(){
+        assertTrue(isValidDate("3/26/2018"));
+    }
+
+    @Test
+    public void validateDateIsInvalid(){
+        assertFalse(isValidDate("13/26/2018"));
+    }
+
+    @Test
+    public void validateFileHasValidExtension(){
+        assertTrue(isValidExtension("a.pdf"));
+    }
+
+    @Test
+    public void validateFileNameDoesNotHaveValidExtension(){
+        assertFalse(isValidExtension("a.mp3"));
     }
 }
