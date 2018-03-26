@@ -5,10 +5,10 @@ import javax.swing.JTextField;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JFrame;
-import javax.swing.JButton;
 import javax.swing.WindowConstants;
+import java.awt.*;
 
-public class SimpleSearchPanel extends JFrame {
+public class SimpleSearchPanel extends JPanel {
 
 
     private JPanel panelSuperior, panelMedio;
@@ -24,6 +24,7 @@ public class SimpleSearchPanel extends JFrame {
         panelSuperior.setLayout(new BoxLayout(panelSuperior, BoxLayout.X_AXIS));
         panelSuperior.add(pathLabel);
         panelSuperior.add(cajaTexto);
+
     }
 
     public void construyePanelMedio(){
@@ -33,28 +34,39 @@ public class SimpleSearchPanel extends JFrame {
         panelMedio.setLayout(new BoxLayout(panelMedio, BoxLayout.X_AXIS));
         panelMedio.add(etiqueta3);
         panelMedio.add(cajaPass);
+
     }
 
 
     public void construyeVentana(){
-        SimpleSearchPanel = new JFrame();
+        JPanel principalPanel  = new JPanel();
         etiqueta1 = new JLabel("Demo por inforux");
-        SimpleSearchPanel.setLayout(new BoxLayout(SimpleSearchPanel.getContentPane(), BoxLayout.Y_AXIS) );
-        SimpleSearchPanel.add(etiqueta1);
-        SimpleSearchPanel.add(panelSuperior);
-        SimpleSearchPanel.add(panelMedio);
-        SimpleSearchPanel.pack();
-        SimpleSearchPanel.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        SimpleSearchPanel.setVisible(true);
+        principalPanel.setLayout(new BoxLayout(principalPanel, BoxLayout.Y_AXIS) );
+        principalPanel.add(etiqueta1);
+        principalPanel.add(panelSuperior);
+        principalPanel.add(panelMedio);
+
     }
 
     public SimpleSearchPanel(){
         construyePanelSuperior();
         construyePanelMedio();
         construyeVentana();
+
     }
 
-    public static void main (String [] args){
+
+
+   /* public static void main (String [] args){
         new SimpleSearchPanel();
+    } */
+     public static void main (String [] args){
+       JFrame test = new JFrame();
+       JPanel simpleSearchPanel =  new SimpleSearchPanel();
+       test.add(simpleSearchPanel);
+       test.pack();
+       test.setSize(300, 400);
+       test.setVisible(true);
+       test.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 }
