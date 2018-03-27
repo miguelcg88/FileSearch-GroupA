@@ -63,14 +63,16 @@ public class MainFileSearch extends JFrame {
         northPanel.setPreferredSize(new Dimension(750,280));
         SimpleSearchPanel simpleSearchPanel = new SimpleSearchPanel();
         simpleSearchPanel.add(simpleSearchPanel.getSimpleSearchPrincipalPanel());
-        makeLeftPanel();
+        LeftPanel leftPanel = new LeftPanel();
+        leftPanel.add(leftPanel.getLeftPanel());
+        //makeLeftPanel();
         northPanel.add(simpleSearchPanel,BorderLayout.CENTER);
         northPanel.add(leftPanel,BorderLayout.WEST);
         northPanel.add(searchButton,BorderLayout.EAST);
         northPanel.setVisible(true);
     }
-
-    /* Initializes left panel that contains buttons to select what kind of search want you use*/
+    /*
+    //Initializes left panel that contains buttons to select what kind of search want you use
     private void makeLeftPanel() {
         leftPanel = new JPanel();
         normalSearchButton = new JButton("Simple");
@@ -85,7 +87,7 @@ public class MainFileSearch extends JFrame {
         leftPanel.add(videoSearchButton);
         leftPanel.add(musicSearchButton);
         leftPanel.add(recentSearchsButton);
-    }
+    }*/
 
     /* Initializes result panel*/
     private void makeResultsPanel() {
