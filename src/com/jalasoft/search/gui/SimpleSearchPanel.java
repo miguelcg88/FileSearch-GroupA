@@ -14,7 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.awt.Dimension;
-
+//Class that creates panel for simple search, it contains another panels that shows optoins to set search
 public class SimpleSearchPanel extends JPanel {
 
     private  JPanel fileNamePanel;
@@ -43,7 +43,6 @@ public class SimpleSearchPanel extends JPanel {
         makeExtensionPanel();
         makeSizePanel();
         makePrincipalSimpleSearchPanel();
-
     }
     //Panel that contains textfiled to enter file name for search
     public void makeFileNamePanel(){
@@ -53,7 +52,6 @@ public class SimpleSearchPanel extends JPanel {
         fileNamePanel.setLayout(new BoxLayout(fileNamePanel, BoxLayout.X_AXIS));
         fileNamePanel.add(fileNameLabel);
         fileNamePanel.add(fileNameField);
-
     }
     //Panel that contains textfiled to enter path for search
     public void makePathPanel(){
@@ -63,8 +61,6 @@ public class SimpleSearchPanel extends JPanel {
         pathPanel.setLayout(new BoxLayout(pathPanel, BoxLayout.X_AXIS));
         pathPanel.add(pathLabel);
         pathPanel.add(pathNameField);
-
-
     }
     //Panel that contains checbox to indicate if user wants to include hidden files or not in search
     public void makeHiddenPanel(){
@@ -74,7 +70,6 @@ public class SimpleSearchPanel extends JPanel {
         hiddenPanel.setLayout(new BoxLayout(hiddenPanel, BoxLayout.X_AXIS));
         hiddenPanel.add(hiddenLabel);
         hiddenPanel.add(hiddenCheckbox);
-
     }
     //Panel that contains drop down to indicate  specific file extension in search
     public void makeExtensionPanel(){
@@ -119,3 +114,4 @@ public class SimpleSearchPanel extends JPanel {
         return simpleSearchPrincipalPanel;
     }
 }
+
