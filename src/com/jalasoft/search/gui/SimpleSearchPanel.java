@@ -1,11 +1,22 @@
+/*
+ * MainFileSearch.java  1.0  3/16/2018
+ * Copyright (c) 2018  Jalasoft
+ * All rights reserved.
+ *Author : Miguel Calderon
+ */
+
 package com.jalasoft.search.gui;
 
-import javax.swing.*;
-import java.awt.*;
-
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import java.awt.Dimension;
 
 public class SimpleSearchPanel extends JPanel {
-
 
     private  JPanel fileNamePanel;
     private  JPanel pathPanel;
@@ -25,6 +36,17 @@ public class SimpleSearchPanel extends JPanel {
     private JComboBox extensionComboBox;
     private JComboBox sizeComboBox;
 
+    //Class constructor, calls methods to make panels, each panel has a component and label
+    public SimpleSearchPanel(){
+        makeFileNamePanel();
+        makePathPanel();
+        makeHiddenPanel();
+        makeExtensionPanel();
+        makeSizePanel();
+        makePrincipalSimpleSearchPanel();
+
+    }
+    //Panel that contains textfiled to enter file name for search
     public void makeFileNamePanel(){
         fileNamePanel =new JPanel();
         fileNameLabel = new JLabel("File Name");
@@ -34,7 +56,7 @@ public class SimpleSearchPanel extends JPanel {
         fileNamePanel.add(fileNameField);
 
     }
-
+    //Panel that contains textfiled to enter path for search
     public void makePathPanel(){
         pathPanel =new JPanel();
         pathLabel = new JLabel("Path");
@@ -45,7 +67,7 @@ public class SimpleSearchPanel extends JPanel {
 
 
     }
-
+    //Panel that contains checbox to indicate if user wants to include hidden files or not in search
     public void makeHiddenPanel(){
         hiddenPanel =new JPanel();
         hiddenLabel = new JLabel("Show Hidden");
@@ -55,28 +77,30 @@ public class SimpleSearchPanel extends JPanel {
         hiddenPanel.add(hiddenCheckbox);
 
     }
-
+    //Panel that contains drop down to indicate  specific file extension in search
     public void makeExtensionPanel(){
         extensionPanel =new JPanel();
         extensionLabel = new JLabel("Select extension");
-        extensionComboBox = new JComboBox<>();
+        String[] extensionsList = { "exe", "doc", "xls", "png", "zip" };
+        extensionComboBox = new JComboBox(extensionsList);
         extensionPanel.setLayout(new BoxLayout(extensionPanel, BoxLayout.X_AXIS));
         extensionPanel.add(extensionLabel);
         extensionPanel.add(extensionComboBox);
 
     }
-
+    //Panel that contains drop down to indicate  specific range for file size
     public void makeSizePanel(){
         sizePanel =new JPanel();
         sizeLabel = new JLabel("Select size range");
-        extensionComboBox = new JComboBox<>();
+        String[] sizeRanges = { "Less than 1 MB", "1MB - 50MB ", "50MB - 500MB", "500MB - 1GB", "More than 1 GB" };
+        sizeComboBox = new JComboBox(sizeRanges);
         sizePanel.setLayout(new BoxLayout(sizePanel, BoxLayout.X_AXIS));
         sizePanel.add(sizeLabel);
-        sizePanel.add(extensionComboBox);
+        sizePanel.add(sizeComboBox);
 
     }
 
-
+    //Main Panel that contains all other panels,this will be called from main Frame to display "simple search" panel with all their components
     public void makePrincipalSimpleSearchPanel(){
         simpleSearchPrincipalPanel = new JPanel();
         simpleSearchPanelLabel = new JLabel("Enter your search criteria");
@@ -92,16 +116,6 @@ public class SimpleSearchPanel extends JPanel {
         simpleSearchPrincipalPanel.add(extensionPanel);
         simpleSearchPrincipalPanel.add(Box.createRigidArea(new Dimension(0,6)));
         simpleSearchPrincipalPanel.add(sizePanel);
-
-    }
-
-    public SimpleSearchPanel(){
-        makeFileNamePanel();
-        makePathPanel();
-        makeHiddenPanel();
-        makeExtensionPanel();
-        makeSizePanel();
-        makePrincipalSimpleSearchPanel();
 
     }
 

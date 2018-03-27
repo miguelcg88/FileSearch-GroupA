@@ -7,8 +7,16 @@
 
 package com.jalasoft.search.gui;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.WindowConstants;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridLayout;
 
 public class MainFileSearch extends JFrame {
 
@@ -26,7 +34,7 @@ public class MainFileSearch extends JFrame {
     private JPanel simpleSearchPanel;
     private JLabel searchLabel;
 
-
+    //Class constructor, calls methods to make panels
     public MainFileSearch(String title) {
         super(title);
         makeNorthPanel();
@@ -54,7 +62,6 @@ public class MainFileSearch extends JFrame {
     private void makeNorthPanel() {
         northPanel = new JPanel();
         searchButton = new JButton("Go !");
-       // searchButton.setPreferredSize(new Dimension(50, 50));
         northPanel.setLayout(new BorderLayout());
         northPanel.setPreferredSize(new Dimension(750,280));
         SimpleSearchPanel simpleSearchPanel = new SimpleSearchPanel();
