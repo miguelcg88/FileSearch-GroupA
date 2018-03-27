@@ -10,6 +10,7 @@
  * with Jalasoft.
  */
 package com.jalasoft.search.common;
+
 import java.io.File;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Paths;

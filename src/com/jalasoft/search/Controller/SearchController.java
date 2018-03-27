@@ -10,6 +10,7 @@
  * with Jalasoft.
  */
 package com.jalasoft.search.Controller;
+
 import com.jalasoft.search.model.SearchModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

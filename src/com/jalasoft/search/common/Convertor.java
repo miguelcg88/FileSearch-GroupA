@@ -10,6 +10,7 @@
  * with Jalasoft.
  */
 package com.jalasoft.search.common;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -24,11 +25,11 @@ import java.sql.Timestamp;
 public class Convertor {
     /**
      MEGABYTE divides bytes (2 times 2014)*/
-    private static final long MEGABYTE = 1024L * 1024L;
+    private static final long megabyte = 1024L * 1024L;
 
     /* ConvertBytesToMegabytes converts bytes to Mb - input bytes */
     public static long ConvertBytesToMegabytes(long bytes) {
-        return bytes / MEGABYTE;
+        return bytes / megabyte;
     }
 
     /* ConvertToReadableDate converts date to desired format - input date */

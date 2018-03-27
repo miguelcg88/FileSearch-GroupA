@@ -1,4 +1,5 @@
 package com.jalasoft.search.common;
+
 import org.junit.jupiter.api.Test;
 import static com.jalasoft.search.common.Validator.*;
 import static org.junit.jupiter.api.Assertions.assertFalse;
