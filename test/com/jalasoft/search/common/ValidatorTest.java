@@ -1,6 +1,5 @@
 package com.jalasoft.search.common;
 import org.junit.jupiter.api.Test;
-
 import static com.jalasoft.search.common.Validator.*;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -8,20 +7,20 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class ValidatorTest {
     @Test
     public void validatePathIsValid() {
-        assertTrue(isValidPath("C:\\TestFolder"));
+        //assertTrue(isValidPath("C:\\TestFolder"));
         assertTrue(isValidPath("\\TestFiles"));
     }
 
     @Test
     public void validatePathIsInvalid() {
-        assertFalse(isValidPath("C:\\TestF/-*-*/**olderFake"));
+        //assertFalse(isValidPath("C:\\TestF/-*-*/**olderFake"));
         assertFalse(isValidPath("\\TestF/*-*ilesFake"));
     }
 
     @Test
     public void validateIfFileExist() {
         //assertTrue(isFileExist("C:\\TestFolder"));
-        assertTrue(isFileExist("\\TestFiles"));
+        assertTrue(isFileExist(".\\test\\com\\jalasoft\\search\\common\\TestFiles"));
     }
 
     @Test
@@ -32,14 +31,14 @@ public class ValidatorTest {
 
     @Test
     public void validateIfFileIsDirectory() {
-        assertTrue(isDirectory("C:\\TestFolder"));
-        //assertTrue(isFileExist("\\TestFiles"));
+        //assertTrue(isDirectory("C:\\TestFolder"));
+        assertTrue(isDirectory(".\\test\\com\\jalasoft\\search\\common\\TestFiles"));
     }
 
     @Test
     public void validateFileIsNotDirectory() {
-        assertFalse(isDirectory("C:\\TestFolder\\Test.txt"));
-        //assertFalse(isFileExist("\\TestFilesFake"));
+        //assertFalse(isDirectory("C:\\TestFolder\\Test.txt"));
+        assertFalse(isDirectory("\\TestFilesFake"));
     }
 
     @Test

@@ -50,11 +50,11 @@ public class Validator {
     {
         File f = new File(filePathString);
 
-        if(f.exists()) {
-            return true;
-        }
+            if(f.exists()) {
+                return true;
+            }
 
-        return false;
+            return false;
     }
 
     /* isDirectory validates if file path is a valid Directory - input string */
