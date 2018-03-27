@@ -4,7 +4,6 @@
  * All rights reserved.
  *Author : Miguel Calderon
  */
-
 package com.jalasoft.search.gui;
 
 import javax.swing.Box;
@@ -86,7 +85,6 @@ public class SimpleSearchPanel extends JPanel {
         extensionPanel.setLayout(new BoxLayout(extensionPanel, BoxLayout.X_AXIS));
         extensionPanel.add(extensionLabel);
         extensionPanel.add(extensionComboBox);
-
     }
     //Panel that contains drop down to indicate  specific range for file size
     public void makeSizePanel(){
@@ -97,7 +95,6 @@ public class SimpleSearchPanel extends JPanel {
         sizePanel.setLayout(new BoxLayout(sizePanel, BoxLayout.X_AXIS));
         sizePanel.add(sizeLabel);
         sizePanel.add(sizeComboBox);
-
     }
 
     //Main Panel that contains all other panels,this will be called from main Frame to display "simple search" panel with all their components
@@ -116,11 +113,9 @@ public class SimpleSearchPanel extends JPanel {
         simpleSearchPrincipalPanel.add(extensionPanel);
         simpleSearchPrincipalPanel.add(Box.createRigidArea(new Dimension(0,6)));
         simpleSearchPrincipalPanel.add(sizePanel);
-
     }
 
     public  JPanel getSimpleSearchPrincipalPanel() {
         return simpleSearchPrincipalPanel;
     }
-
 }

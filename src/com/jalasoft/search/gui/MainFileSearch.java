@@ -17,7 +17,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-
+// Class that creates mainframe for project, contains another panels acccording which kind of search is selected by user
 public class MainFileSearch extends JFrame {
 
     private JButton searchButton;
@@ -44,7 +44,6 @@ public class MainFileSearch extends JFrame {
 
     /* Initializes main frame by adding all panels in it and set properties for window*/
     private void initializeMainFrame(){
-
         JFrame mainPanel = new JFrame();
         mainPanel.setLayout(new BorderLayout());
         mainPanel.add(northPanel,BorderLayout.NORTH);
@@ -53,8 +52,6 @@ public class MainFileSearch extends JFrame {
         mainPanel.setVisible(true);
         mainPanel.setSize(700, 550);
         mainPanel.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
-
     }
 
     /* Initializes panel that contains 2 other panels, one for search criteria and
