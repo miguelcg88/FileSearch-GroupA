@@ -9,6 +9,8 @@
 */
 
 package com.jalasoft.search.Model;
+import com.jalasoft.search.Controller.SearchCriteria;
+
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FilenameFilter;
@@ -34,14 +36,20 @@ public class Search {
         this.isHidden = hidden;
         this.extensionFile = extension;
     }
+    /*public Search(SearchCriteria sc) {
+        this.folderPath = sc.path;
+        this.fileNameToSearch = sc.fileName + "." + sc.extension;
+        this.isHidden = sc.hidden;
+        this.extensionFile = sc.extension;
+    }*/
 
     private String getFilePath() {
         return folderPath;
     }
 
-    public void doListFiles(){
-        ArrayList<String> shortList = new ArrayList<>();
-                //Read file
+    public void searchByHiddenAttribute(){
+        ArrayList<File> shortList = new ArrayList<>();
+        //Read file
         File file = new File(folderPath);
 
         //doListFiles
@@ -50,39 +58,45 @@ public class Search {
             System.out.println(list[i].getName());
             //Show only not hidden files
             if (this.isHidden.equals(false) && !list[i].isHidden()) {
-                if (getFileExtension(list[i]).equals(extensionFile)) {
-                    shortList.add(list[i].getName());
-                }
+                shortList.add(list[i]);
             }
             //Show only hidden files
             if (this.isHidden.equals(true) && list[i].isHidden()){
-                if (getFileExtension(list[i]).equals(extensionFile)) {
-                    shortList.add(list[i].getName());
-                }
+                shortList.add(list[i]);
             }
         }
 
         //Show short list
-        /*System.out.println("*****SHORT LIST********");
-        for (String temp : shortList) {
-            System.out.println(temp);
-        }*/
+        System.out.println("*****SHORT LIST BY ATTRIBUTE HIDDEN->"+ this.isHidden +"********" );
+        for (File temp : shortList) {
+            System.out.println(temp.getName());
+        }
         System.out.println("*****************SEARCH RESULT******************************");
         searchByName(shortList);
+        System.out.println("*********************Extension " + "." + this.extensionFile + " List******************");
+        searchByExtension(shortList);
     }
 
-    private void searchByName(ArrayList<String> shortList) {
+    private void searchByName(ArrayList<File> shortList) {
         //SearchByName
         for(int j=0;j<shortList.size();j++){
-            if (shortList.get(j).equals(fileNameToSearch)){
-                System.out.println("The file-> "+shortList.get(j)+" was found!");
+            if (shortList.get(j).getName().equals(fileNameToSearch)){
+                System.out.println("The file-> "+shortList.get(j).getName()+" was found!");
                 isFound = Boolean.TRUE;
                 break;
             }
         }
-
         if(isFound == Boolean.FALSE){
             System.out.println("The file->"+ fileNameToSearch +" was not found!");
+        }
+    }
+
+    private void searchByExtension(ArrayList<File> shortList) {
+        //SearchByExtension
+        for(int j=0;j<shortList.size();j++){
+            if (shortList.get(j).getName().endsWith("." + this.extensionFile)){
+                System.out.println(shortList.get(j).getName());
+            }
         }
     }
 
@@ -97,6 +111,18 @@ public class Search {
     public  static void main(String args[]){
         Search search = new Search("\\Test", "file8", false, "jonas");
         System.out.println("*****************LIST OF FILES******************************");
-        search.doListFiles();
+        search.searchByHiddenAttribute();
     }
+
+    /*private class SearchCriteria {
+        private String path, extension, fileName;
+        private Boolean hidden;
+
+        private SearchCriteria(String pPath, String pFileName, Boolean pHidden, String pExtension){
+            this.path = pPath;
+            this.extension = pExtension;
+            this.fileName = pFileName;
+            this.hidden = pHidden;
+        }
+    }*/
 }
