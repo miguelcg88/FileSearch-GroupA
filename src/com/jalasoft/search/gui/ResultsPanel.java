@@ -15,7 +15,7 @@ public class ResultsPanel extends JPanel {
     private void makeResultsPanel() {
         resultsPanel = new JPanel();
         resultsPanel.setLayout(new BorderLayout());
-        resultsPanel.setBackground(Color.lightGray);
+        resultsPanel.setBackground(Color.black);
     }
 
     public JPanel getResultsPanel(){
