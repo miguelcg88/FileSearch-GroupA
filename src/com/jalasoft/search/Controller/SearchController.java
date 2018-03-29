@@ -15,10 +15,10 @@ import com.jalasoft.search.model.SearchModel;
 import src.com.jalasoft.search.common.Validator;
 import src.com.jalasoft.search.gui.MainFileSearch;
 import src.com.jalasoft.search.model.SearchCriteria;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 /**
  * SearchController
  *
@@ -37,31 +37,38 @@ public class SearchController {
     public SearchController(SearchModel model, MainFileSearch view){
         this.model = model;
         this.view = view;
-       // this.view.getSearchButton().addSearchListener(
-              // e -> FillCriteria());
-        //this.view.addSearchListener(new SearchListener());
+       this.view.getSearchButton().addActionListener(e -> FillCriteria());
     }
-/*
+
     private void FillCriteria(){
         System.out.println("click");
-        String fileName = this.view.getFileName();
+        /*
+        String fileName = this.view.getFileNameField();
         if(validator.isValidName(fileName)){
             System.out.println(fileName + "is a valid File Name");
             this.criteria.setFileName(fileName);
         }
         else{
-            view.setError(fileName+" is an invalid File Name");
+            //view.setError(fileName+" is an invalid File Name");
         }
-        String filePath = this.view.getFilePath();
+        String filePath = this.view.getPathNameField();
         if(validator.isValidPath(filePath)){
             System.out.println(filePath + "is a valid File Path");
         }
         else{
             view.setError(filePath+" is an invalid File Path");
         }
-        Boolean hidden = this.view.getHidden();
-
-    }*/
+        Boolean hidden = this.view.getHiddenCheckbox();
+        String extension = this.view.getExtensionComboBox();
+        if(validator.isValidExtension("test."+extension)){
+            System.out.println(filePath + "is a valid File Extension");
+        }
+        else{
+            view.setError(filePath+" is an invalid File Extension");
+        }
+        */
+        //model.
+    }
 /*
     public class SearchListener implements ActionListener {
         public void actionPerformed(ActionEvent action){
