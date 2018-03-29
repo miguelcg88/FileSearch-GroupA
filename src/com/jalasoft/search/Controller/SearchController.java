@@ -9,9 +9,14 @@
  * accordance with the terms of the license agreement you entered into
  * with Jalasoft.
  */
-package com.jalasoft.search.Controller;
+package src.com.jalasoft.search.Controller;
 
 import com.jalasoft.search.model.SearchModel;
+import src.com.jalasoft.search.common.Validator;
+import src.com.jalasoft.search.gui.MainFileSearch;
+import src.com.jalasoft.search.model.SearchCriteria;
+
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 /**
@@ -23,23 +28,41 @@ public class SearchController {
     /* Controller. */
     /**
      private model, view */
-
-    /*
-
     private SearchModel model;
-    //private SearchCriteria criteria;
-    //private SearchModel search = new SearchModel(criteria);
     private MainFileSearch view;
-    //private Validation valid = mew Validation();
+    private SearchCriteria criteria;
+    private Validator validator = new Validator();
     //search.getResults();
-
 
     public SearchController(SearchModel model, MainFileSearch view){
         this.model = model;
         this.view = view;
-        this.view.addSearchListener(new SearchListener());
+       // this.view.getSearchButton().addSearchListener(
+              // e -> FillCriteria());
+        //this.view.addSearchListener(new SearchListener());
     }
+/*
+    private void FillCriteria(){
+        System.out.println("click");
+        String fileName = this.view.getFileName();
+        if(validator.isValidName(fileName)){
+            System.out.println(fileName + "is a valid File Name");
+            this.criteria.setFileName(fileName);
+        }
+        else{
+            view.setError(fileName+" is an invalid File Name");
+        }
+        String filePath = this.view.getFilePath();
+        if(validator.isValidPath(filePath)){
+            System.out.println(filePath + "is a valid File Path");
+        }
+        else{
+            view.setError(filePath+" is an invalid File Path");
+        }
+        Boolean hidden = this.view.getHidden();
 
+    }*/
+/*
     public class SearchListener implements ActionListener {
         public void actionPerformed(ActionEvent action){
             //Log action here
@@ -51,10 +74,7 @@ public class SearchController {
                 view.printResults(results);
             }
         }
-    }
-
-    */
-
+    }*/
 }
 
 

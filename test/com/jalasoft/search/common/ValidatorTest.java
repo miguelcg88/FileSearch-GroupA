@@ -1,7 +1,7 @@
-package com.jalasoft.search.common;
+package src.com.jalasoft.search.common;
 
 import org.junit.jupiter.api.Test;
-import static com.jalasoft.search.common.Validator.*;
+import static src.com.jalasoft.search.common.Validator.*;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -60,5 +60,15 @@ public class ValidatorTest {
     @Test
     public void validateFileNameDoesNotHaveValidExtension(){
         assertFalse(isValidExtension("a.mp3"));
+    }
+
+    @Test
+    public void validateStringIsAValidFileName(){
+        assertTrue(isValidName("HelloWorld"));
+    }
+
+    @Test
+    public void validateStringIsInvalidFileName(){
+        assertFalse(isValidName("Hello*World"));
     }
 }

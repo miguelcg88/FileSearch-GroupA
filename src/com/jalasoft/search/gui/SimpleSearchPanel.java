@@ -4,7 +4,7 @@
  * All rights reserved.
  *Author : Miguel Calderon
  */
-package com.jalasoft.search.gui;
+package src.com.jalasoft.search.gui;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
