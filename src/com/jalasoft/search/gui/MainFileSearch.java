@@ -65,7 +65,7 @@ public class MainFileSearch extends JFrame {
     public JButton getSearchButton(){
         return searchButton;
     }
-
+    //Method to communicate to Controller when search button is pressed
     public static void main(String[] args) {
         new MainFileSearch("File Search");
     }
