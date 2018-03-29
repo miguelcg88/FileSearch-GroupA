@@ -65,7 +65,7 @@ public class SimpleSearchPanel extends JPanel {
     //Panel that contains checbox to indicate if user wants to include hidden files or not in search
     public void makeHiddenPanel(){
         hiddenPanel =new JPanel();
-        hiddenLabel = new JLabel("Show Hidden");
+        hiddenLabel = new JLabel("Show Hidden                                         ");
         hiddenCheckbox = new JCheckBox();
         hiddenPanel.setLayout(new BoxLayout(hiddenPanel, BoxLayout.X_AXIS));
         hiddenPanel.add(hiddenLabel);
