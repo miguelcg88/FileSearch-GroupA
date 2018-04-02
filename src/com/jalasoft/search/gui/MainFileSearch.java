@@ -22,6 +22,7 @@ public class MainFileSearch extends JFrame {
 
     private JButton searchButton;
     private JPanel northPanel;
+    //private ResultsPanel resultsPanel;
 
 
     //Class constructor, calls methods to make panels
@@ -40,8 +41,8 @@ public class MainFileSearch extends JFrame {
         mainPanel.add(northPanel,BorderLayout.NORTH);
         mainPanel.add(resultsPanel,BorderLayout.CENTER );
         mainPanel.pack();
-        mainPanel.setVisible(true);
         mainPanel.setSize(700, 550);
+        mainPanel.setVisible(true);
         mainPanel.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
@@ -59,14 +60,16 @@ public class MainFileSearch extends JFrame {
         northPanel.add(simpleSearchPanel,BorderLayout.CENTER);
         northPanel.add(leftPanel,BorderLayout.WEST);
         northPanel.add(searchButton,BorderLayout.EAST);
-        northPanel.setVisible(true);
+        //northPanel.setVisible(true);
     }
 
+    //Method to communicate to Controller when search button is pressed
     public JButton getSearchButton(){
         return searchButton;
     }
-    //Method to communicate to Controller when search button is pressed
+
     public static void main(String[] args) {
         new MainFileSearch("File Search");
     }
 }
+

@@ -31,8 +31,9 @@ public class LeftPanel extends JPanel {
         leftPanel.add(musicSearchButton);
         leftPanel.add(recentSearchsButton);
     }
-
+    //Resturns the letf panel
     public JPanel getLeftPanel(){
         return leftPanel;
     }
 }
+
