@@ -8,8 +8,8 @@
 * with Jalasoft.
 */
 
-package com.jalasoft.search.Model;
-import com.jalasoft.search.Controller.SearchCriteria;
+package src.com.jalasoft.search.model;
+import src.com.jalasoft.search.model.SearchCriteria;
 
 import java.io.File;
 import java.io.FileFilter;

@@ -11,9 +11,13 @@
  */
 package src.com.jalasoft.search.Controller;
 
+//import java.util.logging.Logger;
 import com.jalasoft.search.model.SearchModel;
 import src.com.jalasoft.search.common.Validator;
 import src.com.jalasoft.search.gui.MainFileSearch;
+import src.com.jalasoft.search.gui.ResultsPanel;
+import src.com.jalasoft.search.gui.SimpleSearchPanel;
+import src.com.jalasoft.search.model.Search;
 import src.com.jalasoft.search.model.SearchCriteria;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -28,22 +32,25 @@ public class SearchController {
     /* Controller. */
     /**
      private model, view */
-    private SearchModel model;
+    private Search model;
     private MainFileSearch view;
+    private SimpleSearchPanel simpleFilters;
+    private ResultsPanel results;
     private SearchCriteria criteria;
     private Validator validator = new Validator();
-    //search.getResults();
 
-    public SearchController(SearchModel model, MainFileSearch view){
+    public SearchController(Search model, MainFileSearch view, SimpleSearchPanel simpleFilters, ResultsPanel results){
         this.model = model;
         this.view = view;
+        this.simpleFilters = simpleFilters;
+        this.results = results;
        this.view.getSearchButton().addActionListener(e -> FillCriteria());
     }
 
     private void FillCriteria(){
         System.out.println("click");
-        /*
-        String fileName = this.view.getFileNameField();
+
+        String fileName = this.simpleFilters.getFileNameField();
         if(validator.isValidName(fileName)){
             System.out.println(fileName + "is a valid File Name");
             this.criteria.setFileName(fileName);
@@ -51,37 +58,43 @@ public class SearchController {
         else{
             //view.setError(fileName+" is an invalid File Name");
         }
-        String filePath = this.view.getPathNameField();
+
+        String filePath = this.simpleFilters.getPathNameField();
         if(validator.isValidPath(filePath)){
             System.out.println(filePath + "is a valid File Path");
+            this.criteria.setFolderPath(filePath);
         }
         else{
-            view.setError(filePath+" is an invalid File Path");
+            //results.setError(filePath+" is an invalid File Path");
         }
-        Boolean hidden = this.view.getHiddenCheckbox();
-        String extension = this.view.getExtensionComboBox();
+
+        Boolean hidden = this.simpleFilters.getHiddenCheckbox();
+        this.criteria.setHiddenFlag(hidden);
+
+        String extension = this.simpleFilters.getExtensionComboBox();
         if(validator.isValidExtension("test."+extension)){
             System.out.println(filePath + "is a valid File Extension");
+            this.criteria.setExtension(extension);
         }
         else{
-            view.setError(filePath+" is an invalid File Extension");
+            //results.setError(filePath+" is an invalid File Extension");
         }
-        */
-        //model.
+        //model.setSearchCriteria(criteria);
+
+
+        /*
+        * Search
+        * List<Files> filesResults = search.getResults();
+        * foreach(Files file : fileResults)
+        *  {
+        *   this.results.getGrid().row[0] = file.getName();
+        *   this.results.getGrid().row[1] = file.getPath();
+        *   this.results.getGrid().row[2] = file.getHidden();
+        *   this.results.getGrid().row[3] = file.getExtension();
+        *   this.results.getGrid().row[4] = file.getSize();
+        *  }
+         */
     }
-/*
-    public class SearchListener implements ActionListener {
-        public void actionPerformed(ActionEvent action){
-            //Log action here
-            try{
-                action = view.getCriteria();
-                //criteria.setCriteria(action);
-                model.setCriteria(action);
-                var results = model.getResult();
-                view.printResults(results);
-            }
-        }
-    }*/
 }
 
 
