@@ -110,6 +110,32 @@ public class SimpleSearchPanel extends JPanel {
         simpleSearchPrincipalPanel.add(sizePanel);
     }
 
+    //get the value in file name field
+    public String getFileNameField() {
+        return fileNameField.getText().toString();
+    }
+
+    //get the value in path name field
+    public String getPathNameField() {
+        return pathNameField.getText().toString();
+    }
+
+    //get the value of hidden check box, return true or false
+    public boolean getHiddenCheckbox() {
+        return hiddenCheckbox.isSelected();
+    }
+
+    //get value selected in extension drop down
+    public String getExtensionComboBox() {
+        return extensionComboBox.getSelectedItem().toString();
+    }
+
+    //get value selected in size drop down
+    public String getSizeComboBox() {
+        return sizeComboBox.getSelectedItem().toString();
+    }
+
+    //get simple search panel with all components
     public  JPanel getSimpleSearchPrincipalPanel() {
         return simpleSearchPrincipalPanel;
     }
