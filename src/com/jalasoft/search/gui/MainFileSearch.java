@@ -37,7 +37,6 @@ public class MainFileSearch extends JFrame {
         JFrame mainFrame = new JFrame();
         mainFrame.setLayout(new BorderLayout());
         resultsPanel = new ResultsPanel();
-        //ResultsPanel resultsPanel = new ResultsPanel();
         mainFrame.add(resultsPanel);
         mainFrame.add(northPanel,BorderLayout.NORTH);
         mainFrame.add(resultsPanel,BorderLayout.CENTER );
@@ -57,7 +56,6 @@ public class MainFileSearch extends JFrame {
         SimpleSearchPanel simpleSearchPanel = new SimpleSearchPanel();
         simpleSearchPanel.add(simpleSearchPanel.getSimpleSearchPrincipalPanel());
         LeftPanel leftPanel = new LeftPanel();
-        leftPanel.add(leftPanel.getLeftPanel());
         northPanel.add(simpleSearchPanel,BorderLayout.CENTER);
         northPanel.add(leftPanel,BorderLayout.WEST);
         northPanel.add(searchButton,BorderLayout.EAST);
