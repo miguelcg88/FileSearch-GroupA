@@ -30,13 +30,12 @@ public class MainFileSearch extends JFrame {
     /* Initializes main frame by adding all panels in it and set properties for window*/
     private void initializeMainFrame(){
         JFrame mainFrame = new JFrame();
+        mainFrame.pack();
         mainFrame.setLayout(new BorderLayout());
         resultsPanel = new ResultsPanel();
         mainFrame.add(resultsPanel);
         mainFrame.add(northPanel,BorderLayout.NORTH);
-        //mainFrame.add(Box.createRigidArea(new Dimension(0,8)));
         mainFrame.add(resultsPanel,BorderLayout.CENTER );
-        mainFrame.pack();
         mainFrame.setSize(700, 550);
         mainFrame.setVisible(true);
         mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
