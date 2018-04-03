@@ -1,5 +1,5 @@
 /*
- * @(#)SearchController.java        1.00 3/22/18
+ * @(#)FileSearch.java        1.00 4/3/18
  *
  * Copyright (c) Jalasoft
  *
@@ -11,11 +11,11 @@
  */
 package src.com.jalasoft.search.model;
 /**
- * Search Criteria
+ * FileSearch
  *
- * @version 1.00 26 Mar 2018
+ * @version 1.00 3 Apr 2018
  * @author Gabriel Rendon  */
-public class SearchCriteria {
+public class FileSearch {
     /**
      private variables */
     //private Assets asset;
@@ -37,7 +37,7 @@ public class SearchCriteria {
      * Get folder/file path
      * @return folderPath
      */
-    public String getFilePath() {
+    private String getFilePath() {
         return folderPath;
     }
 
@@ -53,7 +53,7 @@ public class SearchCriteria {
      * Get file name
      * @return name
      */
-    public String getFileName() {
+    private String getFileName() {
         return name;
     }
 
@@ -69,7 +69,7 @@ public class SearchCriteria {
      * Get hidden flag
      * @return hidden
      */
-    public boolean getHiddenFlag() {
+    private boolean getHiddenFlag() {
         return hidden;
     }
 
@@ -85,7 +85,7 @@ public class SearchCriteria {
      * Get file extension
      * @return extension
      */
-    public String getExtension() {
+    private String getExtension() {
         return extension;
     }
 

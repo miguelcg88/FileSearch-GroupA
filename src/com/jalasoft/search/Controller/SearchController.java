@@ -17,11 +17,14 @@ import src.com.jalasoft.search.common.Validator;
 import src.com.jalasoft.search.gui.MainFileSearch;
 import src.com.jalasoft.search.gui.ResultsPanel;
 import src.com.jalasoft.search.gui.SimpleSearchPanel;
+import src.com.jalasoft.search.model.FileSearch;
 import src.com.jalasoft.search.model.Search;
 import src.com.jalasoft.search.model.SearchCriteria;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.ArrayList;
 
 /**
  * SearchController
@@ -62,7 +65,8 @@ public class SearchController {
         String filePath = this.simpleFilters.getPathNameField();
         if(validator.isValidPath(filePath)){
             System.out.println(filePath + "is a valid File Path");
-            this.criteria.setFolderPath(filePath);
+            this.criteria.setFolderPath("C:\\TestFolder");
+                    //filePath);
         }
         else{
             //results.setError(filePath+" is an invalid File Path");
@@ -79,22 +83,40 @@ public class SearchController {
         else{
             //results.setError(filePath+" is an invalid File Extension");
         }
-        //model.setSearchCriteria(criteria);
+        model.setSearchCriteria(criteria);
 
 
-        /*
-        * Search
-        * List<Files> filesResults = search.getResults();
-        * foreach(Files file : fileResults)
-        *  {
-        *   this.results.getGrid().row[0] = file.getName();
-        *   this.results.getGrid().row[1] = file.getPath();
-        *   this.results.getGrid().row[2] = file.getHidden();
-        *   this.results.getGrid().row[3] = file.getExtension();
-        *   this.results.getGrid().row[4] = file.getSize();
-        *  }
-         */
+
+        //Search
+        //List<FileSearch> filesResults = model.setResults();
+        ArrayList<File> fileResults = model.setResults();
+
+        String data [][] = new String[0][];
+        for (int i = 0; i < fileResults.size(); i++) {
+            data[i][0]=fileResults.get(i).getName();
+            data[i][1]=fileResults.get(i).getPath();
+            data[i][2]=(fileResults.get(i).isHidden())? "Yes" : "No";
+            data[i][3]= String.valueOf(fileResults.get(i).getName().endsWith("."));
+        }
+        this.results.setResults(data);
+        this.results.makeResultsPanel();
+
+        /*for(File file : fileResults)
+        {
+            String data [][] = {};
+
+
+          this.results.setResults(data);
+          makeResultsPanel();
+
+                  .row[0] = file.getName();
+          this.results.getGrid().row[1] = file.getPath();
+          this.results.getGrid().row[2] = file.isHidden();
+          this.results.getGrid().row[3] = file.getName().endsWith(".");*/
+          //this.results.getGrid().row[4] = file.getSize();
+        }
+
     }
-}
+
 
 
