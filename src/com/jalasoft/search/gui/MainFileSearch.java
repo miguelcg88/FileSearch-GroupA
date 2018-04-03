@@ -7,12 +7,7 @@
 
 package com.jalasoft.search.gui;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.WindowConstants;
+import javax.swing.*;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -39,6 +34,7 @@ public class MainFileSearch extends JFrame {
         resultsPanel = new ResultsPanel();
         mainFrame.add(resultsPanel);
         mainFrame.add(northPanel,BorderLayout.NORTH);
+        //mainFrame.add(Box.createRigidArea(new Dimension(0,8)));
         mainFrame.add(resultsPanel,BorderLayout.CENTER );
         mainFrame.pack();
         mainFrame.setSize(700, 550);
