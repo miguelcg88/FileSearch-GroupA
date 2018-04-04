@@ -85,7 +85,8 @@ public class SearchController {
         System.out.println("The Criteria Path is " + criteria.getFilePath());
         System.out.println("The Criteria Hidden Flag is " + criteria.getHiddenFlag());
         System.out.println("The Criteria Extension is " + criteria.getExtension());
-        //model.setSearchCriteria(criteria);
+        model.setSearchCriteria(criteria);
+        model.searchByHiddenAttribute();
 
 
         //Search
@@ -124,12 +125,11 @@ public class SearchController {
                 {"102", "Jai", "780000", "exe", "3"},
                 {"101", "Sachin", "700000", "xls", "12"}};
         System.out.println("Setting results to the view");
-
-        ResultsPanel results = new ResultsPanel();
-        results.setResults(dataFixed);
-
+        view.getTable();
         System.out.println("Printing Results Panel");
-        view.getResults();
+        view.setResults(dataFixed);
+        view.revalidate();
+        view.repaint();
 
 
         ArrayList<File> fileResults = model.setResults();
@@ -138,8 +138,9 @@ public class SearchController {
         String data[][] = new String[fileResults.size()][4];
 
         for (int i = 0; i < fileResults.size(); i++) {
-            System.out.println("The Model Result[" + i + "] name is: " + fileResults.get(i).getName());
-            data[i][0] = fileResults.get(i).getName();
+            String nameText = fileResults.get(i).getName().replaceFirst("[.][^.]+$", "");
+            System.out.println("The Model Result[" + i + "] name is: " + nameText);
+            data[i][0] = nameText;
 
             System.out.println("The Model Result[" + i + "] path is: " + fileResults.get(i).getPath());
             data[i][1] = fileResults.get(i).getPath();
@@ -148,7 +149,7 @@ public class SearchController {
             System.out.println("The Model Result[" + i + "] hidden value is: " + hiddenText);
             data[i][2] = hiddenText;
 
-            String extensionText = String.valueOf(fileResults.get(i).getName().endsWith("."));
+            String extensionText =  fileResults.get(i).getName().substring(fileResults.get(i).getName().lastIndexOf(".")+1);
             System.out.println("The Model Result[" + i + "] extension is: " + extensionText);
             data[i][3] = extensionText;
         }

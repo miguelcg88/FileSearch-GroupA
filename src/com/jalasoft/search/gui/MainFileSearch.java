@@ -7,12 +7,7 @@
 
 package src.com.jalasoft.search.gui;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.WindowConstants;
+import javax.swing.*;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -134,6 +129,14 @@ public class MainFileSearch extends JFrame {
         mainFrame.removeAll();
         mainFrame.validate();
         mainFrame.repaint();
+    }
+
+    public JTable getTable(){
+        return resultsPanel.getResultsTable();
+    }
+
+    public void setResults(String data[][]) {
+        this.resultsPanel.setResults(data);
     }
 
     public static void main(String[] args) {

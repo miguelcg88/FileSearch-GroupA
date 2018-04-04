@@ -1,5 +1,6 @@
 package src.com.jalasoft.search.gui;
 
+import javafx.scene.control.TableColumn;
 import oracle.jrockit.jfr.JFR;
 
 import javax.swing.*;
@@ -11,8 +12,13 @@ public class ResultsPanel extends JPanel {
     private JScrollPane scrollPane = new JScrollPane();
     private String data[][];
 
+    //CHECK
     public void setResults(String data[][]) {
-        this.data = data;
+        TableColumn col=new TableColumn();
+
+        //this.resultsTable.setColumnModel()
+               // .addColumn(new String []{"FILE NAME","PATH","HIDDEN?","EXTENSION","SIZE MB"});
+
     }
 
     // Initializes result panel

@@ -23,6 +23,7 @@ public class FileSearch {
     private String name;
     private boolean hidden;
     private String extension;
+    private String owner;
 
     /**
      * Set folder/file path
@@ -89,5 +90,19 @@ public class FileSearch {
         return extension;
     }
 
+    /**
+     * Set file extension
+     * @param //extension
+     */
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
 
+    /**
+     * Get file extension
+     * @return owner
+     */
+    private String getOwner() {
+        return owner;
+    }
 }
