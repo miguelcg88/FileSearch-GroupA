@@ -34,17 +34,18 @@ public class MainFileSearch extends JFrame {
     private JPanel simpleSearchPanel;
     private JLabel searchLabel;
     SimpleSearchPanel simplePanel;
-
+    JFrame mainFrame = new JFrame();
     //Class constructor, calls methods to make panels
     public MainFileSearch(String title) {
         //super(title);
         makeNorthPanel();
-        makeResultsPanel();
+        //makeResultsPanel();
         initializeMainFrame();
     }
 
     /* Initializes main frame by adding all panels in it and set properties for window*/
     private void initializeMainFrame(){
+        /*
         JFrame mainPanel = new JFrame();
         mainPanel.pack();
         mainPanel.setLayout(new BorderLayout());
@@ -53,6 +54,16 @@ public class MainFileSearch extends JFrame {
         mainPanel.setVisible(true);
         mainPanel.setSize(700, 550);
         mainPanel.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        */
+        mainFrame.pack();
+        mainFrame.setLayout(new BorderLayout());
+        resultsPanel = new ResultsPanel();
+        mainFrame.add(resultsPanel);
+        mainFrame.add(northPanel,BorderLayout.NORTH);
+        mainFrame.add(resultsPanel,BorderLayout.CENTER );
+        mainFrame.setSize(700, 550);
+        mainFrame.setVisible(true);
+        mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
     /* Initializes panel that contains 2 other panels, one for search criteria and
@@ -90,12 +101,14 @@ public class MainFileSearch extends JFrame {
     }
 
     /* Initializes result panel*/
+    /*
     private void makeResultsPanel() {
         resultsPanel = new ResultsPanel();
         resultsPanel.setLayout(new BorderLayout());
         resultsPanel.setBackground(Color.lightGray);
         //resultsPanel.makeResultsPanel();
     }
+    */
     public JButton getSearchButton(){
              return searchButton;
             }
@@ -116,7 +129,10 @@ public class MainFileSearch extends JFrame {
     }
 
     public void getResults(){
-       // this.resultsPanel.r
+        resultsPanel.validate();
+        resultsPanel.repaint();
+        mainFrame.validate();
+        mainFrame.repaint();
     }
 
     public static void main(String[] args) {

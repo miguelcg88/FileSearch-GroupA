@@ -118,7 +118,6 @@ public class SearchController {
         results.setResults(data);
 
         System.out.println("Printing Results Panel");
-        results.Refresh();
         view.getResults();
 
 
