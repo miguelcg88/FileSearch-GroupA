@@ -18,9 +18,11 @@ public class ResultsPanel extends JPanel {
     // Initializes result panel
     public void makeResultsPanel() {
 
-        //String data[][]={ {"101","Amit","670000","zip","32"},
-                //{"102","Jai","780000","exe","3"},
-                //{"101","Sachin","700000","xls","12"}};
+        String data[][]={ {"101","Amit","670000","zip","32"},
+             {"102","Jai","780000","exe","3"},
+             {"101","Sachin","700000","xls","12"}};
+
+
         String column[]={"FILE NAME","PATH","HIDDEN?","EXTENSION","SIZE MB"};
         resultsTable = new JTable(data,column);
         resultsTable.setBounds(30,40,200,300);
@@ -33,7 +35,7 @@ public class ResultsPanel extends JPanel {
     public JTable getResultsTable(){
         return resultsTable;
     }
-
+    //set results in JTable from  a bi-dimensional array
     public void setResults(String data[][]) {
      this.data = data;
     }
