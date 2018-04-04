@@ -112,12 +112,12 @@ public class SimpleSearchPanel extends JPanel {
 
     //get the value in file name field
     public String getFileNameField() {
-        return fileNameField.getText().toString();
+        return fileNameField.getText();
     }
 
     //get the value in path name field
     public String getPathNameField() {
-        return pathNameField.getText().toString();
+        return pathNameField.getText();
     }
 
     //get the value of hidden check box, return true or false
@@ -127,12 +127,12 @@ public class SimpleSearchPanel extends JPanel {
 
     //get value selected in extension drop down
     public String getExtensionComboBox() {
-        return extensionComboBox.getSelectedItem().toString();
+        return String.valueOf(extensionComboBox.getSelectedItem());
     }
 
     //get value selected in size drop down
     public String getSizeComboBox() {
-        return sizeComboBox.getSelectedItem().toString();
+        return String.valueOf(sizeComboBox.getSelectedItem());
     }
 
     //get simple search panel with all components
