@@ -38,7 +38,7 @@ public class SearchController {
     private Search model;
     private MainFileSearch view;
     private SimpleSearchPanel simpleFilters;
-    private ResultsPanel results;
+
     private SearchCriteria criteria;
     private Validator validator = new Validator();
 
@@ -46,7 +46,7 @@ public class SearchController {
         this.model = model;
         this.view = view;
         this.simpleFilters = simpleFilters;
-        this.results = results;
+        //this.results = results;
        this.view.getSearchButton().addActionListener(e -> FillCriteria());
     }
 
@@ -72,10 +72,10 @@ public class SearchController {
             //results.setError(filePath+" is an invalid File Path");
         }
 
-        Boolean hidden = this.simpleFilters.getHiddenCheckbox();
+        Boolean hidden = this.view.getHidden();
         this.criteria.setHiddenFlag(hidden);
 
-        String extension = this.simpleFilters.getExtensionComboBox();
+        String extension = this.view.getExtension();
         if(validator.isValidExtension("test."+extension)){
             System.out.println("The Extension ["+ extension + "] is a valid File Extension");
             this.criteria.setExtension(extension);
@@ -114,9 +114,12 @@ public class SearchController {
         {"101","Sachin","700000","xls","12"}};
         System.out.println("Setting results to the view");
 
-        this.results.setResults(data);
-        System.out.println("Printing Results Panel");
+        ResultsPanel results = new ResultsPanel();
+        results.setResults(data);
 
+        System.out.println("Printing Results Panel");
+        results.Refresh();
+        view.getResults();
 
 
         /*for(File file : fileResults)

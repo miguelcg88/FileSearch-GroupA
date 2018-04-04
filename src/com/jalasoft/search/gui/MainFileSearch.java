@@ -30,7 +30,7 @@ public class MainFileSearch extends JFrame {
     private JPanel searchOptionsPanel;
     private JPanel leftPanel;
     private JPanel northPanel;
-    private JPanel resultsPanel;
+    private ResultsPanel resultsPanel;
     private JPanel simpleSearchPanel;
     private JLabel searchLabel;
     SimpleSearchPanel simplePanel;
@@ -46,10 +46,10 @@ public class MainFileSearch extends JFrame {
     /* Initializes main frame by adding all panels in it and set properties for window*/
     private void initializeMainFrame(){
         JFrame mainPanel = new JFrame();
+        mainPanel.pack();
         mainPanel.setLayout(new BorderLayout());
         mainPanel.add(northPanel,BorderLayout.NORTH);
         mainPanel.add(resultsPanel,BorderLayout.CENTER );
-        mainPanel.pack();
         mainPanel.setVisible(true);
         mainPanel.setSize(700, 550);
         mainPanel.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -91,9 +91,10 @@ public class MainFileSearch extends JFrame {
 
     /* Initializes result panel*/
     private void makeResultsPanel() {
-        resultsPanel = new JPanel();
+        resultsPanel = new ResultsPanel();
         resultsPanel.setLayout(new BorderLayout());
         resultsPanel.setBackground(Color.lightGray);
+        //resultsPanel.makeResultsPanel();
     }
     public JButton getSearchButton(){
              return searchButton;
@@ -106,6 +107,17 @@ public class MainFileSearch extends JFrame {
         return this.simplePanel.getPathNameField();
     }
 
+    public String getExtension(){
+        return this.simplePanel.getExtensionComboBox();
+    }
+
+    public Boolean getHidden(){
+        return this.simplePanel.getHiddenCheckbox();
+    }
+
+    public void getResults(){
+       // this.resultsPanel.r
+    }
 
     public static void main(String[] args) {
         new MainFileSearch("File Search");
