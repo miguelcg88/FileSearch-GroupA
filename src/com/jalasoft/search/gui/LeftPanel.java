@@ -1,8 +1,15 @@
+/*
+ * MainFileSearch.java  1.0  3/16/2018
+ * Copyright (c) 2018  Jalasoft
+ * All rights reserved.
+ *Author : Miguel Calderon
+ */
+
 package com.jalasoft.search.gui;
 
 import javax.swing.*;
 import java.awt.*;
-
+//Class that creates left panel that contains buttons to set type of search
 public class LeftPanel extends JPanel {
 
     private JButton normalSearchButton;

@@ -1,3 +1,10 @@
+/*
+ * MainFileSearch.java  1.0  3/16/2018
+ * Copyright (c) 2018  Jalasoft
+ * All rights reserved.
+ *Author : Miguel Calderon
+ */
+
 package com.jalasoft.search.gui;
 
 import oracle.jrockit.jfr.JFR;

@@ -1,8 +1,16 @@
+/*
+ * MainFileSearch.java  1.0  3/16/2018
+ * Copyright (c) 2018  Jalasoft
+ * All rights reserved.
+ *Author : Miguel Calderon
+ */
+
 package com.jalasoft.search.gui;
 
 import javax.swing.*;
-import java.awt.*;
+import java.awt.*;;
 
+//Creates panel for advanced search, extend from JPanel
 public class AdvancedSearchPanel extends JPanel {
 
 
@@ -11,18 +19,24 @@ public class AdvancedSearchPanel extends JPanel {
     private  JPanel hiddenPanel;
     private  JPanel extensionPanel;
     private  JPanel sizePanel;
-    private  JPanel advancedSearchPrincipalPanel;
+    private  JPanel datePanel;
     private JLabel advancedSearchLabel;
     private JLabel fileNameLabel;
     private JLabel pathLabel;
     private JLabel hiddenLabel;
     private JLabel extensionLabel;
     private JLabel sizeLabel;
+    private JLabel dateFromLabel;
+    private JLabel dateToLabel;
     private JTextField fileNameField;
     private JTextField pathNameField;
+    private JTextField dateFromField;
+    private JTextField dateToField;
     private JCheckBox hiddenCheckbox ;
     private JComboBox extensionComboBox;
     private JComboBox sizeComboBox;
+
+
 
     //Class constructor, calls methods to make panels, each panel has a component and label
     public AdvancedSearchPanel(){
@@ -31,6 +45,7 @@ public class AdvancedSearchPanel extends JPanel {
         makeHiddenPanel();
         makeExtensionPanel();
         makeSizePanel();
+        makeDatePanel();
         makePrincipalAdvancedSearchPanel();
     }
     //Panel that contains textfiled to enter file name for search
@@ -81,6 +96,19 @@ public class AdvancedSearchPanel extends JPanel {
         sizePanel.add(sizeComboBox);
     }
 
+    public void makeDatePanel(){
+        datePanel =new JPanel();
+        dateFromLabel = new JLabel("Date created/modified from:");
+        dateFromField = new JTextField (10);
+        dateToLabel = new JLabel("Date created/modified from:");
+        dateToField = new JTextField (10);
+        datePanel.setLayout(new BoxLayout(datePanel, BoxLayout.X_AXIS));
+        datePanel.add(dateFromLabel);
+        datePanel.add(dateFromField);
+        datePanel.add(dateToLabel);
+        datePanel.add(dateToField);
+    }
+
     //Main Panel that contains all other panels,this will be called from main Frame to display "simple search" panel with all their components
     public void makePrincipalAdvancedSearchPanel(){
         //advancedSearchPrincipalPanel = new JPanel();
@@ -97,18 +125,21 @@ public class AdvancedSearchPanel extends JPanel {
         add(extensionPanel);
         add(Box.createRigidArea(new Dimension(0,6)));
         add(sizePanel);
+        add(Box.createRigidArea(new Dimension(0,6)));
+        add(datePanel);
     }
 
-    /*public static void main(String[] args) {
+    public static void main(String[] args) {
 
         JFrame test = new JFrame();
         JPanel advanced = new AdvancedSearchPanel();
         test.setLayout(new BorderLayout());
         test.setPreferredSize(new Dimension(750,280));
         test.add(advanced,BorderLayout.CENTER);
+        test.pack();
         test.setVisible(true);
         test.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-    }*/
+    }
 
 
 }
