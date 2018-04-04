@@ -10,7 +10,9 @@ public class ResultsPanel extends JPanel {
     private JTable resultsTable = new  JTable();
     private JScrollPane scrollPane = new JScrollPane();
     private String data[][];
-
+    public void setResults(String data[][]) {
+        this.data = data;
+    }
 
     public ResultsPanel(){
         makeResultsPanel();
@@ -22,7 +24,7 @@ public class ResultsPanel extends JPanel {
         //{"102","Jai","780000","exe","3"},
         //{"101","Sachin","700000","xls","12"}};
         String column[]={"FILE NAME","PATH","HIDDEN?","EXTENSION","SIZE MB"};
-        resultsTable = new JTable(data,column);
+        resultsTable = new JTable(this.data,column);
         resultsTable.setBounds(30,40,200,300);
         scrollPane=new JScrollPane(resultsTable);
         setLayout(new BorderLayout());
@@ -34,9 +36,7 @@ public class ResultsPanel extends JPanel {
         return resultsTable;
     }
 
-    public void setResults(String data[][]) {
-        this.data = data;
-    }
+
 
 }
 

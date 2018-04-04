@@ -32,8 +32,8 @@ public class SimpleSearchPanel extends JPanel {
     private JTextField fileNameField;
     private JTextField pathNameField;
     private JCheckBox hiddenCheckbox ;
-    private JComboBox extensionComboBox;
-    private JComboBox sizeComboBox;
+    private JComboBox<String> extensionComboBox;
+    private JComboBox<String> sizeComboBox;
 
     //Class constructor, calls methods to make panels, each panel has a component and label
     public SimpleSearchPanel(){
@@ -41,7 +41,7 @@ public class SimpleSearchPanel extends JPanel {
         makePathPanel();
         makeHiddenPanel();
         makeExtensionPanel();
-        makeSizePanel();
+        //makeSizePanel();
         makePrincipalSimpleSearchPanel();
     }
     //Panel that contains textfiled to enter file name for search
@@ -75,14 +75,14 @@ public class SimpleSearchPanel extends JPanel {
     public void makeExtensionPanel(){
         extensionPanel =new JPanel();
         extensionLabel = new JLabel("Select extension");
-        String[] extensionsList = { "exe", "doc", "xls", "png", "zip" };
+        String[] extensionsList = { "txt","exe", "doc", "xls", "png", "zip" };
         extensionComboBox = new JComboBox(extensionsList);
         extensionPanel.setLayout(new BoxLayout(extensionPanel, BoxLayout.X_AXIS));
         extensionPanel.add(extensionLabel);
-        extensionPanel.add(extensionComboBox);
+       extensionPanel.add(extensionComboBox);
     }
     //Panel that contains drop down to indicate  specific range for file size
-    public void makeSizePanel(){
+    /*public void makeSizePanel(){
         sizePanel =new JPanel();
         sizeLabel = new JLabel("Select size range");
         String[] sizeRanges = { "Less than 1 MB", "1MB - 50MB ", "50MB - 500MB", "500MB - 1GB", "More than 1 GB" };
@@ -90,7 +90,7 @@ public class SimpleSearchPanel extends JPanel {
         sizePanel.setLayout(new BoxLayout(sizePanel, BoxLayout.X_AXIS));
         sizePanel.add(sizeLabel);
         sizePanel.add(sizeComboBox);
-    }
+    }*/
 
     //Main Panel that contains all other panels,this will be called from main Frame to display "simple search" panel with all their components
     public void makePrincipalSimpleSearchPanel(){
@@ -106,8 +106,8 @@ public class SimpleSearchPanel extends JPanel {
         simpleSearchPrincipalPanel.add(hiddenPanel);
         simpleSearchPrincipalPanel.add(Box.createRigidArea(new Dimension(0,6)));
         simpleSearchPrincipalPanel.add(extensionPanel);
-        simpleSearchPrincipalPanel.add(Box.createRigidArea(new Dimension(0,6)));
-        simpleSearchPrincipalPanel.add(sizePanel);
+        //simpleSearchPrincipalPanel.add(Box.createRigidArea(new Dimension(0,6)));
+        //simpleSearchPrincipalPanel.add(sizePanel);
     }
 
     //get the value in file name field
@@ -127,13 +127,13 @@ public class SimpleSearchPanel extends JPanel {
 
     //get value selected in extension drop down
     public String getExtensionComboBox() {
-        return extensionComboBox.getSelectedItem().toString();
+        return String.valueOf(extensionComboBox.getSelectedItem());
     }
 
     //get value selected in size drop down
-    public String getSizeComboBox() {
+   /*public String getSizeComboBox() {
         return sizeComboBox.getSelectedItem().toString();
-    }
+    }*/
 
     //get simple search panel with all components
     public  JPanel getSimpleSearchPrincipalPanel() {

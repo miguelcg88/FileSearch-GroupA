@@ -56,7 +56,7 @@ public class SearchController {
         criteria = new SearchCriteria();
         String fileName = this.view.getFileName();
         if(validator.isValidName(fileName)){
-            System.out.println(fileName + "is a valid File Name");
+            System.out.println("The Name ["+ fileName + "] is a valid File Name");
             this.criteria.setFileName(fileName);
         }
         else{
@@ -65,9 +65,8 @@ public class SearchController {
 
         String filePath = this.view.getPath();
         if(validator.isValidPath(filePath)){
-            System.out.println(filePath + "is a valid File Path");
-            this.criteria.setFolderPath("C:\\TestFolder");
-                    //filePath);
+            System.out.println("The Path ["+ filePath + "] is a valid File Path");
+            this.criteria.setFolderPath(filePath);
         }
         else{
             //results.setError(filePath+" is an invalid File Path");
@@ -78,29 +77,47 @@ public class SearchController {
 
         String extension = this.simpleFilters.getExtensionComboBox();
         if(validator.isValidExtension("test."+extension)){
-            System.out.println(filePath + "is a valid File Extension");
+            System.out.println("The Extension ["+ extension + "] is a valid File Extension");
             this.criteria.setExtension(extension);
         }
         else{
             //results.setError(filePath+" is an invalid File Extension");
         }
-        model.setSearchCriteria(criteria);
+        System.out.println("The Criteria Name is "+ criteria.getFileName());
+        System.out.println("The Criteria Path is "+ criteria.getFilePath());
+        System.out.println("The Criteria Hidden Flag is "+ criteria.getHiddenFlag());
+        System.out.println("The Criteria Extension is "+ criteria.getExtension());
+        //model.setSearchCriteria(criteria);
 
 
 
         //Search
         //List<FileSearch> filesResults = model.setResults();
-        ArrayList<File> fileResults = model.setResults();
+        //ArrayList<File> fileResults = model.setResults();
 
-        String data [][] = new String[0][];
-        for (int i = 0; i < fileResults.size(); i++) {
+        //String data [][] = new String[4][4];
+        /*for (int i = 0; i < fileResults.size(); i++) {
+            System.out.println("The Model Result["+i+"] name is: "+fileResults.get(i).getName());
             data[i][0]=fileResults.get(i).getName();
             data[i][1]=fileResults.get(i).getPath();
             data[i][2]=(fileResults.get(i).isHidden())? "Yes" : "No";
             data[i][3]= String.valueOf(fileResults.get(i).getName().endsWith("."));
-        }
+        }*//*
+        for (int i = 0; i < 4; i++) {
+            data[i][0]="Name";
+            data[i][1]="Path";
+            data[i][2]="No";
+            data[i][3]="txt";
+        }*/
+        String data[][]={ {"101","Amit","670000","zip","32"},
+        {"102","Jai","780000","exe","3"},
+        {"101","Sachin","700000","xls","12"}};
+        System.out.println("Setting results to the view");
+
         this.results.setResults(data);
-        this.results.makeResultsPanel();
+        System.out.println("Printing Results Panel");
+
+
 
         /*for(File file : fileResults)
         {
