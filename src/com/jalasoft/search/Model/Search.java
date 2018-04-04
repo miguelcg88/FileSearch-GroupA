@@ -9,16 +9,18 @@
 */
 
 package com.jalasoft.search.Model;
-import com.jalasoft.search.Controller.SearchCriteria;
 
 import java.io.File;
-import java.io.FileFilter;
-import java.io.FilenameFilter;
-import java.io.IOException;
 import java.util.ArrayList;
+import com.jalasoft.search.model.SearchCriteria;
 
 /*
 *Description, the search.java class will search a specific file and then list all files/folders
+* This class can search by four fields:
+* 1. PATH
+* 2. FILE NAME
+* 3. EXTENSION
+* 4. HIDDEN
 * @version 1.0
 * @author Jonas Aramayo
  */
@@ -29,19 +31,17 @@ public class Search {
     private Boolean isFound=Boolean.FALSE;
     private Boolean isHidden;
     private String extensionFile;
+    private SearchCriteria searchCriteria;
 
-    public Search(String path, String fileName, Boolean hidden, String extension) {
-        this.folderPath = path;
-        this.fileNameToSearch = fileName + "." + extension;
-        this.isHidden = hidden;
-        this.extensionFile = extension;
+    public Search() {
+//          this.folderPath = ();
+//        this.fileNameToSearch = searchCriteria.getFileName();
+//        this.isHidden = searchCriteria.getHiddenFlag();
+//        this.extensionFile = searchCriteria.getExtension();
     }
-    /*public Search(SearchCriteria sc) {
-        this.folderPath = sc.path;
-        this.fileNameToSearch = sc.fileName + "." + sc.extension;
-        this.isHidden = sc.hidden;
-        this.extensionFile = sc.extension;
-    }*/
+    public void setSearchCriteria(SearchCriteria sc) {
+        this.searchCriteria = sc;
+    }
 
     private String getFilePath() {
         return folderPath;
@@ -57,31 +57,31 @@ public class Search {
      */
     public void searchByHiddenAttribute(){
         ArrayList<File> shortList = new ArrayList<>();
-        //Read file
-        File file = new File(folderPath);
+        //Read file //folderPath
+        File file = new File(this.searchCriteria.getFilePath());
 
         //doListFiles
         File list[]=file.listFiles();
         for(int i=0;i<list.length;i++){
             System.out.println(list[i].getName());
             //Show only not hidden files
-            if (this.isHidden.equals(false) && !list[i].isHidden()) {
+            if (!this.searchCriteria.getHiddenFlag() && !list[i].isHidden()) {
                 shortList.add(list[i]);
             }
             //Show only hidden files
-            if (this.isHidden.equals(true) && list[i].isHidden()){
+            if (this.searchCriteria.getHiddenFlag() && list[i].isHidden()){
                 shortList.add(list[i]);
             }
         }
 
         //Show short list
-        System.out.println("*****SHORT LIST BY ATTRIBUTE HIDDEN->"+ this.isHidden +"********" );
+        System.out.println("*****SHORT LIST BY ATTRIBUTE HIDDEN->"+ this.searchCriteria.getHiddenFlag() +"********" );
         for (File temp : shortList) {
             System.out.println(temp.getName());
         }
         System.out.println("*****************SEARCH RESULT******************************");
         searchByName(shortList);
-        System.out.println("*********************Extension " + "." + this.extensionFile + " List******************");
+        System.out.println("*********************Extension " + "." + this.searchCriteria.getExtension() + " List******************");
         searchByExtension(shortList);
     }
 
@@ -93,14 +93,14 @@ public class Search {
     private void searchByName(ArrayList<File> shortList) {
         //SearchByName
         for(int j=0;j<shortList.size();j++){
-            if (shortList.get(j).getName().equals(fileNameToSearch)){
+            if (shortList.get(j).getName().equals(this.searchCriteria.getFileName() + "." + this.searchCriteria.getExtension())){
                 System.out.println("The file-> "+shortList.get(j).getName()+" was found!");
                 isFound = Boolean.TRUE;
                 break;
             }
         }
         if(isFound == Boolean.FALSE){
-            System.out.println("The file->"+ fileNameToSearch +" was not found!");
+            System.out.println("The file->"+ this.searchCriteria.getFileName() +" was not found!");
         }
     }
 
@@ -112,35 +112,23 @@ public class Search {
     private void searchByExtension(ArrayList<File> shortList) {
         //SearchByExtension
         for(int j=0;j<shortList.size();j++){
-            if (shortList.get(j).getName().endsWith("." + this.extensionFile)){
+            if (shortList.get(j).getName().endsWith("." + this.searchCriteria.getExtension())){
                 System.out.println(shortList.get(j).getName());
             }
         }
     }
 
-    private static String getFileExtension(File file) {
-        String fileName = file.getName();
-        if(fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0)
-            return fileName.substring(fileName.lastIndexOf(".")+1);
-        else return "";
-    }
-
     //Only for testing purposes
     public  static void main(String args[]){
-        Search search = new Search("\\Test", "file8", false, "jonas");
         System.out.println("*****************LIST OF FILES******************************");
+        SearchCriteria sc = new SearchCriteria();
+        sc.setFolderPath("\\Test");
+        sc.setFileName("file8");
+        sc.setExtension("jonas");
+        sc.setHiddenFlag(false);
+
+        Search search = new Search();
+        search.setSearchCriteria(sc);
         search.searchByHiddenAttribute();
     }
-
-    /*private class SearchCriteria {
-        private String path, extension, fileName;
-        private Boolean hidden;
-
-        private SearchCriteria(String pPath, String pFileName, Boolean pHidden, String pExtension){
-            this.path = pPath;
-            this.extension = pExtension;
-            this.fileName = pFileName;
-            this.hidden = pHidden;
-        }
-    }*/
 }

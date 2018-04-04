@@ -37,7 +37,7 @@ public class SearchCriteria {
      * Get folder/file path
      * @return folderPath
      */
-    private String getFilePath() {
+    public String getFilePath() {
         return folderPath;
     }
 
@@ -53,7 +53,7 @@ public class SearchCriteria {
      * Get file name
      * @return name
      */
-    private String getFileName() {
+    public String getFileName() {
         return name;
     }
 
@@ -69,7 +69,7 @@ public class SearchCriteria {
      * Get hidden flag
      * @return hidden
      */
-    private boolean getHiddenFlag() {
+    public boolean getHiddenFlag() {
         return hidden;
     }
 
@@ -85,7 +85,7 @@ public class SearchCriteria {
      * Get file extension
      * @return extension
      */
-    private String getExtension() {
+    public String getExtension() {
         return extension;
     }
 
