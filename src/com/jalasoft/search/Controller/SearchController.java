@@ -53,7 +53,8 @@ public class SearchController {
     private void FillCriteria(){
         System.out.println("click");
 
-        String fileName = this.simpleFilters.getFileNameField();
+        criteria = new SearchCriteria();
+        String fileName = this.view.getFileName();
         if(validator.isValidName(fileName)){
             System.out.println(fileName + "is a valid File Name");
             this.criteria.setFileName(fileName);
@@ -62,7 +63,7 @@ public class SearchController {
             //view.setError(fileName+" is an invalid File Name");
         }
 
-        String filePath = this.simpleFilters.getPathNameField();
+        String filePath = this.view.getPath();
         if(validator.isValidPath(filePath)){
             System.out.println(filePath + "is a valid File Path");
             this.criteria.setFolderPath("C:\\TestFolder");

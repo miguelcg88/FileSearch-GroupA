@@ -33,6 +33,7 @@ public class MainFileSearch extends JFrame {
     private JPanel resultsPanel;
     private JPanel simpleSearchPanel;
     private JLabel searchLabel;
+    SimpleSearchPanel simplePanel;
 
     //Class constructor, calls methods to make panels
     public MainFileSearch(String title) {
@@ -61,13 +62,14 @@ public class MainFileSearch extends JFrame {
         searchButton = new JButton("Go !");
         northPanel.setLayout(new BorderLayout());
         northPanel.setPreferredSize(new Dimension(750,280));
-        SimpleSearchPanel simpleSearchPanel = new SimpleSearchPanel();
-        simpleSearchPanel.add(simpleSearchPanel.getSimpleSearchPrincipalPanel());
+        simplePanel = new SimpleSearchPanel();
+        simplePanel.add(simplePanel.getSimpleSearchPrincipalPanel());
         makeLeftPanel();
-        northPanel.add(simpleSearchPanel,BorderLayout.CENTER);
+        northPanel.add(simplePanel,BorderLayout.CENTER);
         northPanel.add(leftPanel,BorderLayout.WEST);
         northPanel.add(searchButton,BorderLayout.EAST);
         northPanel.setVisible(true);
+
     }
 
     /* Initializes left panel that contains buttons to select what kind of search want you use*/
@@ -96,6 +98,13 @@ public class MainFileSearch extends JFrame {
     public JButton getSearchButton(){
              return searchButton;
             }
+    public String getFileName(){
+        return this.simplePanel.getFileNameField();
+    }
+
+    public String getPath(){
+        return this.simplePanel.getPathNameField();
+    }
 
 
     public static void main(String[] args) {

@@ -112,12 +112,12 @@ public class SimpleSearchPanel extends JPanel {
 
     //get the value in file name field
     public String getFileNameField() {
-        return fileNameField.getText().toString();
+        return fileNameField.getText();
     }
 
     //get the value in path name field
     public String getPathNameField() {
-        return pathNameField.getText().toString();
+        return pathNameField.getText();
     }
 
     //get the value of hidden check box, return true or false
