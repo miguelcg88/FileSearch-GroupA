@@ -131,6 +131,7 @@ public class MainFileSearch extends JFrame {
     public void getResults(){
         resultsPanel.validate();
         resultsPanel.repaint();
+        mainFrame.removeAll();
         mainFrame.validate();
         mainFrame.repaint();
     }
