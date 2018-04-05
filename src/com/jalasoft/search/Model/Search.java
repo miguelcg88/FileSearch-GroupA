@@ -26,26 +26,14 @@ import src.com.jalasoft.search.model.SearchCriteria;
  */
 
 public class Search {
-    private String folderPath;
-    private String fileNameToSearch;
-    private Boolean isFound=Boolean.FALSE;
-    private Boolean isHidden;
-    private String extensionFile;
     private SearchCriteria searchCriteria;
     private ArrayList<File> shortList = new ArrayList<>();
 
     public Search() {
-//          this.folderPath = ();
-//        this.fileNameToSearch = searchCriteria.getFileName();
-//        this.isHidden = searchCriteria.getHiddenFlag();
-//        this.extensionFile = searchCriteria.getExtension();
+
     }
     public void setSearchCriteria(SearchCriteria sc) {
         this.searchCriteria = sc;
-    }
-
-    private String getFilePath() {
-        return folderPath;
     }
 
     /**
@@ -76,16 +64,11 @@ public class Search {
                 shortList.add(list[i]);
             }
         }
-
         //Show short list
         System.out.println("*****SHORT LIST BY ATTRIBUTE HIDDEN->"+ this.searchCriteria.getHiddenFlag() +"********" );
         for (File temp : shortList) {
             System.out.println(temp.getName());
         }
-//        System.out.println("*****************SEARCH RESULT******************************");
-//        searchByName(shortList);
-//        System.out.println("*********************Extension " + "." + this.searchCriteria.getExtension() + " List******************");
-//        searchByExtension(shortList);
     }
 
     /**
@@ -125,6 +108,10 @@ public class Search {
         return listByExtension;
     }
 
+    /**
+     * This method is used to get all files that matched BY filename or extension
+     * @return  searchList get all files that matched with the Search Criteria
+     */
     public ArrayList<File> getResults(){
         ArrayList<File> searchResult = shortList;
         if(searchCriteria.getFileName() != null){
@@ -135,18 +122,4 @@ public class Search {
         }
         return  searchResult;
     }
-
-    //Only for testing purposes
-   /* public  static void main(String args[]){
-        System.out.println("*****************LIST OF FILES******************************");
-        SearchCriteria sc = new SearchCriteria();
-        sc.setFolderPath("\\Test");
-        sc.setFileName("file8");
-        sc.setExtension("jonas");
-        sc.setHiddenFlag(false);
-
-        Search search = new Search();
-        search.setSearchCriteria(sc);
-        search.searchByHiddenAttribute();
-    }*/
-}
+ }
