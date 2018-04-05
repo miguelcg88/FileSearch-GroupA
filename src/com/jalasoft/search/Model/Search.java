@@ -61,6 +61,8 @@ public class Search {
         //Read file //folderPath
         File file = new File(this.searchCriteria.getFilePath());
 
+        // clean list to new search
+        shortList.clear();
         //doListFiles
         File list[]=file.listFiles();
         for(int i=0;i<list.length;i++){

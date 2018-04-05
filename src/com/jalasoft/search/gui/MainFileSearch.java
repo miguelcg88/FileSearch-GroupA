@@ -8,6 +8,7 @@
 package src.com.jalasoft.search.gui;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -29,36 +30,24 @@ public class MainFileSearch extends JFrame {
     private JPanel simpleSearchPanel;
     private JLabel searchLabel;
     SimpleSearchPanel simplePanel;
-    JFrame mainFrame = new JFrame();
+
     //Class constructor, calls methods to make panels
     public MainFileSearch(String title) {
-        //super(title);
         makeNorthPanel();
-        //makeResultsPanel();
         initializeMainFrame();
     }
 
     /* Initializes main frame by adding all panels in it and set properties for window*/
     private void initializeMainFrame(){
-        /*
-        JFrame mainPanel = new JFrame();
-        mainPanel.pack();
-        mainPanel.setLayout(new BorderLayout());
-        mainPanel.add(northPanel,BorderLayout.NORTH);
-        mainPanel.add(resultsPanel,BorderLayout.CENTER );
-        mainPanel.setVisible(true);
-        mainPanel.setSize(700, 550);
-        mainPanel.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        */
-        mainFrame.pack();
-        mainFrame.setLayout(new BorderLayout());
+        pack();
+        setLayout(new BorderLayout());
         resultsPanel = new ResultsPanel();
-        mainFrame.add(resultsPanel);
-        mainFrame.add(northPanel,BorderLayout.NORTH);
-        mainFrame.add(resultsPanel,BorderLayout.CENTER );
-        mainFrame.setSize(700, 550);
-        mainFrame.setVisible(true);
-        mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        add(resultsPanel);
+        add(northPanel,BorderLayout.NORTH);
+        add(resultsPanel,BorderLayout.CENTER );
+        setSize(700, 550);
+        setVisible(true);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
     /* Initializes panel that contains 2 other panels, one for search criteria and
@@ -95,18 +84,10 @@ public class MainFileSearch extends JFrame {
         leftPanel.add(recentSearchsButton);
     }
 
-    /* Initializes result panel*/
-    /*
-    private void makeResultsPanel() {
-        resultsPanel = new ResultsPanel();
-        resultsPanel.setLayout(new BorderLayout());
-        resultsPanel.setBackground(Color.lightGray);
-        //resultsPanel.makeResultsPanel();
-    }
-    */
     public JButton getSearchButton(){
-             return searchButton;
-            }
+        return searchButton;
+    }
+
     public String getFileName(){
         return this.simplePanel.getFileNameField();
     }
@@ -123,23 +104,7 @@ public class MainFileSearch extends JFrame {
         return this.simplePanel.getHiddenCheckbox();
     }
 
-    public void getResults(){
-        resultsPanel.validate();
-        resultsPanel.repaint();
-        mainFrame.removeAll();
-        mainFrame.validate();
-        mainFrame.repaint();
-    }
-
-    public JTable getTable(){
+    public DefaultTableModel getTable(){
         return resultsPanel.getResultsTable();
-    }
-
-    public void setResults(String data[][]) {
-        this.resultsPanel.setResults(data);
-    }
-
-    public static void main(String[] args) {
-        new MainFileSearch("File Search");
     }
 }
