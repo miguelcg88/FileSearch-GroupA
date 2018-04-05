@@ -76,16 +76,6 @@ public class Search {
                 shortList.add(list[i]);
             }
         }
-
-        //Show short list
-        System.out.println("*****SHORT LIST BY ATTRIBUTE HIDDEN->"+ this.searchCriteria.getHiddenFlag() +"********" );
-        for (File temp : shortList) {
-            System.out.println(temp.getName());
-        }
-//        System.out.println("*****************SEARCH RESULT******************************");
-//        searchByName(shortList);
-//        System.out.println("*********************Extension " + "." + this.searchCriteria.getExtension() + " List******************");
-//        searchByExtension(shortList);
     }
 
     /**
@@ -135,18 +125,4 @@ public class Search {
         }
         return  searchResult;
     }
-
-    //Only for testing purposes
-   /* public  static void main(String args[]){
-        System.out.println("*****************LIST OF FILES******************************");
-        SearchCriteria sc = new SearchCriteria();
-        sc.setFolderPath("\\Test");
-        sc.setFileName("file8");
-        sc.setExtension("jonas");
-        sc.setHiddenFlag(false);
-
-        Search search = new Search();
-        search.setSearchCriteria(sc);
-        search.searchByHiddenAttribute();
-    }*/
 }

@@ -120,7 +120,7 @@ public class SearchController {
             String extensionText =  fileResults.get(i).getName().substring(fileResults.get(i).getName().lastIndexOf(".")+1);
             data[3] = extensionText;
 
-            long size =  fileResults.get(i).getName().length();
+            long size =  fileResults.get(i).length();
             String sizeText = Long.toString(convert.ConvertBytesToMegabytes(size));
             data[4] = sizeText;
 
