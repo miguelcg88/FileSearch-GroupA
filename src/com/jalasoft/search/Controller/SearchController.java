@@ -118,6 +118,7 @@ public class SearchController {
             data[2] = hiddenText;
 
             String extensionText =  fileResults.get(i).getName().substring(fileResults.get(i).getName().lastIndexOf(".")+1);
+
             data[3] = extensionText;
 
             long size =  fileResults.get(i).length();

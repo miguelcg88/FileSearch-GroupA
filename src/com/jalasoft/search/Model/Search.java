@@ -71,8 +71,8 @@ public class Search {
             if (!this.searchCriteria.getHiddenFlag() && !list[i].isHidden()) {
                 shortList.add(list[i]);
             }
-            //Show only hidden files
-            if (this.searchCriteria.getHiddenFlag() && list[i].isHidden()){
+            //Show also hidden files
+            if (this.searchCriteria.getHiddenFlag() == true){
                 shortList.add(list[i]);
             }
         }
@@ -87,8 +87,9 @@ public class Search {
         //SearchByName
         ArrayList<File> listByName = new ArrayList<>();
         for(File f: shortList){
-            System.out.println(f.getName() +"-----");
-            if (f.getName().contains(this.searchCriteria.getFileName() + "." + this.searchCriteria.getExtension())){
+            String nameText = f.getName().replaceFirst("[.][^.]+$", "");
+            System.out.println(nameText+"="+this.searchCriteria.getFileName());
+            if (nameText.startsWith(this.searchCriteria.getFileName())){
                 listByName.add(f);
             }
         }
