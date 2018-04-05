@@ -28,7 +28,7 @@ public class Convertor {
     private static final long megabyte = 1024L * 1024L;
 
     /* ConvertBytesToMegabytes converts bytes to Mb - input bytes */
-    public static long ConvertBytesToMegabytes(long bytes) {
+    public long ConvertBytesToMegabytes(long bytes) {
         return bytes / megabyte;
     }
 

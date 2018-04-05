@@ -31,9 +31,5 @@ public class MVCSearch {
         SimpleSearchPanel simpleFilters = new SimpleSearchPanel();
         ResultsPanel results = new ResultsPanel();
         SearchController controller = new SearchController(model, view, simpleFilters, results);
-        //con.init();
-        //controller.updateView();
-        //controller.setFileName("test");
-        //.updateView();
     }
 }

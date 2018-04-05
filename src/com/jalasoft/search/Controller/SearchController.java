@@ -12,7 +12,8 @@
 package src.com.jalasoft.search.Controller;
 
 //import java.util.logging.Logger;
-import com.jalasoft.search.model.SearchModel;
+import src.com.jalasoft.search.model.SearchModel;
+import src.com.jalasoft.search.common.Convertor;
 import src.com.jalasoft.search.common.Validator;
 import src.com.jalasoft.search.gui.MainFileSearch;
 import src.com.jalasoft.search.gui.ResultsPanel;
@@ -34,23 +35,33 @@ import java.util.ArrayList;
 public class SearchController {
     /* Controller. */
     /**
-     * private model, view
+     * private model, view (main simplesearch) validator convertor criteria
      */
     private Search model;
     private MainFileSearch view;
     private SimpleSearchPanel simpleFilters;
-
     private SearchCriteria criteria;
     private Validator validator = new Validator();
+    private Convertor convert = new Convertor();
 
+    /**
+     * Search Controller Parameters
+     * @param model
+     * @param view
+     * @param simpleFilters
+     * @param results
+     */
     public SearchController(Search model, MainFileSearch view, SimpleSearchPanel simpleFilters, ResultsPanel results) {
         this.model = model;
         this.view = view;
         this.simpleFilters = simpleFilters;
-        //this.results = results;
         this.view.getSearchButton().addActionListener(e -> FillCriteria());
     }
 
+    /**
+     * Fill Criteria will listen UI and sent Criteria to the Model
+     * Retrieve Results from Model and Sent them to UI
+     */
     private void FillCriteria() {
         criteria = new SearchCriteria();
         String fileName = this.view.getFileName();
@@ -87,11 +98,12 @@ public class SearchController {
 
         // Send Search criterial to model.
         model.setSearchCriteria(criteria);
+        //model.setResults();
         model.searchByHiddenAttribute();
 
         // List with all search result.
-        ArrayList<File> fileResults = model.setResults();
-        String data[] = new String[4];
+        ArrayList<File> fileResults = model.getResults();
+        String data[] = new String[5];
 
         // Clean table
         this.view.getTable().setRowCount(0);
@@ -107,6 +119,10 @@ public class SearchController {
 
             String extensionText =  fileResults.get(i).getName().substring(fileResults.get(i).getName().lastIndexOf(".")+1);
             data[3] = extensionText;
+
+            long size =  fileResults.get(i).getName().length();
+            String sizeText = Long.toString(convert.ConvertBytesToMegabytes(size));
+            data[4] = sizeText;
 
             this.view.getTable().addRow(data);
         }

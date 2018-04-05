@@ -10,12 +10,15 @@
  * with Jalasoft.
  */
 package src.com.jalasoft.search.model;
+
+import java.io.File;
+
 /**
  * FileSearch
  *
  * @version 1.00 3 Apr 2018
  * @author Gabriel Rendon  */
-public class FileSearch {
+public class FileSearch extends File {
     /**
      private variables */
     //private Assets asset;
@@ -24,6 +27,10 @@ public class FileSearch {
     private boolean hidden;
     private String extension;
     private String owner;
+
+    public FileSearch(String pathname) {
+        super(pathname);
+    }
 
     /**
      * Set folder/file path

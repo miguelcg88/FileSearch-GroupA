@@ -47,7 +47,7 @@ public class SimpleSearchPanel extends JPanel {
     //Panel that contains textfiled to enter file name for search
     public void makeFileNamePanel(){
         fileNamePanel =new JPanel();
-        fileNameLabel = new JLabel("File Name1");
+        fileNameLabel = new JLabel("File Name");
         fileNameField = new JTextField(10);
         fileNamePanel.setLayout(new BoxLayout(fileNamePanel, BoxLayout.X_AXIS));
         fileNamePanel.add(fileNameLabel);
@@ -56,7 +56,7 @@ public class SimpleSearchPanel extends JPanel {
     //Panel that contains textfiled to enter path for search
     public void makePathPanel(){
         pathPanel =new JPanel();
-        pathLabel = new JLabel("Path1");
+        pathLabel = new JLabel("Path");
         pathNameField = new JTextField (10);
         pathPanel.setLayout(new BoxLayout(pathPanel, BoxLayout.X_AXIS));
         pathPanel.add(pathLabel);
@@ -75,7 +75,7 @@ public class SimpleSearchPanel extends JPanel {
     public void makeExtensionPanel(){
         extensionPanel =new JPanel();
         extensionLabel = new JLabel("Select extension");
-        String[] extensionsList = { "txt","exe", "doc", "xls", "png", "zip" };
+        String[] extensionsList = { "All","txt","exe", "doc", "xls", "png", "zip" };
         extensionComboBox = new JComboBox(extensionsList);
         extensionPanel.setLayout(new BoxLayout(extensionPanel, BoxLayout.X_AXIS));
         extensionPanel.add(extensionLabel);
