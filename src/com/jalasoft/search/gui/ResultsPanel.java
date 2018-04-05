@@ -3,6 +3,8 @@ package src.com.jalasoft.search.gui;
 import javafx.scene.control.TableColumn;
 import oracle.jrockit.jfr.JFR;
 
+import oracle.jrockit.jfr.JFR;
+
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.table.DefaultTableModel;

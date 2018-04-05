@@ -40,8 +40,8 @@ public class Search {
      * This method is used to get a list of all files according  to a path and the hidden parameter.
      * If hidden is set as True, get all files that were hidden.
      * If hidden is set as False, get all files that were not hidden.
-     * @param //folderPath this is the first parameter to show all files that are into this folder.
-     * @param// isHiddem this is   the second parameter to show all files that are hidden.
+     * @param folderPath this is the first parameter to show all files that are into this folder.
+     * @param isHiddem this is   the second parameter to show all files that are hidden.
      *                 By default it is as not checked.
      */
     public void searchByHiddenAttribute(){
@@ -73,9 +73,6 @@ public class Search {
 
     /**
      * This method is used to get all files that did match by a nameFile.
-     * @param //fileNameToSearch this is the first parameter to search into a list of files.
-     * @return  shortList This list to show only the files that are the same that the name file.
-     */
     private ArrayList<File> searchByName(ArrayList<File> shortList) {
         //SearchByName
         ArrayList<File> listByName = new ArrayList<>();
