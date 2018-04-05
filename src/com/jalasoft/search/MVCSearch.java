@@ -9,9 +9,15 @@
  * accordance with the terms of the license agreement you entered into
  * with Jalasoft.
  */
-package com.jalasoft.search;
+package src.com.jalasoft.search;
 
 import com.jalasoft.search.model.SearchModel;
+import src.com.jalasoft.search.Controller.SearchController;
+import src.com.jalasoft.search.gui.MainFileSearch;
+import src.com.jalasoft.search.gui.ResultsPanel;
+import src.com.jalasoft.search.gui.SimpleSearchPanel;
+import src.com.jalasoft.search.model.Search;
+
 /**
  * Main MVC Search
  *
@@ -20,13 +26,12 @@ import com.jalasoft.search.model.SearchModel;
 public class MVCSearch {
     //Test purposes
     public static void main(String[] args) {
-        String fixedPath = "C:\\TestFolder";
-        //SearchView view = new SearchView();
-        SearchModel model  = new SearchModel();
-        model.ListFileByPath(fixedPath);
-
-        //SearchController controller = new SearchController(model, view);
-
+        MainFileSearch view = new MainFileSearch("MI");
+        Search model  = new Search();
+        SimpleSearchPanel simpleFilters = new SimpleSearchPanel();
+        ResultsPanel results = new ResultsPanel();
+        SearchController controller = new SearchController(model, view, simpleFilters, results);
+        //con.init();
         //controller.updateView();
         //controller.setFileName("test");
         //.updateView();

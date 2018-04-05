@@ -9,7 +9,7 @@
  * accordance with the terms of the license agreement you entered into
  * with Jalasoft.
  */
-package com.jalasoft.search.common;
+package src.com.jalasoft.search.common;
 
 import java.text.DateFormat;
 import java.text.ParseException;

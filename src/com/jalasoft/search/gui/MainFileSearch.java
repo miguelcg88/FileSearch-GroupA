@@ -5,9 +5,10 @@
  *Author : Miguel Calderon
  */
 
-package com.jalasoft.search.gui;
+package src.com.jalasoft.search.gui;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -16,30 +17,37 @@ import java.awt.GridLayout;
 public class MainFileSearch extends JFrame {
 
     private JButton searchButton;
+    private JButton normalSearchButton;
+    private JButton advancedSearchButton;
+    private JButton videoSearchButton;
+    private JButton musicSearchButton;
+    private JButton recentSearchsButton;
+    private JTextField searchString;
+    private JPanel searchOptionsPanel;
+    private JPanel leftPanel;
     private JPanel northPanel;
-    private JPanel resultsPanel;
-
+    private ResultsPanel resultsPanel;
+    private JPanel simpleSearchPanel;
+    private JLabel searchLabel;
+    SimpleSearchPanel simplePanel;
 
     //Class constructor, calls methods to make panels
     public MainFileSearch(String title) {
-        super(title);
         makeNorthPanel();
         initializeMainFrame();
     }
 
     /* Initializes main frame by adding all panels in it and set properties for window*/
     private void initializeMainFrame(){
-        JFrame mainFrame = new JFrame();
-        mainFrame.setLayout(new BorderLayout());
+        pack();
+        setLayout(new BorderLayout());
         resultsPanel = new ResultsPanel();
-        mainFrame.add(resultsPanel);
-        mainFrame.add(northPanel,BorderLayout.NORTH);
-        //mainFrame.add(Box.createRigidArea(new Dimension(0,8)));
-        mainFrame.add(resultsPanel,BorderLayout.CENTER );
-        mainFrame.pack();
-        mainFrame.setSize(700, 550);
-        mainFrame.setVisible(true);
-        mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        add(resultsPanel);
+        add(northPanel,BorderLayout.NORTH);
+        add(resultsPanel,BorderLayout.CENTER );
+        setSize(700, 550);
+        setVisible(true);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
     /* Initializes panel that contains 2 other panels, one for search criteria and
@@ -49,21 +57,54 @@ public class MainFileSearch extends JFrame {
         searchButton = new JButton("Go !");
         northPanel.setLayout(new BorderLayout());
         northPanel.setPreferredSize(new Dimension(750,280));
-        SimpleSearchPanel simpleSearchPanel = new SimpleSearchPanel();
-        simpleSearchPanel.add(simpleSearchPanel.getSimpleSearchPrincipalPanel());
-        LeftPanel leftPanel = new LeftPanel();
-        northPanel.add(simpleSearchPanel,BorderLayout.CENTER);
+        simplePanel = new SimpleSearchPanel();
+        simplePanel.add(simplePanel.getSimpleSearchPrincipalPanel());
+        makeLeftPanel();
+        northPanel.add(simplePanel,BorderLayout.CENTER);
         northPanel.add(leftPanel,BorderLayout.WEST);
         northPanel.add(searchButton,BorderLayout.EAST);
+        northPanel.setVisible(true);
+
     }
 
-    //Method to communicate to Controller when search button is pressed
+    /* Initializes left panel that contains buttons to select what kind of search want you use*/
+    private void makeLeftPanel() {
+        leftPanel = new JPanel();
+        normalSearchButton = new JButton("Simple");
+        advancedSearchButton = new JButton("Advanced");
+        videoSearchButton = new JButton("Video");
+        musicSearchButton = new JButton("Music");
+        recentSearchsButton = new JButton("Recent Searchs");
+        leftPanel.setLayout(new GridLayout(5,1));
+        leftPanel.setBackground(Color.darkGray);
+        leftPanel.add(normalSearchButton);
+        leftPanel.add(advancedSearchButton);
+        leftPanel.add(videoSearchButton);
+        leftPanel.add(musicSearchButton);
+        leftPanel.add(recentSearchsButton);
+    }
+
     public JButton getSearchButton(){
         return searchButton;
     }
 
-    public static void main(String[] args) {
-        new MainFileSearch("File Search");
+    public String getFileName(){
+        return this.simplePanel.getFileNameField();
+    }
+
+    public String getPath(){
+        return this.simplePanel.getPathNameField();
+    }
+
+    public String getExtension(){
+        return this.simplePanel.getExtensionComboBox();
+    }
+
+    public Boolean getHidden(){
+        return this.simplePanel.getHiddenCheckbox();
+    }
+
+    public DefaultTableModel getTable(){
+        return resultsPanel.getResultsTable();
     }
 }
-

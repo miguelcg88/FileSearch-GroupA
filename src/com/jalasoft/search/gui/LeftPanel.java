@@ -1,4 +1,4 @@
-package com.jalasoft.search.gui;
+package src.com.jalasoft.search.gui;
 
 import javax.swing.*;
 import java.awt.*;
