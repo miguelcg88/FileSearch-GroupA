@@ -90,7 +90,7 @@ public class SearchController {
         model.searchByHiddenAttribute();
 
         // List with all search result.
-        ArrayList<File> fileResults = model.setResults();
+        ArrayList<File> fileResults = model.getResults();
         String data[] = new String[4];
 
         // Clean table

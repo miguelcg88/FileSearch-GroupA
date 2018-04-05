@@ -82,10 +82,10 @@ public class Search {
         for (File temp : shortList) {
             System.out.println(temp.getName());
         }
-        System.out.println("*****************SEARCH RESULT******************************");
-        searchByName(shortList);
-        System.out.println("*********************Extension " + "." + this.searchCriteria.getExtension() + " List******************");
-        searchByExtension(shortList);
+//        System.out.println("*****************SEARCH RESULT******************************");
+//        searchByName(shortList);
+//        System.out.println("*********************Extension " + "." + this.searchCriteria.getExtension() + " List******************");
+//        searchByExtension(shortList);
     }
 
     /**
@@ -93,18 +93,16 @@ public class Search {
      * @param //fileNameToSearch this is the first parameter to search into a list of files.
      * @return  shortList This list to show only the files that are the same that the name file.
      */
-    private void searchByName(ArrayList<File> shortList) {
+    private ArrayList<File> searchByName(ArrayList<File> shortList) {
         //SearchByName
-        for(int j=0;j<shortList.size();j++){
-            if (shortList.get(j).getName().equals(this.searchCriteria.getFileName() + "." + this.searchCriteria.getExtension())){
-                System.out.println("The file-> "+shortList.get(j).getName()+" was found!");
-                isFound = Boolean.TRUE;
-                break;
+        ArrayList<File> listByName = new ArrayList<>();
+        for(File f: shortList){
+            System.out.println(f.getName() +"-----");
+            if (f.getName().contains(this.searchCriteria.getFileName() + "." + this.searchCriteria.getExtension())){
+                listByName.add(f);
             }
         }
-        if(isFound == Boolean.FALSE){
-            System.out.println("The file->"+ this.searchCriteria.getFileName() +" was not found!");
-        }
+        return listByName;
     }
 
     public ArrayList<File> setResults(){
@@ -116,13 +114,26 @@ public class Search {
      * @param //extensionFile this is the first parameter to search into a list of files.
      * @return  shortList This list to show only the files that are the same that the extension.
      */
-    private void searchByExtension(ArrayList<File> shortList) {
+    private ArrayList<File> searchByExtension(ArrayList<File> shortList) {
         //SearchByExtension
-        for(int j=0;j<shortList.size();j++){
-            if (shortList.get(j).getName().endsWith("." + this.searchCriteria.getExtension())){
-                System.out.println(shortList.get(j).getName());
+        ArrayList<File> listByExtension = new ArrayList<>();
+        for(File f: shortList){
+            if (f.getName().endsWith("." + this.searchCriteria.getExtension())){
+                listByExtension.add(f);
             }
         }
+        return listByExtension;
+    }
+
+    public ArrayList<File> getResults(){
+        ArrayList<File> searchResult = shortList;
+        if(searchCriteria.getFileName() != null){
+            searchResult = searchByName(searchResult);
+        }
+        if(searchCriteria.getExtension() != null){
+            searchResult = searchByExtension(searchResult);
+        }
+        return  searchResult;
     }
 
     //Only for testing purposes
