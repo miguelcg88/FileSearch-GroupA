@@ -1,74 +1,80 @@
 package src.com.jalasoft.search.common;
 
-import org.junit.jupiter.api.Test;
-import static src.com.jalasoft.search.common.Validator.*;
+
+
+
+import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static src.com.jalasoft.search.common.Validator.*;
+
 
 public class ValidatorTest {
     @Test
     public void validatePathIsValid() {
         //assertTrue(isValidPath("C:\\TestFolder"));
-        assertTrue(isValidPath("\\TestFiles"));
+        Assertions.assertTrue(isValidPath("\\TestFiles"));
     }
 
     @Test
     public void validatePathIsInvalid() {
         //assertFalse(isValidPath("C:\\TestF/-*-*/**olderFake"));
-        assertFalse(isValidPath("\\TestF/*-*ilesFake"));
+        Assertions.assertFalse(isValidPath("\\TestF/*-*ilesFake"));
     }
 
     @Test
     public void validateIfFileExist() {
         //assertTrue(isFileExist("C:\\TestFolder"));
-        assertTrue(isFileExist(".\\test\\com\\jalasoft\\search\\common\\TestFiles"));
+        Assertions.assertTrue(isFileExist(".\\test\\com\\jalasoft\\search\\common\\TestFiles"));
     }
 
     @Test
     public void validateFileDoesNotExist() {
         //assertFalse(isFileExist("H:\\TestFolder"));
-        assertFalse(isFileExist("TestFilesFake"));
+        Assertions.assertFalse(isFileExist("TestFilesFake"));
     }
 
     @Test
     public void validateIfFileIsDirectory() {
         //assertTrue(isDirectory("C:\\TestFolder"));
-        assertTrue(isDirectory(".\\test\\com\\jalasoft\\search\\common\\TestFiles"));
+        Assertions.assertTrue(isDirectory(".\\test\\com\\jalasoft\\search\\common\\TestFiles"));
     }
 
     @Test
     public void validateFileIsNotDirectory() {
         //assertFalse(isDirectory("C:\\TestFolder\\Test.txt"));
-        assertFalse(isDirectory("\\TestFilesFake"));
+        Assertions.assertFalse(isDirectory("\\TestFilesFake"));
     }
 
     @Test
     public void validateDateIsValid(){
-        assertTrue(isValidDate("3/26/2018"));
+        Assertions.assertTrue(isValidDate("3/26/2018"));
     }
 
     @Test
     public void validateDateIsInvalid(){
-        assertFalse(isValidDate("13/26/2018"));
+        Assertions.assertFalse(isValidDate("13/26/2018"));
     }
 
     @Test
     public void validateFileHasValidExtension(){
-        assertTrue(isValidExtension("a.pdf"));
+        Assertions.assertTrue(isValidExtension("a.pdf"));
     }
 
     @Test
     public void validateFileNameDoesNotHaveValidExtension(){
-        assertFalse(isValidExtension("a.mp3"));
+        Assertions.assertFalse(isValidExtension("a.mp3"));
     }
 
     @Test
     public void validateStringIsAValidFileName(){
-        assertTrue(isValidName("HelloWorld"));
+        Assertions.assertTrue(isValidName("HelloWorld"));
     }
 
     @Test
     public void validateStringIsInvalidFileName(){
-        assertFalse(isValidName("Hello*World"));
+        Assertions.assertFalse(isValidName("Hello*World"));
     }
 }

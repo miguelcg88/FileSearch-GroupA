@@ -6,14 +6,10 @@
  */
 package src.com.jalasoft.search.gui;
 
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 import java.awt.Dimension;
+import java.io.File;
+
 //Class that creates panel for simple search, it contains another panels that shows optoins to set search
 public class SimpleSearchPanel extends JPanel {
 
@@ -34,6 +30,8 @@ public class SimpleSearchPanel extends JPanel {
     private JCheckBox hiddenCheckbox ;
     private JComboBox<String> extensionComboBox;
     private JComboBox<String> sizeComboBox;
+    private JButton browseButton;
+    private JFileChooser fileChooser;
 
     //Class constructor, calls methods to make panels, each panel has a component and label
     public SimpleSearchPanel(){
@@ -58,9 +56,22 @@ public class SimpleSearchPanel extends JPanel {
         pathPanel =new JPanel();
         pathLabel = new JLabel("Path");
         pathNameField = new JTextField (10);
+        browseButton = new JButton("Browse");
+
+        fileChooser = new JFileChooser();
+        fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+        int result = fileChooser.showOpenDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            System.out.println("Selected file: " + selectedFile.getAbsolutePath());
+        }
+
+
         pathPanel.setLayout(new BoxLayout(pathPanel, BoxLayout.X_AXIS));
         pathPanel.add(pathLabel);
         pathPanel.add(pathNameField);
+        pathPanel.add(browseButton);
+
     }
     //Panel that contains checbox to indicate if user wants to include hidden files or not in search
     public void makeHiddenPanel(){
