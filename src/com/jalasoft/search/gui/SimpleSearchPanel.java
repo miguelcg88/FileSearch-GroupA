@@ -8,6 +8,8 @@ package src.com.jalasoft.search.gui;
 
 import javax.swing.*;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 
 //Class that creates panel for simple search, it contains another panels that shows optoins to set search
@@ -31,7 +33,7 @@ public class SimpleSearchPanel extends JPanel {
     private JComboBox<String> extensionComboBox;
     private JComboBox<String> sizeComboBox;
     private JButton browseButton;
-    private JFileChooser fileChooser;
+    private MyFileChooser myFileChooser;
 
     //Class constructor, calls methods to make panels, each panel has a component and label
     public SimpleSearchPanel(){
@@ -57,14 +59,21 @@ public class SimpleSearchPanel extends JPanel {
         pathLabel = new JLabel("Path");
         pathNameField = new JTextField (10);
         browseButton = new JButton("Browse");
+        browseButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                myFileChooser = new MyFileChooser();
+                pathNameField.setText(myFileChooser.getPath());
+            }
+        });
 
-        fileChooser = new JFileChooser();
+        /*fileChooser = new JFileChooser();
         fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
         int result = fileChooser.showOpenDialog(this);
         if (result == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
             System.out.println("Selected file: " + selectedFile.getAbsolutePath());
-        }
+        }*/
 
 
         pathPanel.setLayout(new BoxLayout(pathPanel, BoxLayout.X_AXIS));
@@ -128,7 +137,7 @@ public class SimpleSearchPanel extends JPanel {
 
     //get the value in path name field
     public String getPathNameField() {
-        return pathNameField.getText();
+        return myFileChooser.getPath();
     }
 
     //get the value of hidden check box, return true or false
