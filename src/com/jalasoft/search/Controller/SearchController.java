@@ -43,6 +43,7 @@ public class SearchController {
     private SearchCriteria criteria;
     private Validator validator = new Validator();
     private Convertor convert = new Convertor();
+    private src.com.jalasoft.search.Controller.LoggerCreator loggerCreator;
 
     /**
      * Search Controller Parameters
@@ -56,6 +57,7 @@ public class SearchController {
         this.view = view;
         this.simpleFilters = simpleFilters;
         this.view.getSearchButton().addActionListener(e -> FillCriteria());
+        src.com.jalasoft.search.Controller.LoggerCreator.getInstance();
     }
 
     /**
@@ -65,6 +67,7 @@ public class SearchController {
     private void FillCriteria() {
         criteria = new SearchCriteria();
         String fileName = this.view.getFileName();
+
 
         if (validator.isValidName(fileName)) {
             this.criteria.setFileName(fileName);
