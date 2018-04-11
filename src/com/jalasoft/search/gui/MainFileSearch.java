@@ -20,7 +20,7 @@ import java.awt.event.ActionListener;
 public class MainFileSearch extends JFrame {
 
     private JButton searchButton;
-    private JButton normalSearchButton;
+    private JButton simpleSearchButton;
     private JButton advancedSearchButton;
     private JButton videoSearchButton;
     private JButton musicSearchButton;
@@ -30,12 +30,12 @@ public class MainFileSearch extends JFrame {
     private JPanel leftPanel;
     private JPanel northPanel;
     private ResultsPanel resultsPanel;
-    SimpleSearchPanel simplePanel;
+    SimpleSearchPanel simpleSearchPanel;
     AdvancedSearchPanel advancedSearchPanel;
 
     //Class constructor, calls methods to make panels
     public MainFileSearch(String title) {
-        makeNorthPanel();
+        makeNorthPanelForSimpleSearch();
         initializeMainFrame();
     }
 
@@ -54,21 +54,21 @@ public class MainFileSearch extends JFrame {
 
     /* Initializes panel that contains 2 other panels, one for search criteria and
     other one is left panel that contains buttons to select what kind of search want to use*/
-    private void makeNorthPanel() {
+    private void makeNorthPanelForSimpleSearch() {
         northPanel = new JPanel();
         searchButton = new JButton("Go !");
         northPanel.setLayout(new BorderLayout());
         northPanel.setPreferredSize(new Dimension(750,280));
-        simplePanel = new SimpleSearchPanel();
-        simplePanel.add(simplePanel.getSimpleSearchPrincipalPanel());
+        simpleSearchPanel = new SimpleSearchPanel();
+        simpleSearchPanel.add(simpleSearchPanel.getSimpleSearchPrincipalPanel());
         makeLeftPanel();
-        northPanel.add(simplePanel,BorderLayout.CENTER);
+        northPanel.add(simpleSearchPanel,BorderLayout.CENTER);
         northPanel.add(leftPanel,BorderLayout.WEST);
         northPanel.add(searchButton,BorderLayout.EAST);
         northPanel.setVisible(true);
 
     }
-    //Initializes advanced panel when user click on "Advanced" button
+   /* //Initializes advanced panel when user click on "Advanced" button
     private void makeNorthPanelForAdvancedSearch(){
         northPanel = new JPanel();
         searchButton = new JButton("Go !");
@@ -81,16 +81,28 @@ public class MainFileSearch extends JFrame {
         northPanel.add(searchButton,BorderLayout.EAST);
         northPanel.setVisible(true);
 
-    }
+    }*/
 
     /* Initializes left panel that contains buttons to select what kind of search want you use*/
     private void makeLeftPanel() {
         leftPanel = new JPanel();
-        normalSearchButton = new JButton("Simple");
+        simpleSearchButton = new JButton("Simple");
+        simpleSearchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                northPanel.remove(advancedSearchPanel);
+                simpleSearchPanel = new SimpleSearchPanel();
+                simpleSearchPanel.setVisible(true);
+                northPanel.add(simpleSearchPanel);
+                northPanel.revalidate();
+            }
+        });
+
         advancedSearchButton = new JButton("Advanced");
         advancedSearchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                northPanel.remove(simpleSearchPanel);
                 advancedSearchPanel = new AdvancedSearchPanel();
                 northPanel.add(advancedSearchPanel);
                 northPanel.revalidate();
@@ -101,7 +113,7 @@ public class MainFileSearch extends JFrame {
         recentSearchsButton = new JButton("Recent Searchs");
         leftPanel.setLayout(new GridLayout(5,1));
         leftPanel.setBackground(Color.darkGray);
-        leftPanel.add(normalSearchButton);
+        leftPanel.add(simpleSearchButton);
         leftPanel.add(advancedSearchButton);
         leftPanel.add(videoSearchButton);
         leftPanel.add(musicSearchButton);
@@ -113,19 +125,19 @@ public class MainFileSearch extends JFrame {
     }
 
     public String getFileName(){
-        return this.simplePanel.getFileNameField();
+        return this.simpleSearchPanel.getFileNameField();
     }
 
     public String getPath(){
-        return this.simplePanel.getPathNameField();
+        return this.simpleSearchPanel.getPathNameField();
     }
 
     public String getExtension(){
-        return this.simplePanel.getExtensionComboBox();
+        return this.simpleSearchPanel.getExtensionComboBox();
     }
 
     public Boolean getHidden(){
-        return this.simplePanel.getHiddenCheckbox();
+        return this.simpleSearchPanel.getHiddenCheckbox();
     }
 
     public DefaultTableModel getTable(){
