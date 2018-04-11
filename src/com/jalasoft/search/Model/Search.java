@@ -109,8 +109,13 @@ public class Search {
         //SearchByExtension
         ArrayList<File> listByExtension = new ArrayList<>();
         for(File f: shortList){
-            if (f.getName().endsWith("." + this.searchCriteria.getExtension())){
+            if(this.searchCriteria.getExtension()=="All") {
                 listByExtension.add(f);
+            }
+            else {
+                if (f.getName().endsWith("." + this.searchCriteria.getExtension())) {
+                    listByExtension.add(f);
+                }
             }
         }
         return listByExtension;

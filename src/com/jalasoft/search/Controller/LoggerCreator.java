@@ -14,8 +14,8 @@ package src.com.jalasoft.search.Controller;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
+import java.util.logging.*;
+
 /**
  * Implements the log creation
  * @author Gabriel Rendon
@@ -24,15 +24,23 @@ import java.util.logging.Logger;
  */
 public class LoggerCreator {
     private static LoggerCreator logCreator;
-    public static Logger logger;
-
+    private static Logger logger;
 
     private LoggerCreator() {
-        try (FileInputStream configFile = new FileInputStream("./logger.properties")) {
-            //readConfig(configFile);
-            LogManager.getLogManager().readConfiguration(configFile);
-            logger = LogManager.getLogManager().getLogger("MyLog");
+        FileHandler fileHandler;
 
+        try /*(FileInputStream configFile = new FileInputStream("./logger.properties"))*/ {
+            //readConfig(configFile);
+            //LogManager.getLogManager().readConfiguration(configFile);
+            //logger = LogManager.getLogManager().getLogger("MyLog");
+
+            logger = Logger.getLogger("Test");
+            logger.setUseParentHandlers(false);
+            logger.setLevel(Level.ALL);
+            fileHandler = new FileHandler("C:/DevFun/FileSearch_GroupA_Log.log", true);
+            fileHandler.setFormatter(new SimpleFormatter());
+            logger.addHandler(fileHandler);
+            fileHandler.setLevel(Level.ALL);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -51,7 +59,11 @@ public class LoggerCreator {
         return logCreator;
     }
 
-    private void readConfig(FileInputStream configFile){
-
+    /**
+     * getLogger will return the logger set by loggerCreator
+     * @return logger
+     */
+    public static Logger getLogger(){
+        return logger;
     }
 }
