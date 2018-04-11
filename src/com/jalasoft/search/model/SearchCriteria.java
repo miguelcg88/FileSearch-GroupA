@@ -9,7 +9,7 @@
  * accordance with the terms of the license agreement you entered into
  * with Jalasoft.
  */
-package src.com.jalasoft.search.model;
+package src.com.jalasoft.search.Model;
 /**
  * Search Criteria
  *
@@ -23,6 +23,12 @@ public class SearchCriteria {
     private String name;
     private boolean hidden;
     private String extension;
+    private String dateAddedFrom;
+    private String dateAddedTo;
+    private String dateModifiedFrom;
+    private String dateModifiedTo;
+    private String contains;
+    private String createdBy;
 
     /**
      * Set folder/file path
@@ -89,5 +95,99 @@ public class SearchCriteria {
         return extension;
     }
 
+    /**
+     * Set date limit Added From
+     * @param dateAddedFrom
+     */
+    public void setDateAddedFrom(String dateAddedFrom) {
+        this.dateAddedFrom = dateAddedFrom;
+    }
 
+    /**
+     * get date limit Added From
+     * @return dateAddedFrom
+     */
+    public String getDateAddedFrom() {
+        return this.dateAddedFrom;
+    }
+
+    /**
+     * Set date limit Added To
+     * @param dateAddedTo
+     */
+    public void setDateAddedTo(String dateAddedTo) {
+        this.dateAddedTo = dateAddedTo;
+    }
+
+    /**
+     * get date limit Added To
+     * @return dateAddedTo
+     */
+    public String getDateAddedTo() {
+        return this.dateAddedTo;
+    }
+
+    /**
+     * Set date limit Modified From
+     * @param dateModifiedFrom
+     */
+    public void setDateModifiedFrom(String dateModifiedFrom) {
+        this.dateModifiedFrom = dateModifiedFrom;
+    }
+
+    /**
+     * get date limit Modified From
+     * @return dateModifiedFrom
+     */
+    public String getDateModifiedFrom() {
+        return this.dateModifiedFrom;
+    }
+
+    /**
+     * Set date limit Modified To
+     * @param dateModifiedTo
+     */
+    public void setDateModifiedTo(String dateModifiedTo) {
+        this.dateModifiedTo = dateModifiedTo;
+    }
+
+    /**
+     * get date limit Modified To
+     * @return dateModifiedTo
+     */
+    public String getDateModifiedTo() {
+        return this.dateModifiedTo;
+    }
+
+    /**
+     * Set contains text
+     * @param contains
+     */
+    public void setContains(String contains) {
+        this.contains = contains;
+    }
+
+    /**
+     * get contains text
+     * @return contains
+     */
+    public String getContains() {
+        return this.contains;
+    }
+
+    /**
+     * Set created By user field
+     * @param createdBy
+     */
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    /**
+     * get created By user field
+     * @return createdBy
+     */
+    public String getCreatedBy() {
+        return this.createdBy;
+    }
 }
