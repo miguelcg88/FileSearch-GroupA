@@ -13,6 +13,9 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 // Class that creates mainframe for project, contains another panels acccording which kind of search is selected by user
 public class MainFileSearch extends JFrame {
 
@@ -27,9 +30,8 @@ public class MainFileSearch extends JFrame {
     private JPanel leftPanel;
     private JPanel northPanel;
     private ResultsPanel resultsPanel;
-    private JPanel simpleSearchPanel;
-    private JLabel searchLabel;
     SimpleSearchPanel simplePanel;
+    AdvancedSearchPanel advancedSearchPanel;
 
     //Class constructor, calls methods to make panels
     public MainFileSearch(String title) {
@@ -66,12 +68,34 @@ public class MainFileSearch extends JFrame {
         northPanel.setVisible(true);
 
     }
+    //Initializes advanced panel when user click on "Advanced" button
+    private void makeNorthPanelForAdvancedSearch(){
+        northPanel = new JPanel();
+        searchButton = new JButton("Go !");
+        northPanel.setLayout(new BorderLayout());
+        northPanel.setPreferredSize(new Dimension(750,280));
+        advancedSearchPanel = new AdvancedSearchPanel();
+        makeLeftPanel();
+        northPanel.add(advancedSearchPanel,BorderLayout.CENTER);
+        northPanel.add(leftPanel,BorderLayout.WEST);
+        northPanel.add(searchButton,BorderLayout.EAST);
+        northPanel.setVisible(true);
+
+    }
 
     /* Initializes left panel that contains buttons to select what kind of search want you use*/
     private void makeLeftPanel() {
         leftPanel = new JPanel();
         normalSearchButton = new JButton("Simple");
         advancedSearchButton = new JButton("Advanced");
+        advancedSearchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                advancedSearchPanel = new AdvancedSearchPanel();
+                northPanel.add(advancedSearchPanel);
+                northPanel.revalidate();
+            }
+        });
         videoSearchButton = new JButton("Video");
         musicSearchButton = new JButton("Music");
         recentSearchsButton = new JButton("Recent Searchs");
