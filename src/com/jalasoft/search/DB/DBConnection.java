@@ -15,8 +15,7 @@ public class DBConnection {
             Class.forName("org.sqlite.JDBC");
             con = DriverManager.getConnection("jdbc:sqlite:SearchGroupA.db");
             Statement state = con.createStatement();
-            state.execute("CREATE TABLE [IF NOT EXISTS] SearchTable " +
-                    "(Id Integer PRIMARY KEY, CriteriaName String NOT NULL, Json String)");
+            state.execute("CREATE TABLE [IF NOT EXISTS] SearchTable (Id Integer PRIMARY KEY, CriteriaName String NOT NULL, Json String)");
 
         //} catch(ClassNotFoundException e) {
         //} catch (SQLException e) {
