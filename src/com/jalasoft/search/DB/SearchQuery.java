@@ -3,31 +3,20 @@ package src.com.jalasoft.search.DB;
 import javax.management.relation.RelationSupport;
 import java.sql.*;
 
+
 public class SearchQuery {
     private static Connection con;
 
-    public SearchQuery(){
+    public SearchQuery() throws SQLException, ClassNotFoundException {
         con = DBConnection.getInstance().getConnection();
     }
 
-    public String addCriteria(String String externalJson){
-        String query = "Insert Into SearchGroupA Set Values(1,2)";
+    public String addCriteria(String criteriaName, String externalJson) throws SQLException {
+        String query = "INSERT INTO SearchGroupA (Id, CriteriaName, Json) Values(1,2,3)";
         PreparedStatement pre = con.prepareStatement(query);
-        pre.setString(2,externalJson);
+        pre.setString(2,criteriaName);
+        pre.setString(3,externalJson);
         pre.execute();
-
-        /*
-        String sql = "update people set firstname=? , lastname=? where id=?";
-
-PreparedStatement preparedStatement =
-        connection.prepareStatement(sql);
-
-preparedStatement.setString(1, "Gary");
-preparedStatement.setString(2, "Larson");
-preparedStatement.setLong  (3, 123);
-
-int rowsAffected = preparedStatement.executeUpdate();
-         */
         return "";
     }
 

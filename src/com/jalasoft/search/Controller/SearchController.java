@@ -12,6 +12,7 @@
 package src.com.jalasoft.search.Controller;
 
 //import java.util.logging.Logger;
+import com.google.gson.Gson;
 import src.com.jalasoft.search.model.SearchModel;
 import src.com.jalasoft.search.common.Convertor;
 import src.com.jalasoft.search.common.Validator;
@@ -108,6 +109,12 @@ public class SearchController {
         // Send Search criterial to model.
         logger.info("Sendding Search criteria to model.");
         model.setSearchCriteria(criteria);
+
+        //Converting criteria to Json string
+        Gson gson = new Gson();
+        String jsonToString = gson.toJson(criteria);
+        System.out.println(jsonToString);
+
         //model.setResults();
         logger.info("Searching");
         model.searchByHiddenAttribute();

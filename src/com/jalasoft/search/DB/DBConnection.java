@@ -6,27 +6,26 @@ public class DBConnection {
     private static DBConnection dbConnection;
     private static Connection con;
 
-    private DBConnection(){
+    private DBConnection() throws SQLException, ClassNotFoundException {
         init();
     }
 
-    private void init(){
-        try {
-
+    private void init() throws ClassNotFoundException, SQLException {
+        //try {
             Class.forName("org.sqlite.JDBC");
             con = DriverManager.getConnection("jdbc:sqlite:SearchGroupA.db");
             Statement state = con.createStatement();
             state.execute("CREATE TABLE [IF NOT EXISTS] SearchTable " +
                     "(Id Integer PRIMARY KEY, CriteriaName String NOT NULL, Json String)");
 
-        } catch(ClassNotFoundException e) {
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        //} catch(ClassNotFoundException e) {
+        //} catch (SQLException e) {
+        //    e.printStackTrace();
+        //}
         System.out.println("Opened database successfully");
     }
 
-    public static DBConnection getInstance(){
+    public static DBConnection getInstance() throws SQLException, ClassNotFoundException {
         if(dbConnection == null){
             dbConnection = new DBConnection();
         }

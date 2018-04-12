@@ -9,7 +9,7 @@
  * accordance with the terms of the license agreement you entered into
  * with Jalasoft.
  */
-package src.com.jalasoft.search.Model;
+package src.com.jalasoft.search.model;
 /**
  * Search Criteria
  *

@@ -66,7 +66,7 @@ public class Search {
         //doListFiles
         File list[]=file.listFiles();
         for(int i=0;i<list.length;i++){
-            System.out.println(list[i].getName());
+            //System.out.println(list[i].getName());
             //Show only not hidden files
             if (!this.searchCriteria.getHiddenFlag() && !list[i].isHidden()) {
                 shortList.add(list[i]);
