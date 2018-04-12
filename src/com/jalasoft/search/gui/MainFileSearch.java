@@ -91,10 +91,14 @@ public class MainFileSearch extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 northPanel.remove(advancedSearchPanel);
+                advancedSearchPanel.invalidate();
                 simpleSearchPanel = new SimpleSearchPanel();
-                simpleSearchPanel.setVisible(true);
-                northPanel.add(simpleSearchPanel);
+                advancedSearchPanel.setVisible(false);
+                northPanel.add(simpleSearchPanel.getSimpleSearchPrincipalPanel());
+                //northPanel.invalidate();
                 northPanel.revalidate();
+
+
             }
         });
 
@@ -103,9 +107,13 @@ public class MainFileSearch extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 northPanel.remove(simpleSearchPanel);
+                simpleSearchPanel.invalidate();
                 advancedSearchPanel = new AdvancedSearchPanel();
+                simpleSearchPanel.setVisible(false);
                 northPanel.add(advancedSearchPanel);
+                //northPanel.invalidate();
                 northPanel.revalidate();
+
             }
         });
         videoSearchButton = new JButton("Video");
