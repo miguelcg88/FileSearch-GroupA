@@ -1,7 +1,22 @@
+/*
+ * @(#)SearchController.java        1.00 3/22/18
+ *
+ * Copyright (c) Jalasoft
+ *
+ * This software is the confidential and proprietary information of Jalasoft
+ * ("Confidential Information").  You shall not
+ * disclose such Confidential Information and shall use it only in
+ * accordance with the terms of the license agreement you entered into
+ * with Jalasoft.
+ */
 package src.com.jalasoft.search.DB;
 
 import java.sql.*;
-
+/**
+ * Search Criteria
+ *
+ * @version 1.00 26 Mar 2018
+ * @author Gabriel Rendon  */
 public class DBConnection {
     private static DBConnection dbConnection;
     private static Connection con;

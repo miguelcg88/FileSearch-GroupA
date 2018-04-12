@@ -11,6 +11,8 @@
  */
 package src.com.jalasoft.search.common;
 
+import src.com.jalasoft.search.model.SearchCriteria;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -52,4 +54,20 @@ public class Convertor {
             return null;
         }
     }
+    /*
+    public String ObjectToJson(SearchCriteria criteria) {
+        Gson gson = new Gson();
+        String jsonToString = gson.toJson(criteria);
+        System.out.println(jsonToString);
+
+        return jsonToString;
+    }
+
+    public Object JsonToObject(String json) {
+        Gson gson = new Gson();
+        SearchCriteria criteria= gson.fromJson(json, SearchCriteria.class);
+
+        return criteria;
+    }
+    */
 }

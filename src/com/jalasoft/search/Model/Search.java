@@ -11,7 +11,12 @@
 package src.com.jalasoft.search.model;
 
 import java.io.File;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+
+import src.com.jalasoft.search.DB.SearchQuery;
+import src.com.jalasoft.search.common.Convertor;
 import src.com.jalasoft.search.model.SearchCriteria;
 
 /*
@@ -34,7 +39,7 @@ public class Search {
     private SearchCriteria searchCriteria;
     private ArrayList<File> shortList = new ArrayList<>();
 
-    public Search() {
+    public Search() throws SQLException, ClassNotFoundException {
 //          this.folderPath = ();
 //        this.fileNameToSearch = searchCriteria.getFileName();
 //        this.isHidden = searchCriteria.getHiddenFlag();
@@ -130,5 +135,30 @@ public class Search {
             searchResult = searchByExtension(searchResult);
         }
         return  searchResult;
+    }
+
+    public void saveCriteria(String name){
+        /*
+        try {
+            SearchQuery searchQuery = new SearchQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        Convertor convert = new Convertor();
+        String criteria = convert.ObjectToJson(searchCriteria);
+
+        searchQuery.AddCriteria(name,searchCriteria);
+
+
+    ResultSet result = searchQuery.getAllCriteria();
+
+    While(result next() throws SQLException, ClassNotFoundException){
+        System.out.println(result.getInt("Id")+" - "+result.getString("Json")+"-"+result.getString("CriteriaName"));
+
+    }
+    */
     }
 }
