@@ -29,6 +29,7 @@ public class SearchCriteria {
     private String dateModifiedTo;
     private String contains;
     private String createdBy;
+    private String owner;
 
     /**
      * Set folder/file path
@@ -190,4 +191,8 @@ public class SearchCriteria {
     public String getCreatedBy() {
         return this.createdBy;
     }
+
+    public void setOwner(String owner){this.owner = owner;}
+
+    public String getOwner(){return this.owner;}
 }

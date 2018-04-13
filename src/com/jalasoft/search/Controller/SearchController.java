@@ -12,18 +12,14 @@
 package src.com.jalasoft.search.Controller;
 
 //import java.util.logging.Logger;
-import src.com.jalasoft.search.model.SearchModel;
 import src.com.jalasoft.search.common.Convertor;
 import src.com.jalasoft.search.common.Validator;
 import src.com.jalasoft.search.gui.MainFileSearch;
 import src.com.jalasoft.search.gui.ResultsPanel;
 import src.com.jalasoft.search.gui.SimpleSearchPanel;
-import src.com.jalasoft.search.model.FileSearch;
 import src.com.jalasoft.search.model.Search;
 import src.com.jalasoft.search.model.SearchCriteria;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.logging.Logger;
@@ -105,12 +101,14 @@ public class SearchController {
             //results.setError(filePath+" is an invalid File Extension");
         }
 
+        //String owner = this.view.getOwner();
+
         // Send Search criterial to model.
         logger.info("Sendding Search criteria to model.");
         model.setSearchCriteria(criteria);
 
         //Converting criteria to Json string
-        String jsonString = convert.ObjectToJson(criteria);
+       // String jsonString = convert.ObjectToJson(criteria);
 
         //model.setResults();
         logger.info("Searching");

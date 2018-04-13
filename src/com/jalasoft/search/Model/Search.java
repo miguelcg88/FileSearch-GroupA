@@ -11,6 +11,12 @@
 package src.com.jalasoft.search.model;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.attribute.FileOwnerAttributeView;
+import java.nio.file.attribute.UserPrincipal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -37,7 +43,9 @@ public class Search {
     private Boolean isHidden;
     private String extensionFile;
     private SearchCriteria searchCriteria;
-    private ArrayList<File> shortList = new ArrayList<>();
+    private ArrayList shortList = new ArrayList<>();
+//    private ArrayList<src.com.jalasoft.search.model.FileSearch> fileSearchSL = new ArrayList<src.com.jalasoft.search.model.FileSearch>();
+//    private src.com.jalasoft.search.model.FileSearch fileSearch;
 
     public Search() throws SQLException, ClassNotFoundException {
 //          this.folderPath = ();
@@ -83,6 +91,44 @@ public class Search {
         }
     }
 
+//    public void searchByHiddenAttribute2(){
+//
+//        //Read file //folderPath
+//        File file = new File(this.searchCriteria.getFilePath());
+//
+//        // clean list to new search
+//        shortList.clear();
+//        //doListFiles
+//        File[] list=file.listFiles();
+//        for(File temp : list){
+//            //System.out.println(list[i].getName());
+//            //Show only not hidden files
+//            if (!this.searchCriteria.getHiddenFlag() && !temp.isHidden()) {
+//                fileSearch = new src.com.jalasoft.search.model.FileSearch(this.searchCriteria.getFilePath());
+//                String name = temp.getName();
+//                String[] absoluteName = name.split("\\.");
+//                fileSearch.setFileName(absoluteName[0]);
+//                fileSearch.setOwner((Files.getOwner(Paths.get(temp.getAbsolutePath()))); //gtOwner(Paths.get(file.getAbsolutePath())).getName());
+//                fileSearchSL.add(fileSearch);
+//            }
+//            //Show also hidden files
+//            if (this.searchCriteria.getHiddenFlag() == true){
+//                fileSearch = new src.com.jalasoft.search.model.FileSearch(this.searchCriteria.getFilePath());
+//                String name = temp.getName();
+//                String[] absoluteName = name.split("\\.");
+//                fileSearch.setFileName(absoluteName[0]);
+//                fileSearch.setFileName(this.searchCriteria.getFileName());
+//                fileSearchSL.add(fileSearch);
+//            }
+//        }
+//        for(File temp2 : fileSearchSL){
+//            System.out.println("algo");
+//            System.out.println(temp2);
+//            System.out.println(temp2.getName());
+//        }
+//        System.out.println(fileSearchSL);
+//    }
+
     /**
      * This method is used to get all files that did match by a nameFile.
      * @param //fileNameToSearch this is the first parameter to search into a list of files.
@@ -126,6 +172,28 @@ public class Search {
         return listByExtension;
     }
 
+    private ArrayList<File> searchByOwner(ArrayList<File> shortList){
+        //searchByOwner
+        ArrayList<File> listByOwner = new ArrayList<>();
+        for(File f: shortList){
+            try {
+                Path path = Paths.get(this.searchCriteria.getFilePath());
+                FileOwnerAttributeView view = Files.getFileAttributeView(path, FileOwnerAttributeView.class);
+                UserPrincipal userPrincipal = view.getOwner();
+                String getOwnerTemp = userPrincipal.getName();
+                //if(this.searchCriteria.getOwner().equals(getOwnerTemp)) {
+                    if(getOwnerTemp.equals("WIN-IT92TJKOQE6\\Guest")) {
+                    listByOwner.add(f);
+                    System.out.println(f);
+                }
+            } catch (IOException e){
+                System.out.println(e);
+            }
+
+        }
+        return listByOwner;
+    }
+
     public ArrayList<File> getResults(){
         ArrayList<File> searchResult = shortList;
         if(searchCriteria.getFileName() != null){
@@ -134,9 +202,13 @@ public class Search {
         if(searchCriteria.getExtension() != null){
             searchResult = searchByExtension(searchResult);
         }
+        this.searchByOwner(searchResult);
         return  searchResult;
     }
 
+//    private ArrayList<FileSearch> searchByOwner(){
+//
+//    }
     public void saveCriteria(String name){
         /*
         try {
