@@ -32,6 +32,7 @@ public class MainFileSearch extends JFrame {
     private ResultsPanel resultsPanel;
     SimpleSearchPanel simpleSearchPanel;
     AdvancedSearchPanel advancedSearchPanel;
+    private String panelFlag;
 
     //Class constructor, calls methods to make panels
     public MainFileSearch(String title) {
@@ -98,6 +99,7 @@ public class MainFileSearch extends JFrame {
                 northPanel.add(simpleSearchPanel);
                 northPanel.repaint();
                 northPanel.revalidate();
+                panelFlag = "simple";
 
 
             }
@@ -114,6 +116,7 @@ public class MainFileSearch extends JFrame {
                 northPanel.add(advancedSearchPanel);
                 northPanel.repaint();
                 northPanel.revalidate();
+                panelFlag = "advanced";
             }
         });
         videoSearchButton = new JButton("Video");
@@ -160,6 +163,8 @@ public class MainFileSearch extends JFrame {
     public String getModifiedDate2FromAdvancedSearch(){return this.advancedSearchPanel.getModifiedDateTo();}
     public String getContains(){return this.advancedSearchPanel.getContainsText();}
     public String getCreatedBy(){return this.advancedSearchPanel.getCreatedByText();}
+
+    public String getPanelFlag(){return this.panelFlag;}
 
 
 
