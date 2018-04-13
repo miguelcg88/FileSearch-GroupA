@@ -108,13 +108,13 @@ public class SimpleSearchPanel extends JPanel {
         simpleSearchPanelLabel = new JLabel("Enter your search criteria");
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS) );
         add(simpleSearchPanelLabel);
-        add(Box.createRigidArea(new Dimension(10,6)));
+        add(Box.createRigidArea(new Dimension(0,6)));
         add(fileNamePanel);
-        add(Box.createRigidArea(new Dimension(10,6)));
+        add(Box.createRigidArea(new Dimension(0,6)));
         add(pathPanel);
-        add(Box.createRigidArea(new Dimension(10,6)));
+        add(Box.createRigidArea(new Dimension(0,6)));
         add(hiddenPanel);
-        add(Box.createRigidArea(new Dimension(100,6)));
+        add(Box.createRigidArea(new Dimension(0,6)));
         add(extensionPanel);
         //add(Box.createRigidArea(new Dimension(0,6)));
         //add(sizePanel);
