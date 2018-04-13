@@ -13,11 +13,14 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 // Class that creates mainframe for project, contains another panels acccording which kind of search is selected by user
 public class MainFileSearch extends JFrame {
 
     private JButton searchButton;
-    private JButton normalSearchButton;
+    private JButton simpleSearchButton;
     private JButton advancedSearchButton;
     private JButton videoSearchButton;
     private JButton musicSearchButton;
@@ -27,13 +30,12 @@ public class MainFileSearch extends JFrame {
     private JPanel leftPanel;
     private JPanel northPanel;
     private ResultsPanel resultsPanel;
-    private JPanel simpleSearchPanel;
-    private JLabel searchLabel;
-    SimpleSearchPanel simplePanel;
+    SimpleSearchPanel simpleSearchPanel;
+    AdvancedSearchPanel advancedSearchPanel;
 
     //Class constructor, calls methods to make panels
     public MainFileSearch(String title) {
-        makeNorthPanel();
+        makeNorthPanelForSimpleSearch();
         initializeMainFrame();
     }
 
@@ -52,32 +54,74 @@ public class MainFileSearch extends JFrame {
 
     /* Initializes panel that contains 2 other panels, one for search criteria and
     other one is left panel that contains buttons to select what kind of search want to use*/
-    private void makeNorthPanel() {
+    private void makeNorthPanelForSimpleSearch() {
         northPanel = new JPanel();
         searchButton = new JButton("Go !");
         northPanel.setLayout(new BorderLayout());
         northPanel.setPreferredSize(new Dimension(750,280));
-        simplePanel = new SimpleSearchPanel();
-        simplePanel.add(simplePanel.getSimpleSearchPrincipalPanel());
+        simpleSearchPanel = new SimpleSearchPanel();
+        advancedSearchPanel = new AdvancedSearchPanel();
+
         makeLeftPanel();
-        northPanel.add(simplePanel,BorderLayout.CENTER);
+        northPanel.add(simpleSearchPanel,BorderLayout.CENTER);
         northPanel.add(leftPanel,BorderLayout.WEST);
         northPanel.add(searchButton,BorderLayout.EAST);
         northPanel.setVisible(true);
 
     }
+   /* //Initializes advanced panel when user click on "Advanced" button
+    private void makeNorthPanelForAdvancedSearch(){
+        northPanel = new JPanel();
+        searchButton = new JButton("Go !");
+        northPanel.setLayout(new BorderLayout());
+        northPanel.setPreferredSize(new Dimension(750,280));
+        advancedSearchPanel = new AdvancedSearchPanel();
+        makeLeftPanel();
+        northPanel.add(advancedSearchPanel,BorderLayout.CENTER);
+        northPanel.add(leftPanel,BorderLayout.WEST);
+        northPanel.add(searchButton,BorderLayout.EAST);
+        northPanel.setVisible(true);
+
+    }*/
 
     /* Initializes left panel that contains buttons to select what kind of search want you use*/
     private void makeLeftPanel() {
         leftPanel = new JPanel();
-        normalSearchButton = new JButton("Simple");
+        simpleSearchButton = new JButton("Simple");
+        simpleSearchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                northPanel.remove(advancedSearchPanel);
+                northPanel.repaint();
+                northPanel.revalidate();
+
+                northPanel.add(simpleSearchPanel);
+                northPanel.repaint();
+                northPanel.revalidate();
+
+
+            }
+        });
+
         advancedSearchButton = new JButton("Advanced");
+        advancedSearchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                northPanel.remove(simpleSearchPanel);
+                northPanel.repaint();
+                northPanel.revalidate();
+
+                northPanel.add(advancedSearchPanel);
+                northPanel.repaint();
+                northPanel.revalidate();
+            }
+        });
         videoSearchButton = new JButton("Video");
         musicSearchButton = new JButton("Music");
         recentSearchsButton = new JButton("Recent Searchs");
         leftPanel.setLayout(new GridLayout(5,1));
         leftPanel.setBackground(Color.darkGray);
-        leftPanel.add(normalSearchButton);
+        leftPanel.add(simpleSearchButton);
         leftPanel.add(advancedSearchButton);
         leftPanel.add(videoSearchButton);
         leftPanel.add(musicSearchButton);
@@ -87,22 +131,38 @@ public class MainFileSearch extends JFrame {
     public JButton getSearchButton(){
         return searchButton;
     }
-
-    public String getFileName(){
-        return this.simplePanel.getFileNameField();
+    public String getFileNameFromSimpleSearch(){
+        return this.simpleSearchPanel.getFileNameField();
+    }
+    public String getPathFromSimpleSearch(){
+        return this.simpleSearchPanel.getPathNameField();
+    }
+    public String getExtensionFromSimpleSearch(){
+        return this.simpleSearchPanel.getExtensionComboBox();
+    }
+    public Boolean getHiddenFromSimpleSearch(){
+        return this.simpleSearchPanel.getHiddenCheckbox();
     }
 
-    public String getPath(){
-        return this.simplePanel.getPathNameField();
-    }
 
-    public String getExtension(){
-        return this.simplePanel.getExtensionComboBox();
+    public String getFileNameFromAdvancedSearch(){
+        return this.advancedSearchPanel.getFileNameField();
     }
+    public String getExtensionFromAdvancedSearch(){
+        return this.advancedSearchPanel.getExtensionComboBox();
+    }
+    public Boolean getHiddenFromAdvancedSearch(){
+        return this.advancedSearchPanel.getHiddenCheckbox();
+    }
+    public String getCreatedDate1FromAdvancedSearch(){return this.advancedSearchPanel.getCreatedDateFrom();}
+    public String getCreatedDate2FromAdvancedSearch(){return this.advancedSearchPanel.getCreatedDateTo();}
+    public String getModifiedDate1FromAdvancedSearch(){return this.advancedSearchPanel.getModifiedDateFrom();}
+    public String getModifiedDate2FromAdvancedSearch(){return this.advancedSearchPanel.getModifiedDateTo();}
+    public String getContains(){return this.advancedSearchPanel.getContainsText();}
+    public String getCreatedBy(){return this.advancedSearchPanel.getCreatedByText();}
 
-    public Boolean getHidden(){
-        return this.simplePanel.getHiddenCheckbox();
-    }
+
+
 
     public DefaultTableModel getTable(){
         return resultsPanel.getResultsTable();

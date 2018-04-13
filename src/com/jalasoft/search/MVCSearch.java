@@ -11,7 +11,7 @@
  */
 package src.com.jalasoft.search;
 
-import com.jalasoft.search.model.SearchModel;
+import src.com.jalasoft.search.model.SearchModel;
 import src.com.jalasoft.search.Controller.SearchController;
 import src.com.jalasoft.search.gui.MainFileSearch;
 import src.com.jalasoft.search.gui.ResultsPanel;
@@ -31,9 +31,5 @@ public class MVCSearch {
         SimpleSearchPanel simpleFilters = new SimpleSearchPanel();
         ResultsPanel results = new ResultsPanel();
         SearchController controller = new SearchController(model, view, simpleFilters, results);
-        //con.init();
-        //controller.updateView();
-        //controller.setFileName("test");
-        //.updateView();
     }
 }
