@@ -12,7 +12,11 @@ package src.com.jalasoft.search.model;
 
 import java.io.File;
 import java.util.ArrayList;
+
+import com.jalasoft.search.Model.Asset;
 import src.com.jalasoft.search.model.SearchCriteria;
+
+import javax.tools.FileObject;
 
 /*
  *Description, the search.java class will search a specific file and then list all files/folders
@@ -27,7 +31,8 @@ import src.com.jalasoft.search.model.SearchCriteria;
 
 public class Search {
     private SearchCriteria searchCriteria;
-    private ArrayList<File> shortList = new ArrayList<>();
+    private ArrayList<Asset> shortList = new ArrayList<Asset>();
+    private Asset asset;
 
     public Search() {
 
@@ -52,15 +57,23 @@ public class Search {
         // clean list to new search
         shortList.clear();
         //doListFiles
-        File list[]=file.listFiles();
-        for(int i=0;i<list.length;i++){
-            System.out.println(list[i].getName());
+        File[] list=file.listFiles();
+        for(File file1 : list){
+            System.out.println(file1.getName());
             //Show only not hidden files
-            if (!this.searchCriteria.getHiddenFlag() && !list[i].isHidden()) {
-                shortList.add(list[i]);
+            if (!this.searchCriteria.getHiddenFlag() && !file1.isHidden()) {
+                asset = new Asset(this.searchCriteria.getFilePath());
+                asset.setFolderPath(this.searchCriteria.getFilePath());
+                asset.setFileName(this.searchCriteria.getFileName());
+                //asset.setCreationDate(this.searchCriteria.getCreationDate());
+                asset.setHiddenFlag(this.searchCriteria.getHiddenFlag());
+                //asset.setModificationDate(this.searchCriteria.getModificationDate());
+                //asset.setOwner(this.searchCriteria.getOwner());
+                shortList.add(asset);
+
             }
             //Show only hidden files
-            if (this.searchCriteria.getHiddenFlag() && list[i].isHidden()){
+            if (this.searchCriteria.getHiddenFlag() && file1.isHidden()){
                 shortList.add(list[i]);
             }
         }
@@ -73,6 +86,7 @@ public class Search {
 
     /**
      * This method is used to get all files that did match by a nameFile.
+     */
     private ArrayList<File> searchByName(ArrayList<File> shortList) {
         //SearchByName
         ArrayList<File> listByName = new ArrayList<>();
