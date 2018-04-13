@@ -131,22 +131,38 @@ public class MainFileSearch extends JFrame {
     public JButton getSearchButton(){
         return searchButton;
     }
-
-    public String getFileName(){
+    public String getFileNameFromSimpleSearch(){
         return this.simpleSearchPanel.getFileNameField();
     }
-
-    public String getPath(){
+    public String getPathFromSimpleSearch(){
         return this.simpleSearchPanel.getPathNameField();
     }
-
-    public String getExtension(){
+    public String getExtensionFromSimpleSearch(){
         return this.simpleSearchPanel.getExtensionComboBox();
     }
-
-    public Boolean getHidden(){
+    public Boolean getHiddenFromSimpleSearch(){
         return this.simpleSearchPanel.getHiddenCheckbox();
     }
+
+
+    public String getFileNameFromAdvancedSearch(){
+        return this.advancedSearchPanel.getFileNameField();
+    }
+    public String getExtensionFromAdvancedSearch(){
+        return this.advancedSearchPanel.getExtensionComboBox();
+    }
+    public Boolean getHiddenFromAdvancedSearch(){
+        return this.advancedSearchPanel.getHiddenCheckbox();
+    }
+    public String getCreatedDate1FromAdvancedSearch(){return this.advancedSearchPanel.getCreatedDateFrom();}
+    public String getCreatedDate2FromAdvancedSearch(){return this.advancedSearchPanel.getCreatedDateTo();}
+    public String getModifiedDate1FromAdvancedSearch(){return this.advancedSearchPanel.getModifiedDateFrom();}
+    public String getModifiedDate2FromAdvancedSearch(){return this.advancedSearchPanel.getModifiedDateTo();}
+    public String getContains(){return this.advancedSearchPanel.getContainsText();}
+    public String getCreatedBy(){return this.advancedSearchPanel.getCreatedByText();}
+
+
+
 
     public DefaultTableModel getTable(){
         return resultsPanel.getResultsTable();

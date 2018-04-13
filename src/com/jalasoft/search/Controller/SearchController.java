@@ -12,18 +12,14 @@
 package src.com.jalasoft.search.Controller;
 
 //import java.util.logging.Logger;
-import src.com.jalasoft.search.model.SearchModel;
 import src.com.jalasoft.search.common.Convertor;
 import src.com.jalasoft.search.common.Validator;
 import src.com.jalasoft.search.gui.MainFileSearch;
 import src.com.jalasoft.search.gui.ResultsPanel;
 import src.com.jalasoft.search.gui.SimpleSearchPanel;
-import src.com.jalasoft.search.model.FileSearch;
 import src.com.jalasoft.search.model.Search;
 import src.com.jalasoft.search.model.SearchCriteria;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import java.io.File;
 import java.util.ArrayList;
 
@@ -64,7 +60,7 @@ public class SearchController {
      */
     private void FillCriteria() {
         criteria = new SearchCriteria();
-        String fileName = this.view.getFileName();
+        String fileName = this.view.getFileNameFromSimpleSearch();
 
         if (validator.isValidName(fileName)) {
             this.criteria.setFileName(fileName);
@@ -74,7 +70,7 @@ public class SearchController {
             // this.view.setError(fileName+" is an invalid File Name");
         }
 
-        String filePath = this.view.getPath();
+        String filePath = this.view.getPathFromSimpleSearch();
         if (validator.isValidPath(filePath)) {
             this.criteria.setFolderPath(filePath);
         } else {
@@ -83,10 +79,10 @@ public class SearchController {
             //results.setError(filePath+" is an invalid File Path");
         }
 
-        Boolean hidden = this.view.getHidden();
+        Boolean hidden = this.view.getHiddenFromSimpleSearch();
         this.criteria.setHiddenFlag(hidden);
 
-        String extension = this.view.getExtension();
+        String extension = this.view.getExtensionFromSimpleSearch();
         if (validator.isValidExtension("test." + extension)) {
             System.out.println("The Extension [" + extension + "] is a valid File Extension");
             this.criteria.setExtension(extension);

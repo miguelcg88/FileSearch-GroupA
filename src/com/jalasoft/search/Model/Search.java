@@ -36,9 +36,9 @@ public class Search {
 
     public Search() {
 //          this.folderPath = ();
-//        this.fileNameToSearch = searchCriteria.getFileName();
+//        this.fileNameToSearch = searchCriteria.getFileNameFromSimpleSearch();
 //        this.isHidden = searchCriteria.getHiddenFlag();
-//        this.extensionFile = searchCriteria.getExtension();
+//        this.extensionFile = searchCriteria.getExtensionFromSimpleSearch();
     }
     public void setSearchCriteria(SearchCriteria sc) {
         this.searchCriteria = sc;

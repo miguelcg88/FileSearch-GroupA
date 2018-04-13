@@ -155,6 +155,46 @@ public class AdvancedSearchPanel extends JPanel {
 
     }
 
+    //get the value in file name field
+    public String getFileNameField() {
+        return fileNameField.getText();
+    }
+
+    //get date created from
+    public String getCreatedDateFrom() {
+        return dateAddedFromField.getText();
+    }
+    //get date created to
+    public String getCreatedDateTo() {
+        return dateAddedToField.getText();
+    }
+
+    //get date modified from
+    public String getModifiedDateFrom() {
+        return dateModifiedFromField.getText();
+    }
+    //get date modified to
+    public String getModifiedDateTo() {
+        return dateModifiedToField.getText();
+    }
+    //get text on contains textfield
+    public String getContainsText() {
+        return containsField.getText();
+    }
+    //get text on created by textfield
+    public String getCreatedByText() {
+        return createdByField.getText();
+    }
+    //get the value of hidden check box, return true or false
+    public boolean getHiddenCheckbox() {
+        return hiddenCheckbox.isSelected();
+    }
+
+    //get value selected in extension drop down
+    public String getExtensionComboBox() {
+        return String.valueOf(extensionComboBox.getSelectedItem());
+    }
+
 
    /* public static void main(String[] args) {
 
