@@ -1,3 +1,4 @@
+
 package src.com.jalasoft.search.gui;
         /*
         * MainFileSearch.java  1.0  3/16/2018
@@ -10,6 +11,7 @@ import javax.swing.*;
 import java.awt.*;;
 
 //Creates panel for advanced search, extend from JPanel
+
 public class AdvancedSearchPanel extends JPanel {
 
 
@@ -43,6 +45,7 @@ public class AdvancedSearchPanel extends JPanel {
 
 
 
+
     //Class constructor, calls methods to make panels, each panel has a component and label
     public AdvancedSearchPanel(){
         makeFileNamePanel();
@@ -63,6 +66,7 @@ public class AdvancedSearchPanel extends JPanel {
         fileNamePanel.add(fileNameLabel);
         fileNamePanel.add(fileNameField);
     }
+
     //Panel that contains fields to set added dates
     public void makeDateAddedPanel(){
         dateAddedPanel =new JPanel();
@@ -91,6 +95,7 @@ public class AdvancedSearchPanel extends JPanel {
         dateModifiedPanel.add(dateModifiedToField);
     }
 
+
     //Panel that contains checbox to indicate if user wants to include hidden files or not in search
     public void makeHiddenPanel(){
         hiddenPanel =new JPanel();
@@ -111,6 +116,7 @@ public class AdvancedSearchPanel extends JPanel {
         extensionPanel.add(extensionComboBox);
     }
 
+
     //Panel that contains textfiled to keywords that contains a text file, to search inside of it
     public void makeContainsPanel(){
         containsPanel = new JPanel();
@@ -130,6 +136,7 @@ public class AdvancedSearchPanel extends JPanel {
         createdByPanel.add(createdByLabel);
         createdByPanel.add(createdByField);
     }
+
 
 
     //Main Panel that contains all other panels,this will be called from main Frame to display "simple search" panel with all their components
@@ -198,15 +205,19 @@ public class AdvancedSearchPanel extends JPanel {
 
    /* public static void main(String[] args) {
 
+
         JFrame test = new JFrame();
         JPanel advanced = new AdvancedSearchPanel();
         test.setLayout(new BorderLayout());
         test.setPreferredSize(new Dimension(750,280));
         test.add(advanced,BorderLayout.CENTER);
         test.pack();
+
         test.setVisible(true);
         test.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }*/
 
 
+
 }
+

@@ -26,34 +26,22 @@ import src.com.jalasoft.search.model.SearchCriteria;
  */
 
 public class Search {
-    private String folderPath;
-    private String fileNameToSearch;
-    private Boolean isFound=Boolean.FALSE;
-    private Boolean isHidden;
-    private String extensionFile;
     private SearchCriteria searchCriteria;
     private ArrayList<File> shortList = new ArrayList<>();
 
     public Search() {
-//          this.folderPath = ();
-//        this.fileNameToSearch = searchCriteria.getFileNameFromSimpleSearch();
-//        this.isHidden = searchCriteria.getHiddenFlag();
-//        this.extensionFile = searchCriteria.getExtensionFromSimpleSearch();
+
     }
     public void setSearchCriteria(SearchCriteria sc) {
         this.searchCriteria = sc;
-    }
-
-    private String getFilePath() {
-        return folderPath;
     }
 
     /**
      * This method is used to get a list of all files according  to a path and the hidden parameter.
      * If hidden is set as True, get all files that were hidden.
      * If hidden is set as False, get all files that were not hidden.
-     * @param //folderPath this is the first parameter to show all files that are into this folder.
-     * @param// isHiddem this is   the second parameter to show all files that are hidden.
+     * @param folderPath this is the first parameter to show all files that are into this folder.
+     * @param isHiddem this is   the second parameter to show all files that are hidden.
      *                 By default it is as not checked.
      */
     public void searchByHiddenAttribute(){
@@ -76,13 +64,11 @@ public class Search {
                 shortList.add(list[i]);
             }
         }
+
     }
 
     /**
      * This method is used to get all files that did match by a nameFile.
-     * @param //fileNameToSearch this is the first parameter to search into a list of files.
-     * @return  shortList This list to show only the files that are the same that the name file.
-     */
     private ArrayList<File> searchByName(ArrayList<File> shortList) {
         //SearchByName
         ArrayList<File> listByName = new ArrayList<>();
@@ -116,6 +102,10 @@ public class Search {
         return listByExtension;
     }
 
+    /**
+     * This method is used to get all files that matched BY filename or extension
+     * @return  searchList get all files that matched with the Search Criteria
+     */
     public ArrayList<File> getResults(){
         ArrayList<File> searchResult = shortList;
         if(searchCriteria.getFileName() != null){
@@ -126,4 +116,6 @@ public class Search {
         }
         return  searchResult;
     }
+
 }
+
