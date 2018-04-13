@@ -104,20 +104,20 @@ public class SimpleSearchPanel extends JPanel {
 
     //Main Panel that contains all other panels,this will be called from main Frame to display "simple search" panel with all their components
     public void makePrincipalSimpleSearchPanel(){
-        simpleSearchPrincipalPanel = new JPanel();
+        //simpleSearchPrincipalPanel = new JPanel();
         simpleSearchPanelLabel = new JLabel("Enter your search criteria");
-        simpleSearchPrincipalPanel.setLayout(new BoxLayout(simpleSearchPrincipalPanel, BoxLayout.Y_AXIS) );
-        simpleSearchPrincipalPanel.add(simpleSearchPanelLabel);
-        simpleSearchPrincipalPanel.add(Box.createRigidArea(new Dimension(0,6)));
-        simpleSearchPrincipalPanel.add(fileNamePanel);
-        simpleSearchPrincipalPanel.add(Box.createRigidArea(new Dimension(0,6)));
-        simpleSearchPrincipalPanel.add(pathPanel);
-        simpleSearchPrincipalPanel.add(Box.createRigidArea(new Dimension(0,6)));
-        simpleSearchPrincipalPanel.add(hiddenPanel);
-        simpleSearchPrincipalPanel.add(Box.createRigidArea(new Dimension(0,6)));
-        simpleSearchPrincipalPanel.add(extensionPanel);
-        //simpleSearchPrincipalPanel.add(Box.createRigidArea(new Dimension(0,6)));
-        //simpleSearchPrincipalPanel.add(sizePanel);
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS) );
+        add(simpleSearchPanelLabel);
+        add(Box.createRigidArea(new Dimension(10,6)));
+        add(fileNamePanel);
+        add(Box.createRigidArea(new Dimension(10,6)));
+        add(pathPanel);
+        add(Box.createRigidArea(new Dimension(10,6)));
+        add(hiddenPanel);
+        add(Box.createRigidArea(new Dimension(100,6)));
+        add(extensionPanel);
+        //add(Box.createRigidArea(new Dimension(0,6)));
+        //add(sizePanel);
     }
 
     //get the value in file name field
@@ -146,8 +146,8 @@ public class SimpleSearchPanel extends JPanel {
     }*/
 
     //get simple search panel with all components
-    public  JPanel getSimpleSearchPrincipalPanel() {
+   /* public  JPanel getSimpleSearchPrincipalPanel() {
         return simpleSearchPrincipalPanel;
-    }
+    }*/
 }
 

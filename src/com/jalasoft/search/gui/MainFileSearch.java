@@ -60,7 +60,8 @@ public class MainFileSearch extends JFrame {
         northPanel.setLayout(new BorderLayout());
         northPanel.setPreferredSize(new Dimension(750,280));
         simpleSearchPanel = new SimpleSearchPanel();
-        simpleSearchPanel.add(simpleSearchPanel.getSimpleSearchPrincipalPanel());
+        advancedSearchPanel = new AdvancedSearchPanel();
+
         makeLeftPanel();
         northPanel.add(simpleSearchPanel,BorderLayout.CENTER);
         northPanel.add(leftPanel,BorderLayout.WEST);
@@ -91,11 +92,11 @@ public class MainFileSearch extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 northPanel.remove(advancedSearchPanel);
-                advancedSearchPanel.invalidate();
-                simpleSearchPanel = new SimpleSearchPanel();
-                advancedSearchPanel.setVisible(false);
-                northPanel.add(simpleSearchPanel.getSimpleSearchPrincipalPanel());
-                //northPanel.invalidate();
+                northPanel.repaint();
+                northPanel.revalidate();
+
+                northPanel.add(simpleSearchPanel);
+                northPanel.repaint();
                 northPanel.revalidate();
 
 
@@ -107,13 +108,12 @@ public class MainFileSearch extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 northPanel.remove(simpleSearchPanel);
-                simpleSearchPanel.invalidate();
-                advancedSearchPanel = new AdvancedSearchPanel();
-                simpleSearchPanel.setVisible(false);
-                northPanel.add(advancedSearchPanel);
-                //northPanel.invalidate();
+                northPanel.repaint();
                 northPanel.revalidate();
 
+                northPanel.add(advancedSearchPanel);
+                northPanel.repaint();
+                northPanel.revalidate();
             }
         });
         videoSearchButton = new JButton("Video");
