@@ -23,6 +23,8 @@ public class SearchCriteria {
     private String name;
     private boolean hidden;
     private String extension;
+    private String owner;
+    private String content;
 
     /**
      * Set folder/file path
@@ -89,5 +91,27 @@ public class SearchCriteria {
         return extension;
     }
 
+    /**
+     * Set file owner
+     * @param owner
+     */
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
 
+    /**
+     * Get file owner
+     * @return owner
+     */
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setContent(String content){
+        this.content = content;
+    }
+
+    public String getContent() {
+        return content;
+    }
 }

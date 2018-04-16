@@ -18,6 +18,8 @@ package com.jalasoft.search.Model;
  * @author Jonas Aramayo
  */
 
+import java.io.File;
+
 public class Asset {
     private String folderPath;
     private String fileNameToSearch;
@@ -28,12 +30,16 @@ public class Asset {
 
     /**
      * Set folder/file path
-     * @param path
+     * @param owner.
      */
-    public Asset(String path) {
-            setFolderPath(path);
+    public Asset(String path, String fileName, Boolean isHidden, String owner) {
+        this.folderPath = path;
+        this.fileNameToSearch = fileName;
+        this.isHidden = isHidden;
+        this.owner = owner;
+
+            //setFolderPath(path);
         }
-    }
     public void setFolderPath(String path) {
         this.folderPath = path;
         //this.asset.folderPath = folderPath;
@@ -43,7 +49,7 @@ public class Asset {
      * Get folder/file path
      * @return folderPath
      */
-    private String getFilePath() {
+    public String getFilePath() {
         return folderPath;
     }
     /**
@@ -58,7 +64,7 @@ public class Asset {
      * Get file name
      * @return fileName
      */
-    private String getFileName() {
+    public String getFileName() {
         return fileNameToSearch;
     }
     /**
@@ -73,7 +79,7 @@ public class Asset {
      * Get hidden flag
      * @return hidden
      */
-    private boolean getHiddenFlag() {
+    public boolean getHiddenFlag() {
         return isHidden;
     }
     /**
@@ -88,7 +94,7 @@ public class Asset {
      * Get owner
      * @return owner
      */
-    private String getOwner() {
+    public String getOwner() {
         return owner;
     }
 

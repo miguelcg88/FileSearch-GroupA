@@ -19,9 +19,15 @@ import com.jalasoft.search.Model.Asset;
  * @version 1.00 3 Apr 2018
  * @author Gabriel Rendon  */
 public class FileSearch extends Asset{
+//    private String folderPath;
+//    private String fileNameToSearch;
+//    private Boolean isHidden;
+//    private String owner;
+//    private String modificationDate;
+//    private String creationDate;
     private String extension;
-    public FileSearch(String path){
-        super(path);
+    public FileSearch(String path, String fileName, Boolean isHidden, String owner, String extension){
+        super(path, fileName, isHidden, owner);
     }
 
 //    /**
