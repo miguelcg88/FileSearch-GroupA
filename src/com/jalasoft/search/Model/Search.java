@@ -11,7 +11,12 @@
 package src.com.jalasoft.search.model;
 
 import java.io.File;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+
+import src.com.jalasoft.search.DB.SearchQuery;
+import src.com.jalasoft.search.common.Convertor;
 import src.com.jalasoft.search.model.SearchCriteria;
 
 /*
@@ -29,8 +34,7 @@ public class Search {
     private SearchCriteria searchCriteria;
     private ArrayList<File> shortList = new ArrayList<>();
 
-    public Search() {
-
+    public Search() throws SQLException, ClassNotFoundException {
     }
     public void setSearchCriteria(SearchCriteria sc) {
         this.searchCriteria = sc;
@@ -54,7 +58,7 @@ public class Search {
         //doListFiles
         File list[]=file.listFiles();
         for(int i=0;i<list.length;i++){
-            System.out.println(list[i].getName());
+            //System.out.println(list[i].getName());
             //Show only not hidden files
             if (!this.searchCriteria.getHiddenFlag() && !list[i].isHidden()) {
                 shortList.add(list[i]);
@@ -95,8 +99,13 @@ public class Search {
         //SearchByExtension
         ArrayList<File> listByExtension = new ArrayList<>();
         for(File f: shortList){
-            if (f.getName().endsWith("." + this.searchCriteria.getExtension())){
+            if(this.searchCriteria.getExtension()=="All") {
                 listByExtension.add(f);
+            }
+            else {
+                if (f.getName().endsWith("." + this.searchCriteria.getExtension())) {
+                    listByExtension.add(f);
+                }
             }
         }
         return listByExtension;
@@ -117,5 +126,28 @@ public class Search {
         return  searchResult;
     }
 
-}
+    public void saveCriteria(String name){
+        /*
+        try {
+            SearchQuery searchQuery = new SearchQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 
+        Convertor convert = new Convertor();
+        String criteria = convert.ObjectToJson(searchCriteria);
+
+        searchQuery.AddCriteria(name,searchCriteria);
+
+
+    ResultSet result = searchQuery.getAllCriteria();
+
+    While(result next() throws SQLException, ClassNotFoundException){
+        System.out.println(result.getInt("Id")+" - "+result.getString("Json")+"-"+result.getString("CriteriaName"));
+
+    }
+    */
+    }
+}

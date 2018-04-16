@@ -22,6 +22,7 @@ import src.com.jalasoft.search.model.SearchCriteria;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 /**
  * SearchController
@@ -39,6 +40,7 @@ public class SearchController {
     private SearchCriteria criteria;
     private Validator validator = new Validator();
     private Convertor convert = new Convertor();
+    private Logger logger = LoggerCreator.getInstance().getLogger();
 
     /**
      * Search Controller Parameters
@@ -61,10 +63,12 @@ public class SearchController {
     private void FillCriteria() {
         criteria = new SearchCriteria();
         String fileName = this.view.getFileNameFromSimpleSearch();
-
         if (validator.isValidName(fileName)) {
             this.criteria.setFileName(fileName);
+            if(fileName == null || fileName.isEmpty())fileName="[null]";
+            logger.info("FileName criteria set as: " +fileName);
         } else {
+            logger.warning("FileName criteria is not valid");
             // TO DO
             // Need to pass the error to UI
             // this.view.setError(fileName+" is an invalid File Name");
@@ -73,7 +77,9 @@ public class SearchController {
         String filePath = this.view.getPathFromSimpleSearch();
         if (validator.isValidPath(filePath)) {
             this.criteria.setFolderPath(filePath);
+            logger.info("FilePath criteria set as: "+filePath);
         } else {
+            logger.warning("FilePath criteria is not valid");
             // TO DO
             // Need to pass the error to UI
             //results.setError(filePath+" is an invalid File Path");
@@ -81,23 +87,32 @@ public class SearchController {
 
         Boolean hidden = this.view.getHiddenFromSimpleSearch();
         this.criteria.setHiddenFlag(hidden);
+        logger.info((hidden==true)? "Criteria was set to Include Hidden" : "Criteria was set to Exclude hidden");
 
         String extension = this.view.getExtensionFromSimpleSearch();
         if (validator.isValidExtension("test." + extension)) {
-            System.out.println("The Extension [" + extension + "] is a valid File Extension");
             this.criteria.setExtension(extension);
+            logger.info("Extension criteria set as: "+extension);
         } else {
+            logger.warning("Extension criteria is not valid");
             // TO DO
             // Need to pass the error to UI
             //results.setError(filePath+" is an invalid File Extension");
         }
 
         // Send Search criterial to model.
+        logger.info("Sendding Search criteria to model.");
         model.setSearchCriteria(criteria);
+
+        //Converting criteria to Json string
+        String jsonString = convert.ObjectToJson(criteria);
+
         //model.setResults();
+        logger.info("Searching");
         model.searchByHiddenAttribute();
 
         // List with all search result.
+        logger.info("Getting results from model.");
         ArrayList<File> fileResults = model.getResults();
         String data[] = new String[5];
 

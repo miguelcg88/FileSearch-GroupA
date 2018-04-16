@@ -11,12 +11,16 @@
  */
 package src.com.jalasoft.search;
 
+import src.com.jalasoft.search.DB.DBConnection;
+import src.com.jalasoft.search.DB.SearchQuery;
 import src.com.jalasoft.search.model.SearchModel;
 import src.com.jalasoft.search.Controller.SearchController;
 import src.com.jalasoft.search.gui.MainFileSearch;
 import src.com.jalasoft.search.gui.ResultsPanel;
 import src.com.jalasoft.search.gui.SimpleSearchPanel;
 import src.com.jalasoft.search.model.Search;
+
+import java.sql.SQLException;
 
 /**
  * Main MVC Search
@@ -25,11 +29,12 @@ import src.com.jalasoft.search.model.Search;
  * @author Gabriel Rendon  */
 public class MVCSearch {
     //Test purposes
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
         MainFileSearch view = new MainFileSearch("MI");
         Search model  = new Search();
         SimpleSearchPanel simpleFilters = new SimpleSearchPanel();
         ResultsPanel results = new ResultsPanel();
         SearchController controller = new SearchController(model, view, simpleFilters, results);
+        SearchQuery sQuery = new SearchQuery();
     }
 }
