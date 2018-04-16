@@ -15,6 +15,10 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.nio.file.attribute.FileTime;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import com.jalasoft.search.Model.Asset;
@@ -134,6 +138,12 @@ public class Search {
         if(searchCriteria.getContent() != null){
             searchResult = searchByContent(searchResult, searchCriteria.getContent());
         }
+        if(searchCriteria.getCreationDate() != null){
+            searchResult = searchByCreationDate(searchCriteria.getCreationDate(),searchResult);
+        }
+        if(searchCriteria.getModificationDate() != null){
+            searchResult = searchByModificationDate(searchCriteria.getModificationDate(),searchResult);
+        }
         return searchResult;
     }
 
@@ -203,6 +213,62 @@ public class Search {
         }
         return listByContent;
     }
+    /**
+     * This method is used to get all files that did match by content.
+     */
+    private ArrayList<Asset> searchByCreationDate(String creationDate, ArrayList<Asset> shortList) {
+        //SearchByCreateDate
+        ArrayList<Asset>  listByCreationDate = new ArrayList<>();
+        for(Asset f: shortList){
+            try {
+                BasicFileAttributes bfa = Files.readAttributes(Paths.get(f.getFilePath()), BasicFileAttributes.class);
+                FileTime ft = bfa.creationTime();
+                System.out.println(f.getFileName() + "-----");
+                String date = dateToString(ft);
+                System.out.println(date + " -DATE");
+                if (date.equals(creationDate)) {
+                    System.out.println(f.getFileName() + "FOUND BY CREATION DATE");
+                    listByCreationDate.add(f);
+                }
+            }
+            catch(Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return listByCreationDate;
+    }
+
+    /**
+     * This method is used to get all files that did match by modificationDate .
+     */
+    private ArrayList<Asset> searchByModificationDate(String modificationDate, ArrayList<Asset> shortList) {
+        //SearchByCreateDate
+        ArrayList<Asset>  listByModificationDate = new ArrayList<>();
+        for(Asset f: shortList){
+            try {
+                BasicFileAttributes bfa = Files.readAttributes(Paths.get(f.getFilePath()), BasicFileAttributes.class);
+                FileTime ft = bfa.lastModifiedTime();
+                System.out.println(f.getFileName() + "-----");
+                String date = dateToString(ft);
+                System.out.println(date + " - DATE");
+                if (date.equals(modificationDate)) {
+                    System.out.println(f.getFileName() + "FOUND BY MODIFICATION DATE");
+                    listByModificationDate.add(f);
+                }
+            }
+            catch(Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return listByModificationDate;
+    }
+
+    private String dateToString(FileTime ft) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-dd-MM");
+        String dateToCompare = dateFormat.format(ft.toMillis());
+        return dateToCompare;
+    }
+
 
     //Only for testing purposes
     public  static void main(String args[]){
@@ -213,6 +279,8 @@ public class Search {
         sc.setHiddenFlag(false);
         sc.setOwner("WIN-IT92TJKOQE6\\Guest");
         sc.setContent("como");
+        sc.setCreationDate("2018-16-04");
+        sc.setModificationDate("2018-16-04");
 
         Search search = new Search();
         search.setSearchCriteria(sc);
@@ -226,6 +294,8 @@ public class Search {
         search.searchByHiddenAttributeSetAsTrue(searchResult);
         search.searchByOwner(search.searchCriteria.getOwner(), searchResult);
         search.searchByContent(searchResult, search.searchCriteria.getContent());
+        search.searchByCreationDate(search.searchCriteria.getCreationDate(), searchResult);
+        search.searchByModificationDate(search.searchCriteria.getModificationDate(), searchResult);
 
     }
 

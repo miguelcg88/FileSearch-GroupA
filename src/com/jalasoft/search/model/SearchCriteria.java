@@ -25,6 +25,8 @@ public class SearchCriteria {
     private String extension;
     private String owner;
     private String content;
+    private String creationDate;
+    private String modificationDate;
 
     /**
      * Set folder/file path
@@ -113,5 +115,21 @@ public class SearchCriteria {
 
     public String getContent() {
         return content;
+    }
+
+    public void setCreationDate(String creationDate){
+        this.creationDate = creationDate;
+    }
+
+    public String getCreationDate() {
+        return creationDate;
+    }
+
+    public void setModificationDate(String modificationDate){
+        this.modificationDate = modificationDate;
+    }
+
+    public String getModificationDate() {
+        return modificationDate;
     }
 }
