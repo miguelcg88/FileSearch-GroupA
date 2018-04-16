@@ -28,6 +28,7 @@ public class SearchCriteria {
     private String creationDate;
     private String modificationDate;
 
+
     /**
      * Set folder/file path
      * @param folderPath

@@ -11,7 +11,11 @@
  */
 package src.com.jalasoft.search.model;
 
+
 import com.jalasoft.search.Model.Asset;
+
+//import java.io.File;
+
 
 /**
  * FileSearch

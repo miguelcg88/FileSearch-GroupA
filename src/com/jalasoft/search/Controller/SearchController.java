@@ -12,19 +12,17 @@
 package src.com.jalasoft.search.Controller;
 
 //import java.util.logging.Logger;
-import com.jalasoft.search.model.SearchModel;
+import src.com.jalasoft.search.common.Convertor;
 import src.com.jalasoft.search.common.Validator;
 import src.com.jalasoft.search.gui.MainFileSearch;
 import src.com.jalasoft.search.gui.ResultsPanel;
 import src.com.jalasoft.search.gui.SimpleSearchPanel;
-import src.com.jalasoft.search.model.FileSearch;
 import src.com.jalasoft.search.model.Search;
 import src.com.jalasoft.search.model.SearchCriteria;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import java.io.File;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 /**
  * SearchController
@@ -34,64 +32,89 @@ import java.util.ArrayList;
 public class SearchController {
     /* Controller. */
     /**
-     * private model, view
+     * private model, view (main simplesearch) validator convertor criteria
      */
     private Search model;
     private MainFileSearch view;
     private SimpleSearchPanel simpleFilters;
-
     private SearchCriteria criteria;
     private Validator validator = new Validator();
+    private Convertor convert = new Convertor();
+    private Logger logger = LoggerCreator.getInstance().getLogger();
 
+    /**
+     * Search Controller Parameters
+     * @param model
+     * @param view
+     * @param simpleFilters
+     * @param results
+     */
     public SearchController(Search model, MainFileSearch view, SimpleSearchPanel simpleFilters, ResultsPanel results) {
         this.model = model;
         this.view = view;
         this.simpleFilters = simpleFilters;
-        //this.results = results;
         this.view.getSearchButton().addActionListener(e -> FillCriteria());
     }
 
+    /**
+     * Fill Criteria will listen UI and sent Criteria to the Model
+     * Retrieve Results from Model and Sent them to UI
+     */
     private void FillCriteria() {
         criteria = new SearchCriteria();
-        String fileName = this.view.getFileName();
-
+        String fileName = this.view.getFileNameFromSimpleSearch();
         if (validator.isValidName(fileName)) {
             this.criteria.setFileName(fileName);
+            if(fileName == null || fileName.isEmpty())fileName="[null]";
+            logger.info("FileName criteria set as: " +fileName);
         } else {
+            logger.warning("FileName criteria is not valid");
             // TO DO
             // Need to pass the error to UI
             // this.view.setError(fileName+" is an invalid File Name");
         }
 
-        String filePath = this.view.getPath();
+        String filePath = this.view.getPathFromSimpleSearch();
         if (validator.isValidPath(filePath)) {
             this.criteria.setFolderPath(filePath);
+            logger.info("FilePath criteria set as: "+filePath);
         } else {
+            logger.warning("FilePath criteria is not valid");
             // TO DO
             // Need to pass the error to UI
             //results.setError(filePath+" is an invalid File Path");
         }
 
-        Boolean hidden = this.view.getHidden();
+        Boolean hidden = this.view.getHiddenFromSimpleSearch();
         this.criteria.setHiddenFlag(hidden);
+        logger.info((hidden==true)? "Criteria was set to Include Hidden" : "Criteria was set to Exclude hidden");
 
-        String extension = this.view.getExtension();
+        String extension = this.view.getExtensionFromSimpleSearch();
         if (validator.isValidExtension("test." + extension)) {
-            System.out.println("The Extension [" + extension + "] is a valid File Extension");
             this.criteria.setExtension(extension);
+            logger.info("Extension criteria set as: "+extension);
         } else {
+            logger.warning("Extension criteria is not valid");
             // TO DO
             // Need to pass the error to UI
             //results.setError(filePath+" is an invalid File Extension");
         }
 
         // Send Search criterial to model.
+        logger.info("Sendding Search criteria to model.");
         model.setSearchCriteria(criteria);
+
+        //Converting criteria to Json string
+        String jsonString = convert.ObjectToJson(criteria);
+
+        //model.setResults();
+        logger.info("Searching");
         model.searchByHiddenAttribute();
 
         // List with all search result.
+        logger.info("Getting results from model.");
         ArrayList<File> fileResults = model.getResults();
-        String data[] = new String[4];
+        String data[] = new String[5];
 
         // Clean table
         this.view.getTable().setRowCount(0);
@@ -106,7 +129,12 @@ public class SearchController {
             data[2] = hiddenText;
 
             String extensionText =  fileResults.get(i).getName().substring(fileResults.get(i).getName().lastIndexOf(".")+1);
+
             data[3] = extensionText;
+
+            long size =  fileResults.get(i).length();
+            String sizeText = Long.toString(convert.ConvertBytesToMegabytes(size));
+            data[4] = sizeText;
 
             this.view.getTable().addRow(data);
         }

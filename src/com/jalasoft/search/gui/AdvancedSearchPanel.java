@@ -1,36 +1,60 @@
-package com.jalasoft.search.gui;
+
+package src.com.jalasoft.search.gui;
+        /*
+        * MainFileSearch.java  1.0  3/16/2018
+        * Copyright (c) 2018  Jalasoft
+        * All rights reserved.
+        *Author : Miguel Calderon
+        */
 
 import javax.swing.*;
-import java.awt.*;
+import java.awt.*;;
+
+//Creates panel for advanced search, extend from JPanel
 
 public class AdvancedSearchPanel extends JPanel {
 
 
     private JPanel fileNamePanel;
-    private  JPanel pathPanel;
     private  JPanel hiddenPanel;
     private  JPanel extensionPanel;
-    private  JPanel sizePanel;
-    private  JPanel advancedSearchPrincipalPanel;
+    private  JPanel containsPanel;
+    private  JPanel dateAddedPanel;
+    private  JPanel dateModifiedPanel;
+    private  JPanel createdByPanel;
     private JLabel advancedSearchLabel;
     private JLabel fileNameLabel;
-    private JLabel pathLabel;
     private JLabel hiddenLabel;
     private JLabel extensionLabel;
-    private JLabel sizeLabel;
+    private JLabel containsLabel;
+    private JLabel dateAddedFromLabel;
+    private JLabel dateAddedToLabel;
+    private JLabel dateModifiedFromLabel;
+    private JLabel dateModifiedToLabel;
+    private JLabel createdByLabel;
     private JTextField fileNameField;
-    private JTextField pathNameField;
+    private JTextField dateAddedFromField;
+    private JTextField dateAddedToField;
+    private JTextField dateModifiedFromField;
+    private JTextField dateModifiedToField;
+    private JTextField containsField;
+    private JTextField createdByField;
     private JCheckBox hiddenCheckbox ;
     private JComboBox extensionComboBox;
-    private JComboBox sizeComboBox;
+
+
+
+
 
     //Class constructor, calls methods to make panels, each panel has a component and label
     public AdvancedSearchPanel(){
         makeFileNamePanel();
-        makePathPanel();
+        makeDateAddedPanel();
+        makeDateModifiedPanel();
         makeHiddenPanel();
         makeExtensionPanel();
-        makeSizePanel();
+        makeContainsPanel();
+        makeCreatedByPanel();
         makePrincipalAdvancedSearchPanel();
     }
     //Panel that contains textfiled to enter file name for search
@@ -42,15 +66,36 @@ public class AdvancedSearchPanel extends JPanel {
         fileNamePanel.add(fileNameLabel);
         fileNamePanel.add(fileNameField);
     }
-    //Panel that contains textfiled to enter path for search
-    public void makePathPanel(){
-        pathPanel =new JPanel();
-        pathLabel = new JLabel("Path");
-        pathNameField = new JTextField (10);
-        pathPanel.setLayout(new BoxLayout(pathPanel, BoxLayout.X_AXIS));
-        pathPanel.add(pathLabel);
-        pathPanel.add(pathNameField);
+
+    //Panel that contains fields to set added dates
+    public void makeDateAddedPanel(){
+        dateAddedPanel =new JPanel();
+        dateAddedFromLabel = new JLabel("Date created from:");
+        dateAddedFromField = new JTextField (10);
+        dateAddedToLabel = new JLabel("To:");
+        dateAddedToField = new JTextField (10);
+        dateAddedPanel.setLayout(new BoxLayout(dateAddedPanel, BoxLayout.X_AXIS));
+        dateAddedPanel.add(dateAddedFromLabel);
+        dateAddedPanel.add(dateAddedFromField);
+        dateAddedPanel.add(dateAddedToLabel);
+        dateAddedPanel.add(dateAddedToField);
     }
+
+    //Panel that contains fields to set modify dates
+    public void makeDateModifiedPanel(){
+        dateModifiedPanel =new JPanel();
+        dateModifiedFromLabel = new JLabel("Date modified from:");
+        dateModifiedFromField = new JTextField (10);
+        dateModifiedToLabel = new JLabel("To:");
+        dateModifiedToField = new JTextField (10);
+        dateModifiedPanel.setLayout(new BoxLayout(dateModifiedPanel, BoxLayout.X_AXIS));
+        dateModifiedPanel.add(dateModifiedFromLabel);
+        dateModifiedPanel.add(dateModifiedFromField);
+        dateModifiedPanel.add(dateModifiedToLabel);
+        dateModifiedPanel.add(dateModifiedToField);
+    }
+
+
     //Panel that contains checbox to indicate if user wants to include hidden files or not in search
     public void makeHiddenPanel(){
         hiddenPanel =new JPanel();
@@ -70,16 +115,29 @@ public class AdvancedSearchPanel extends JPanel {
         extensionPanel.add(extensionLabel);
         extensionPanel.add(extensionComboBox);
     }
-    //Panel that contains drop down to indicate  specific range for file size
-    public void makeSizePanel(){
-        sizePanel =new JPanel();
-        sizeLabel = new JLabel("Select size range");
-        String[] sizeRanges = { "Less than 1 MB", "1MB - 50MB ", "50MB - 500MB", "500MB - 1GB", "More than 1 GB" };
-        sizeComboBox = new JComboBox(sizeRanges);
-        sizePanel.setLayout(new BoxLayout(sizePanel, BoxLayout.X_AXIS));
-        sizePanel.add(sizeLabel);
-        sizePanel.add(sizeComboBox);
+
+
+    //Panel that contains textfiled to keywords that contains a text file, to search inside of it
+    public void makeContainsPanel(){
+        containsPanel = new JPanel();
+        containsLabel = new JLabel("Contains");
+        containsField = new JTextField(10);
+        containsPanel.setLayout(new BoxLayout(containsPanel, BoxLayout.X_AXIS));
+        containsPanel.add(containsLabel);
+        containsPanel.add(containsField);
     }
+
+    //Panel that contains drop down to indicate  specific  user that created a file
+    public void makeCreatedByPanel(){
+        createdByPanel = new JPanel();
+        createdByLabel = new JLabel("Created by");
+        createdByField = new JTextField(10);
+        createdByPanel.setLayout(new BoxLayout(createdByPanel, BoxLayout.X_AXIS));
+        createdByPanel.add(createdByLabel);
+        createdByPanel.add(createdByField);
+    }
+
+
 
     //Main Panel that contains all other panels,this will be called from main Frame to display "simple search" panel with all their components
     public void makePrincipalAdvancedSearchPanel(){
@@ -90,25 +148,76 @@ public class AdvancedSearchPanel extends JPanel {
         add(Box.createRigidArea(new Dimension(0,6)));
         add(fileNamePanel);
         add(Box.createRigidArea(new Dimension(0,6)));
-        add(pathPanel);
+        add(dateAddedPanel);
+        add(Box.createRigidArea(new Dimension(0,6)));
+        add(dateModifiedPanel);
         add(Box.createRigidArea(new Dimension(0,6)));
         add(hiddenPanel);
         add(Box.createRigidArea(new Dimension(0,6)));
         add(extensionPanel);
         add(Box.createRigidArea(new Dimension(0,6)));
-        add(sizePanel);
+        add(containsPanel);
+        add(Box.createRigidArea(new Dimension(0,6)));
+        add(createdByPanel);
+
     }
 
-    /*public static void main(String[] args) {
+    //get the value in file name field
+    public String getFileNameField() {
+        return fileNameField.getText();
+    }
+
+    //get date created from
+    public String getCreatedDateFrom() {
+        return dateAddedFromField.getText();
+    }
+    //get date created to
+    public String getCreatedDateTo() {
+        return dateAddedToField.getText();
+    }
+
+    //get date modified from
+    public String getModifiedDateFrom() {
+        return dateModifiedFromField.getText();
+    }
+    //get date modified to
+    public String getModifiedDateTo() {
+        return dateModifiedToField.getText();
+    }
+    //get text on contains textfield
+    public String getContainsText() {
+        return containsField.getText();
+    }
+    //get text on created by textfield
+    public String getCreatedByText() {
+        return createdByField.getText();
+    }
+    //get the value of hidden check box, return true or false
+    public boolean getHiddenCheckbox() {
+        return hiddenCheckbox.isSelected();
+    }
+
+    //get value selected in extension drop down
+    public String getExtensionComboBox() {
+        return String.valueOf(extensionComboBox.getSelectedItem());
+    }
+
+
+   /* public static void main(String[] args) {
+
 
         JFrame test = new JFrame();
         JPanel advanced = new AdvancedSearchPanel();
         test.setLayout(new BorderLayout());
         test.setPreferredSize(new Dimension(750,280));
         test.add(advanced,BorderLayout.CENTER);
+        test.pack();
+
         test.setVisible(true);
         test.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }*/
 
 
+
 }
+

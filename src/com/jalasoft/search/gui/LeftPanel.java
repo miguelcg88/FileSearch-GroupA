@@ -2,10 +2,12 @@ package src.com.jalasoft.search.gui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class LeftPanel extends JPanel {
 
-    private JButton normalSearchButton;
+   /* private JButton normalSearchButton;
     private JButton advancedSearchButton;
     private JButton videoSearchButton;
     private JButton musicSearchButton;
@@ -30,5 +32,10 @@ public class LeftPanel extends JPanel {
         add(musicSearchButton);
         add(recentSearchsButton);
     }
+
+    //Return AdvancedSearchButton
+    public JButton getAdvancedSearchButton() {
+        return advancedSearchButton;
+    }*/
 }
 

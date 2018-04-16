@@ -23,6 +23,13 @@ import java.util.ArrayList;
 
 import com.jalasoft.search.Model.Asset;
 import com.jalasoft.search.Model.FactoryAsset;
+/*import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import src.com.jalasoft.search.DB.SearchQuery;
+import src.com.jalasoft.search.common.Convertor;
+*/
 import src.com.jalasoft.search.model.SearchCriteria;
 
 import javax.tools.FileObject;
@@ -43,8 +50,7 @@ public class Search {
     private ArrayList<Asset> shortList = new ArrayList<Asset>();
     private Asset asset;
 
-    public Search() {
-
+    public Search() throws SQLException, ClassNotFoundException {
     }
     public void setSearchCriteria(SearchCriteria sc) {
         this.searchCriteria = sc;
@@ -110,6 +116,11 @@ public class Search {
             if (f.getFileName().endsWith("." + this.searchCriteria.getExtension())){
                 System.out.println(f.getFileName() + "FOUND EXTENSION");
                 listByExtension.add(f);
+            }
+            else {
+                if (f.getName().endsWith("." + this.searchCriteria.getExtension())) {
+                    listByExtension.add(f);
+                }
             }
         }
         return listByExtension;
