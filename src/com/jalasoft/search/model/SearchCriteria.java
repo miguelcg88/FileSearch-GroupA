@@ -23,12 +23,11 @@ public class SearchCriteria {
     private String name;
     private boolean hidden;
     private String extension;
-    private String dateAddedFrom;
-    private String dateAddedTo;
-    private String dateModifiedFrom;
-    private String dateModifiedTo;
-    private String contains;
-    private String createdBy;
+    private String owner;
+    private String content;
+    private String creationDate;
+    private String modificationDate;
+
 
     /**
      * Set folder/file path
@@ -96,98 +95,42 @@ public class SearchCriteria {
     }
 
     /**
-     * Set date limit Added From
-     * @param dateAddedFrom
+     * Set file owner
+     * @param owner
      */
-    public void setDateAddedFrom(String dateAddedFrom) {
-        this.dateAddedFrom = dateAddedFrom;
+    public void setOwner(String owner) {
+        this.owner = owner;
     }
 
     /**
-     * get date limit Added From
-     * @return dateAddedFrom
+     * Get file owner
+     * @return owner
      */
-    public String getDateAddedFrom() {
-        return this.dateAddedFrom;
+    public String getOwner() {
+        return owner;
     }
 
-    /**
-     * Set date limit Added To
-     * @param dateAddedTo
-     */
-    public void setDateAddedTo(String dateAddedTo) {
-        this.dateAddedTo = dateAddedTo;
+    public void setContent(String content){
+        this.content = content;
     }
 
-    /**
-     * get date limit Added To
-     * @return dateAddedTo
-     */
-    public String getDateAddedTo() {
-        return this.dateAddedTo;
+    public String getContent() {
+        return content;
     }
 
-    /**
-     * Set date limit Modified From
-     * @param dateModifiedFrom
-     */
-    public void setDateModifiedFrom(String dateModifiedFrom) {
-        this.dateModifiedFrom = dateModifiedFrom;
+    public void setCreationDate(String creationDate){
+        this.creationDate = creationDate;
     }
 
-    /**
-     * get date limit Modified From
-     * @return dateModifiedFrom
-     */
-    public String getDateModifiedFrom() {
-        return this.dateModifiedFrom;
+    public String getCreationDate() {
+        return creationDate;
     }
 
-    /**
-     * Set date limit Modified To
-     * @param dateModifiedTo
-     */
-    public void setDateModifiedTo(String dateModifiedTo) {
-        this.dateModifiedTo = dateModifiedTo;
+    public void setModificationDate(String modificationDate){
+        this.modificationDate = modificationDate;
     }
 
-    /**
-     * get date limit Modified To
-     * @return dateModifiedTo
-     */
-    public String getDateModifiedTo() {
-        return this.dateModifiedTo;
-    }
-
-    /**
-     * Set contains text
-     * @param contains
-     */
-    public void setContains(String contains) {
-        this.contains = contains;
-    }
-
-    /**
-     * get contains text
-     * @return contains
-     */
-    public String getContains() {
-        return this.contains;
-    }
-
-    /**
-     * Set created By user field
-     * @param createdBy
-     */
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    /**
-     * get created By user field
-     * @return createdBy
-     */
-    public String getCreatedBy() {
-        return this.createdBy;
+    public String getModificationDate() {
+        return modificationDate;
     }
 }
