@@ -1,4 +1,4 @@
-package com.jalasoft.search.Model;
+package src.com.jalasoft.search.model;
 
 import src.com.jalasoft.search.model.FileSearch;
 
@@ -21,7 +21,8 @@ public class FactoryAsset {
         if (type.equals("file")) {
             return new FileSearch(tempFolderPath, tempFileNameToSearch, tempIsHidden, tempOwner, tempExtensionFile);
         } else {
-            return new FolderSearch(tempFolderPath, tempFileNameToSearch, tempIsHidden, tempOwner);
+            //return new FolderSearch(tempFolderPath, tempFileNameToSearch, tempIsHidden, tempOwner);
+            return new FileSearch(tempFolderPath, tempFileNameToSearch, tempIsHidden, tempOwner, tempExtensionFile);
             }
     }
 

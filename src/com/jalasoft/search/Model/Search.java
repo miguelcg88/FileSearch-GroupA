@@ -18,11 +18,12 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.attribute.FileTime;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-import com.jalasoft.search.Model.Asset;
-import com.jalasoft.search.Model.FactoryAsset;
+import src.com.jalasoft.search.model.Asset;
+import src.com.jalasoft.search.model.FactoryAsset;
 /*import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -60,8 +61,8 @@ public class Search {
      * This method is used to get a list of all files according  to a path and the hidden parameter.
      * If hidden is set as True, get all files that were hidden.
      * If hidden is set as False, get all files that were not hidden.
-     * @param folderPath this is the first parameter to show all files that are into this folder.
-     * @param isHiddem this is   the second parameter to show all files that are hidden.
+     * @param //folderPath this is the first parameter to show all files that are into this folder.
+     * @param //isHiddem this is   the second parameter to show all files that are hidden.
      *                 By default it is as not checked.
      */
     private ArrayList<Asset> searchByHiddenAttributeSetAsFalse(ArrayList<Asset> shortList){
@@ -118,7 +119,7 @@ public class Search {
                 listByExtension.add(f);
             }
             else {
-                if (f.getName().endsWith("." + this.searchCriteria.getExtension())) {
+                if (f.getFileName().endsWith("." + this.searchCriteria.getExtension())) {
                     listByExtension.add(f);
                 }
             }
@@ -138,11 +139,11 @@ public class Search {
         if(searchCriteria.getExtension() != null){
             searchResult = searchByExtension(searchCriteria.getExtension(),searchResult);
         }
-        if(!searchCriteria.getHiddenFlag()){
+        /*if(!searchCriteria.getHiddenFlag()){
             searchResult = searchByHiddenAttributeSetAsFalse(searchResult);
         } else {
             searchResult = searchByHiddenAttributeSetAsTrue(searchResult);
-        }
+        }*/
         if(searchCriteria.getOwner() != null){
             searchResult = searchByOwner(searchCriteria.getOwner(),searchResult);
         }
@@ -158,7 +159,7 @@ public class Search {
         return searchResult;
     }
 
-    private ArrayList<Asset> getAllFileByPath(String path) {
+    public ArrayList<Asset> getAllFileByPath(String path) {
         ArrayList<Asset> allList = new ArrayList<>();
         File file = new File(path);
         listAllFilesByPath(file, allList);
@@ -279,35 +280,4 @@ public class Search {
         String dateToCompare = dateFormat.format(ft.toMillis());
         return dateToCompare;
     }
-
-
-    //Only for testing purposes
-    public  static void main(String args[]){
-        SearchCriteria sc = new SearchCriteria();
-        sc.setFolderPath("\\Test");
-        sc.setFileName("file8");
-        sc.setExtension("jonas");
-        sc.setHiddenFlag(false);
-        sc.setOwner("WIN-IT92TJKOQE6\\Guest");
-        sc.setContent("como");
-        sc.setCreationDate("2018-16-04");
-        sc.setModificationDate("2018-16-04");
-
-        Search search = new Search();
-        search.setSearchCriteria(sc);
-
-        ArrayList<Asset> searchResult = search.getAllFileByPath(search.searchCriteria.getFilePath());
-
-
-        search.searchByName(search.searchCriteria.getFileName(),searchResult);
-        search.searchByExtension(search.searchCriteria.getExtension(),searchResult);
-        search.searchByHiddenAttributeSetAsFalse(searchResult);
-        search.searchByHiddenAttributeSetAsTrue(searchResult);
-        search.searchByOwner(search.searchCriteria.getOwner(), searchResult);
-        search.searchByContent(searchResult, search.searchCriteria.getContent());
-        search.searchByCreationDate(search.searchCriteria.getCreationDate(), searchResult);
-        search.searchByModificationDate(search.searchCriteria.getModificationDate(), searchResult);
-
-    }
-
  }

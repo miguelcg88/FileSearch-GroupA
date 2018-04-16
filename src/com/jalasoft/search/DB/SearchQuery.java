@@ -11,8 +11,13 @@
  */
 package src.com.jalasoft.search.DB;
 
+import src.com.jalasoft.search.common.Convertor;
+import src.com.jalasoft.search.model.SearchCriteria;
+
 import javax.management.relation.RelationSupport;
 import java.sql.*;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Search Criteria
@@ -50,4 +55,35 @@ public class SearchQuery {
         }
         return  result;
     }
+/*
+    public String saveCriteria(SearchCriteria criteria){
+        try{
+            SearchQuery dbh = new SearchQuery();
+            Convertor convertor = new Convertor();
+            String jsonString = convertor.ObjectToJson(criteria);
+            dbh.AddCriteria(jsonString);
+        }
+        catch(SQLException e){
+            return "error";
+        }
+        return "success";
+    }
+
+    public Map<Integer,SearchCriteria> getAllData()
+    {
+        Map<Integer,SearchCriteria> scMap = new HashMap<>();
+
+        SearchQuery dbh = new SearchQuery();
+        ResultSet set = dbh.getAllCiteria();
+
+        Gson gson = new Gson();
+        While(set.next()) {
+        SearchCriteria criteria = gson.fromJson(json, SearchCriteria.class);
+        int id = set.getInt("Id");
+        scMap.put(id, criteria);
+    }
+
+    return scMap;
+    }
+    */
 }
