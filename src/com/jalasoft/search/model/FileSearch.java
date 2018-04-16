@@ -12,7 +12,7 @@
 package src.com.jalasoft.search.model;
 
 
-import com.jalasoft.search.Model.Asset;
+import src.com.jalasoft.search.model.Asset;
 
 //import java.io.File;
 

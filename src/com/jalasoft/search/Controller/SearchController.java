@@ -17,6 +17,7 @@ import src.com.jalasoft.search.common.Validator;
 import src.com.jalasoft.search.gui.MainFileSearch;
 import src.com.jalasoft.search.gui.ResultsPanel;
 import src.com.jalasoft.search.gui.SimpleSearchPanel;
+import src.com.jalasoft.search.model.Asset;
 import src.com.jalasoft.search.model.Search;
 import src.com.jalasoft.search.model.SearchCriteria;
 
@@ -105,15 +106,16 @@ public class SearchController {
         model.setSearchCriteria(criteria);
 
         //Converting criteria to Json string
-        String jsonString = convert.ObjectToJson(criteria);
+        //String jsonString = convert.ObjectToJson(criteria);
 
         //model.setResults();
         logger.info("Searching");
-        model.searchByHiddenAttribute();
+        model.getAllFileByPath(criteria.getFilePath());
 
         // List with all search result.
         logger.info("Getting results from model.");
-        ArrayList<File> fileResults = model.getResults();
+        ArrayList<Asset> fileResults = model.getResults();
+        System.out.println(fileResults.size());
         String data[] = new String[5];
 
         // Clean table
@@ -121,18 +123,19 @@ public class SearchController {
 
         // Set search result in table
         for (int i = 0; i < fileResults.size(); i++) {
-            String nameText = fileResults.get(i).getName().replaceFirst("[.][^.]+$", "");
+            String nameText = fileResults.get(i).getFileName().replaceFirst("[.][^.]+$", "");
             data[0] = nameText;
-            data[1] = fileResults.get(i).getPath();
+            data[1] = fileResults.get(i).getFilePath();
 
-            String hiddenText = (fileResults.get(i).isHidden()) ? "Yes" : "No";
+            String hiddenText = (fileResults.get(i).getHiddenFlag()) ? "Yes" : "No";
             data[2] = hiddenText;
 
-            String extensionText =  fileResults.get(i).getName().substring(fileResults.get(i).getName().lastIndexOf(".")+1);
+            String extensionText =  fileResults.get(i).getFileName().substring(fileResults.get(i).getFileName().lastIndexOf(".")+1);
 
             data[3] = extensionText;
 
-            long size =  fileResults.get(i).length();
+            File file = new File (fileResults.get(i).getFilePath());
+            long size =  file.length();
             String sizeText = Long.toString(convert.ConvertBytesToMegabytes(size));
             data[4] = sizeText;
 

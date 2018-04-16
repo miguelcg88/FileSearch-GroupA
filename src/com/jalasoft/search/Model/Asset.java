@@ -7,7 +7,7 @@
  * accordance with the terms of the license agreement you entered into
  * with Jalasoft.
  */
-package com.jalasoft.search.Model;
+package src.com.jalasoft.search.model;
 
 /*
  *Description, the Asset.java class is the main class.
@@ -30,7 +30,7 @@ public class Asset {
 
     /**
      * Set folder/file path
-     * @param owner.
+     * @param //owner.
      */
     public Asset(String path, String fileName, Boolean isHidden, String owner) {
         this.folderPath = path;

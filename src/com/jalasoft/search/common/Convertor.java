@@ -54,7 +54,7 @@ public class Convertor {
             return null;
         }
     }
-    /*
+/*
     public String ObjectToJson(SearchCriteria criteria) {
         Gson gson = new Gson();
         String jsonToString = gson.toJson(criteria);
@@ -68,6 +68,5 @@ public class Convertor {
         SearchCriteria criteria= gson.fromJson(json, SearchCriteria.class);
 
         return criteria;
-    }
-    */
+    }*/
 }

@@ -95,7 +95,7 @@ public class SearchModel {
     public void searchByFilters(){
         //Read file //folderPath
         File file = new File(getFilePath());
-        FileSearch fileSearch = new FileSearch(getFilePath());
+        //FileSearch fileSearch = new FileSearch(getFilePath());
 
         // clean list to new search
         shortList.clear();
