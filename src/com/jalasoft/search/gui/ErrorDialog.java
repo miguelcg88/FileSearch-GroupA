@@ -15,13 +15,18 @@ import javax.swing.JOptionPane;
 public class ErrorDialog {
     private static String error;
 
-    public static void main(String[] args)
-    {
-        error = "/Users/al/backups";
-        JFrame frame = new JFrame("JOptionPane showMessageDialog example");
+
+
+
+
+    public JFrame setErrorMessage (String e) {
+        error = e;
+        JFrame frame = new JFrame("Error message");
         JOptionPane.showMessageDialog(frame,
-                "Problem writing to backup directory: '" + error + "'.");
+                error );
         System.exit(0);
+
+        return  frame;
     }
 }
 
