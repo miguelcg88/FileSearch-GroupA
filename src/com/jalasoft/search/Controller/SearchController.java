@@ -101,6 +101,18 @@ public class SearchController {
             //results.setError(filePath+" is an invalid File Extension");
         }
 
+        String owner =this.view.getCreatedBy();
+        this.criteria.setOwner(owner);
+
+        String content = this.view.getContains();
+        this.criteria.setContent(content);
+
+        String creationDate = this.view.getCreatedDate1FromAdvancedSearch();
+        this.criteria.setCreationDate(creationDate);
+
+        String modificationDate = this.view.getModifiedDate1FromAdvancedSearch();
+        this.criteria.setModificationDate(modificationDate);
+
         // Send Search criterial to model.
         logger.info("Sendding Search criteria to model.");
         model.setSearchCriteria(criteria);
@@ -124,6 +136,7 @@ public class SearchController {
         // Set search result in table
         for (int i = 0; i < fileResults.size(); i++) {
             String nameText = fileResults.get(i).getFileName().replaceFirst("[.][^.]+$", "");
+            System.out.println(fileResults.get(i));
             data[0] = nameText;
             data[1] = fileResults.get(i).getFilePath();
 

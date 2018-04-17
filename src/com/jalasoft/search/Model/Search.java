@@ -22,8 +22,9 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import src.com.jalasoft.search.Model.FactoryAsset;
 import src.com.jalasoft.search.model.Asset;
-import src.com.jalasoft.search.model.FactoryAsset;
+import src.com.jalasoft.search.Model.*;
 /*import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -81,11 +82,9 @@ public class Search {
         //Search all no hidden files
         ArrayList<Asset>  listByHiddenAttributeSetAsTrue = new ArrayList<>();
         for(Asset f: shortList){
-            if (f.getHiddenFlag()){
                 System.out.println(f.getFileName() + "FOUND HIDDEN FILEs");
                 listByHiddenAttributeSetAsTrue.add(f);
             }
-        }
         return listByHiddenAttributeSetAsTrue;
     }
 
@@ -113,18 +112,20 @@ public class Search {
     private ArrayList<Asset> searchByExtension(String extension, ArrayList<Asset> shortList) {
         //SearchByExtension
         ArrayList<Asset> listByExtension = new ArrayList<>();
-        for(Asset f: shortList){
-            if (f.getFileName().endsWith("." + this.searchCriteria.getExtension())){
-                System.out.println(f.getFileName() + "FOUND EXTENSION");
+        if(extension.equals("All")){
+            for (Asset f: shortList){
                 listByExtension.add(f);
             }
-            else {
+            return listByExtension;
+        }else {
+            for (Asset f : shortList) {
                 if (f.getFileName().endsWith("." + this.searchCriteria.getExtension())) {
+                    System.out.println(f.getFileName() + "FOUND EXTENSION");
                     listByExtension.add(f);
                 }
             }
+            return listByExtension;
         }
-        return listByExtension;
     }
 
     /**
@@ -139,17 +140,28 @@ public class Search {
         if(searchCriteria.getExtension() != null){
             searchResult = searchByExtension(searchCriteria.getExtension(),searchResult);
         }
-        /*if(!searchCriteria.getHiddenFlag()){
+        System.out.println(searchCriteria.getFileName()+"--filename");
+        System.out.println(searchCriteria.getFilePath()+"---path");
+        System.out.println(searchCriteria.getExtension()+"--extemdsio");
+        System.out.println(searchCriteria.getContent()+"---content");
+        System.out.println(searchCriteria.getHiddenFlag()+"---hidden");
+        System.out.println(searchCriteria.getCreationDate()+"---creation date");
+        System.out.println(searchCriteria.getModificationDate()+"---modification date");
+        System.out.println(searchCriteria.getOwner()+"---Owner");
+
+        if(!searchCriteria.getHiddenFlag()){
             searchResult = searchByHiddenAttributeSetAsFalse(searchResult);
         } else {
             searchResult = searchByHiddenAttributeSetAsTrue(searchResult);
-        }*/
+        }
         if(searchCriteria.getOwner() != null){
             searchResult = searchByOwner(searchCriteria.getOwner(),searchResult);
         }
+
         if(searchCriteria.getContent() != null){
             searchResult = searchByContent(searchResult, searchCriteria.getContent());
         }
+
         if(searchCriteria.getCreationDate() != null){
             searchResult = searchByCreationDate(searchCriteria.getCreationDate(),searchResult);
         }
