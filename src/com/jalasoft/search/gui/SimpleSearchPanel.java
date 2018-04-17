@@ -19,8 +19,7 @@ public class SimpleSearchPanel extends JPanel {
     private  JPanel pathPanel;
     private  JPanel hiddenPanel;
     private  JPanel extensionPanel;
-    private  JPanel sizePanel;
-    private  JPanel simpleSearchPrincipalPanel;
+    private  JPanel saveSearchPanel;
     private JLabel simpleSearchPanelLabel;
     private JLabel fileNameLabel;
     private JLabel pathLabel;
@@ -33,6 +32,7 @@ public class SimpleSearchPanel extends JPanel {
     private JComboBox<String> extensionComboBox;
     private JComboBox<String> sizeComboBox;
     private JButton browseButton;
+    private JButton saveSearchButton;
     private MyFileChooser myFileChooser;
 
     //Class constructor, calls methods to make panels, each panel has a component and label
@@ -42,6 +42,7 @@ public class SimpleSearchPanel extends JPanel {
         makeHiddenPanel();
         makeExtensionPanel();
         //makeSizePanel();
+        makeSavePanel();
         makePrincipalSimpleSearchPanel();
     }
     //Panel that contains textfiled to enter file name for search
@@ -91,6 +92,15 @@ public class SimpleSearchPanel extends JPanel {
         extensionPanel.add(extensionLabel);
        extensionPanel.add(extensionComboBox);
     }
+
+    //Panel that contains button to save search
+    public void makeSavePanel(){
+        saveSearchPanel =new JPanel();
+        saveSearchButton  = new JButton("Save Search");
+        saveSearchPanel.setLayout(new BoxLayout(saveSearchPanel, BoxLayout.X_AXIS));
+        saveSearchPanel.add(saveSearchButton);
+    }
+
     //Panel that contains drop down to indicate  specific range for file size
     /*public void makeSizePanel(){
         sizePanel =new JPanel();
@@ -118,6 +128,8 @@ public class SimpleSearchPanel extends JPanel {
         add(extensionPanel);
         //add(Box.createRigidArea(new Dimension(0,6)));
         //add(sizePanel);
+        add(Box.createRigidArea(new Dimension(0,6)));
+        add(saveSearchPanel);
     }
 
     //get the value in file name field
@@ -127,7 +139,8 @@ public class SimpleSearchPanel extends JPanel {
 
     //get the value in path name field
     public String getPathNameField() {
-        return myFileChooser.getPath();
+        return pathNameField.getText();
+        //return myFileChooser.getPath();
     }
 
     //get the value of hidden check box, return true or false

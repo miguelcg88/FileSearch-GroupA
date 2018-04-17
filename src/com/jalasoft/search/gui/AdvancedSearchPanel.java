@@ -25,6 +25,7 @@ public class AdvancedSearchPanel extends JPanel {
     private  JPanel dateModifiedPanel;
     private  JPanel createdByPanel;
     private  JPanel pathPanel;
+    private  JPanel saveSearchPanel;
     private JLabel advancedSearchLabel;
     private JLabel fileNameLabel;
     private JLabel hiddenLabel;
@@ -47,6 +48,7 @@ public class AdvancedSearchPanel extends JPanel {
     private JCheckBox hiddenCheckbox ;
     private JComboBox extensionComboBox;
     private JButton browseButton;
+    private JButton saveSearchButton;
     private MyFileChooser myFileChooser;
 
 
@@ -63,6 +65,7 @@ public class AdvancedSearchPanel extends JPanel {
         makeExtensionPanel();
         makeContainsPanel();
         makeCreatedByPanel();
+        makeSavePanel();
         makePrincipalAdvancedSearchPanel();
     }
     //Panel that contains textfiled to enter file name for search
@@ -165,6 +168,14 @@ public class AdvancedSearchPanel extends JPanel {
 
     }
 
+    //Panel that contains button to save search
+    public void makeSavePanel(){
+        saveSearchPanel =new JPanel();
+        saveSearchButton  = new JButton("Save Search");
+        saveSearchPanel.setLayout(new BoxLayout(saveSearchPanel, BoxLayout.X_AXIS));
+        saveSearchPanel.add(saveSearchButton);
+    }
+
 
 
     //Main Panel that contains all other panels,this will be called from main Frame to display "simple search" panel with all their components
@@ -189,6 +200,8 @@ public class AdvancedSearchPanel extends JPanel {
         add(containsPanel);
         add(Box.createRigidArea(new Dimension(0,6)));
         add(createdByPanel);
+        add(Box.createRigidArea(new Dimension(0,6)));
+        add(saveSearchPanel);
 
     }
 
@@ -201,7 +214,8 @@ public class AdvancedSearchPanel extends JPanel {
     }
 
    public String getPathNameField() {
-       return myFileChooser.getPath();
+        return pathNameField.getText();
+       // return myFileChooser.getPath();
    }
 
     //get date created from
