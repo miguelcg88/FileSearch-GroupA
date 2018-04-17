@@ -1,7 +1,7 @@
-package src.com.jalasoft.search.model;
+package src.com.jalasoft.search.Model;
 
 import src.com.jalasoft.search.model.FileSearch;
-
+import src.com.jalasoft.search.model.Asset;
 import java.io.File;
 
 public class FactoryAsset {
