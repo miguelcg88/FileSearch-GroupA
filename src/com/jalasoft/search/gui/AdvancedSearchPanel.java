@@ -78,7 +78,7 @@ public class AdvancedSearchPanel extends JPanel {
     //Panel that contains fields to set added dates
     public void makeDateAddedPanel(){
         dateAddedPanel =new JPanel();
-        dateAddedFromLabel = new JLabel("Date created from:");
+        dateAddedFromLabel = new JLabel("Date created from (yyyy-dd-MM):");
         dateAddedFromField = new JTextField (10);
         dateAddedToLabel = new JLabel("To:");
         dateAddedToField = new JTextField (10);
@@ -92,7 +92,7 @@ public class AdvancedSearchPanel extends JPanel {
     //Panel that contains fields to set modify dates
     public void makeDateModifiedPanel(){
         dateModifiedPanel =new JPanel();
-        dateModifiedFromLabel = new JLabel("Date modified from:");
+        dateModifiedFromLabel = new JLabel("Date modified from (yyyy-dd-MM):");
         dateModifiedFromField = new JTextField (10);
         dateModifiedToLabel = new JLabel("To:");
         dateModifiedToField = new JTextField (10);

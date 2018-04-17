@@ -66,6 +66,7 @@ public class SearchController {
     private void FillCriteria() {
         criteria = new SearchCriteria();
         if(view.panelFlag == "simple") {
+            logger.info("SIMPLE SEARCH");
             String fileName = this.view.getFileNameFromSimpleSearch();
             if (validator.isValidName(fileName)) {
                 this.criteria.setFileName(fileName);
@@ -106,6 +107,7 @@ public class SearchController {
         }
 
         if(view.panelFlag == "advanced"){
+            logger.info("ADVANCED SEARCH");
             String fileName = this.view.getFileNameFromAdvancedSearch();
             if (validator.isValidName(fileName)) {
                 this.criteria.setFileName(fileName);
@@ -145,31 +147,37 @@ public class SearchController {
             }
 
             this.criteria.setContent(this.view.getContains());
+            logger.info("Content criteria set as: "+this.view.getContains());
             this.criteria.setOwner(this.view.getCreatedBy());
+            logger.info("Created by criteria set as: "+this.view.getCreatedBy());
 
             if(validator.isValidDate(this.view.getCreatedDate1FromAdvancedSearch())){
-                this.criteria.setCreationDateFrom(this.view.getCreatedDate1FromAdvancedSearch());}
+                this.criteria.setCreationDateFrom(this.view.getCreatedDate1FromAdvancedSearch());
+                logger.info("CreationDate From criteria set as: "+this.view.getCreatedDate1FromAdvancedSearch());}
             else {
                 logger.warning("Created Date From criteria is not valid - needed format yyyy-dd-MM");
                 //error.
             }
 
             if(validator.isValidDate(this.view.getCreatedDate2FromAdvancedSearch())){
-                this.criteria.setCreationDateTo(this.view.getCreatedDate2FromAdvancedSearch());}
+                this.criteria.setCreationDateTo(this.view.getCreatedDate2FromAdvancedSearch());
+                logger.info("Creation Date To criteria set as: "+this.view.getCreatedDate2FromAdvancedSearch());}
             else {
                 logger.warning("Created Date From criteria is not valid - needed format yyyy-dd-MM");
                 //error.
             }
 
             if(validator.isValidDate(this.view.getModifiedDate1FromAdvancedSearch())){
-                this.criteria.setModificationDateFrom(this.view.getModifiedDate1FromAdvancedSearch());}
+                this.criteria.setModificationDateFrom(this.view.getModifiedDate1FromAdvancedSearch());
+                logger.info("Modification Date From criteria set as: "+this.view.getModifiedDate1FromAdvancedSearch());}
             else {
                 logger.warning("Created Date From criteria is not valid - needed format yyyy-dd-MM");
                 //error.
             }
 
             if(validator.isValidDate(this.view.getModifiedDate2FromAdvancedSearch())){
-                this.criteria.setModificationDateTo(this.view.getModifiedDate2FromAdvancedSearch());}
+                this.criteria.setModificationDateTo(this.view.getModifiedDate2FromAdvancedSearch());
+                logger.info("Modification Date To criteria set as: "+this.view.getModifiedDate2FromAdvancedSearch());}
             else {
                 logger.warning("Created Date From criteria is not valid - needed format yyyy-dd-MM");
                 //error.
@@ -198,8 +206,8 @@ public class SearchController {
 
         // Set search result in table
         for (int i = 0; i < fileResults.size(); i++) {
-            String nameText = fileResults.get(i).getFileName().replaceFirst("[.][^.]+$", "");
-            System.out.println(fileResults.get(i));
+            //String nameText = fileResults.get(i).getFileName().replaceFirst("[.][^.]+$", "");
+            String nameText = fileResults.get(i).getFileName();
             data[0] = nameText;
             data[1] = fileResults.get(i).getFilePath();
 
@@ -207,7 +215,6 @@ public class SearchController {
             data[2] = hiddenText;
 
             String extensionText =  fileResults.get(i).getFileName().substring(fileResults.get(i).getFileName().lastIndexOf(".")+1);
-
             data[3] = extensionText;
 
             File file = new File (fileResults.get(i).getFilePath());

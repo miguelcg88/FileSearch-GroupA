@@ -24,7 +24,7 @@ import java.util.ArrayList;
 
 import src.com.jalasoft.search.Model.FactoryAsset;
 import src.com.jalasoft.search.model.Asset;
-import src.com.jalasoft.search.Model.*;
+import src.com.jalasoft.search.model.*;
 /*import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -71,7 +71,7 @@ public class Search {
         ArrayList<Asset>  listByHiddenAttributeSetAsFalse = new ArrayList<>();
         for(Asset f: shortList){
             if (!f.getHiddenFlag()){
-                System.out.println(f.getFileName() + "FOUND NOT HIDDEN FILEs");
+                //System.out.println(f.getFileName() + "FOUND NOT HIDDEN FILEs");
                 listByHiddenAttributeSetAsFalse.add(f);
             }
         }
@@ -82,7 +82,7 @@ public class Search {
         //Search all no hidden files
         ArrayList<Asset>  listByHiddenAttributeSetAsTrue = new ArrayList<>();
         for(Asset f: shortList){
-                System.out.println(f.getFileName() + "FOUND HIDDEN FILEs");
+                //System.out.println(f.getFileName() + "FOUND HIDDEN FILEs");
                 listByHiddenAttributeSetAsTrue.add(f);
             }
         return listByHiddenAttributeSetAsTrue;
@@ -95,9 +95,9 @@ public class Search {
         //SearchByName
         ArrayList<Asset>  listByName = new ArrayList<>();
         for(Asset f: shortList){
-            System.out.println(f.getFileName() +"-----");
+            //System.out.println(f.getFileName() +"-----");
             if (f.getFileName().contains(fileName)){
-                System.out.println(f.getFileName() + "FOUND");
+                //System.out.println(f.getFileName() + "FOUND");
                 listByName.add(f);
             }
         }
@@ -120,7 +120,7 @@ public class Search {
         }else {
             for (Asset f : shortList) {
                 if (f.getFileName().endsWith("." + this.searchCriteria.getExtension())) {
-                    System.out.println(f.getFileName() + "FOUND EXTENSION");
+                    //System.out.println(f.getFileName() + "FOUND EXTENSION");
                     listByExtension.add(f);
                 }
             }
@@ -140,15 +140,16 @@ public class Search {
         if(searchCriteria.getExtension() != null){
             searchResult = searchByExtension(searchCriteria.getExtension(),searchResult);
         }
+        /*
         System.out.println(searchCriteria.getFileName()+"--filename");
         System.out.println(searchCriteria.getFilePath()+"---path");
         System.out.println(searchCriteria.getExtension()+"--extemdsio");
         System.out.println(searchCriteria.getContent()+"---content");
         System.out.println(searchCriteria.getHiddenFlag()+"---hidden");
-        System.out.println(searchCriteria.getCreationDate()+"---creation date");
-        System.out.println(searchCriteria.getModificationDate()+"---modification date");
+        System.out.println(searchCriteria.getCreationDateFrom()+"---creation from date");
+        System.out.println(searchCriteria.getModificationDateFrom()+"---modification from date");
         System.out.println(searchCriteria.getOwner()+"---Owner");
-
+*/
         if(!searchCriteria.getHiddenFlag()){
             searchResult = searchByHiddenAttributeSetAsFalse(searchResult);
         } else {
@@ -162,17 +163,18 @@ public class Search {
             searchResult = searchByContent(searchResult, searchCriteria.getContent());
         }
 
-        if(searchCriteria.getCreationDate() != null){
-            searchResult = searchByCreationDate(searchCriteria.getCreationDate(),searchResult);
+        if(searchCriteria.getCreationDateFrom() != null){
+            searchResult = searchByCreationDate(searchCriteria.getCreationDateFrom(),searchResult);
         }
-        if(searchCriteria.getModificationDate() != null){
-            searchResult = searchByModificationDate(searchCriteria.getModificationDate(),searchResult);
+        if(searchCriteria.getModificationDateFrom() != null){
+            searchResult = searchByModificationDate(searchCriteria.getModificationDateFrom(),searchResult);
         }
         return searchResult;
     }
 
     public ArrayList<Asset> getAllFileByPath(String path) {
         ArrayList<Asset> allList = new ArrayList<>();
+        System.out.println(path);
         File file = new File(path);
         listAllFilesByPath(file, allList);
         return allList;
@@ -200,9 +202,9 @@ public class Search {
         //SearchByOwner
         ArrayList<Asset>  listByOwner = new ArrayList<>();
         for(Asset f: shortList){
-            System.out.println(f.getFileName() +"-----");
+            //System.out.println(f.getFileName() +"-----");
             if (f.getOwner().contains(owner)){
-                System.out.println(f.getFileName() + "FOUND OWNER");
+                //System.out.println(f.getFileName() + "FOUND OWNER");
                 listByOwner.add(f);
             }
         }
@@ -216,8 +218,8 @@ public class Search {
         //SearchByOwner
         ArrayList<Asset>  listByContent = new ArrayList<>();
         for(Asset f: shortList){
-            System.out.println(f.getFileName() +"-----");
-            System.out.println(f.getFilePath());
+            //System.out.println(f.getFileName() +"-----");
+            //System.out.println(f.getFilePath());
             try {
                 File Archivo = new File(f.getFilePath());
                 FileReader fr = new FileReader(Archivo);
@@ -226,7 +228,7 @@ public class Search {
                 String line="";
                 while((line=br.readLine())!=null) {
                     if (line.indexOf(content)!= -1) {
-                        System.out.println(line+ "FOUND line");
+                        //System.out.println(line+ "FOUND line");
                         listByContent.add(f);
                     }
                 }br.close();
@@ -247,11 +249,11 @@ public class Search {
             try {
                 BasicFileAttributes bfa = Files.readAttributes(Paths.get(f.getFilePath()), BasicFileAttributes.class);
                 FileTime ft = bfa.creationTime();
-                System.out.println(f.getFileName() + "-----");
+                //System.out.println(f.getFileName() + "-----");
                 String date = dateToString(ft);
-                System.out.println(date + " -DATE");
+                //System.out.println(date + " -DATE");
                 if (date.equals(creationDate)) {
-                    System.out.println(f.getFileName() + "FOUND BY CREATION DATE");
+                    //System.out.println(f.getFileName() + "FOUND BY CREATION DATE");
                     listByCreationDate.add(f);
                 }
             }
@@ -272,11 +274,11 @@ public class Search {
             try {
                 BasicFileAttributes bfa = Files.readAttributes(Paths.get(f.getFilePath()), BasicFileAttributes.class);
                 FileTime ft = bfa.lastModifiedTime();
-                System.out.println(f.getFileName() + "-----");
+                //System.out.println(f.getFileName() + "-----");
                 String date = dateToString(ft);
-                System.out.println(date + " - DATE");
+                //System.out.println(date + " - DATE");
                 if (date.equals(modificationDate)) {
-                    System.out.println(f.getFileName() + "FOUND BY MODIFICATION DATE");
+                    //System.out.println(f.getFileName() + "FOUND BY MODIFICATION DATE");
                     listByModificationDate.add(f);
                 }
             }
