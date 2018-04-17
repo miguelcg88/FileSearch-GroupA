@@ -30,7 +30,7 @@ public class Validator {
      DATE_FORMAT has the format wanted
      Petterm fileExtnPtrn has the valid format*/
 
-    final static String DATE_FORMAT = "MM/dd/yyyy";
+    final static String DATE_FORMAT = "yyyy-dd-MM";
     private static Pattern fileExtnPtrn = Pattern.compile("([^\\s]+(\\.(?i)(exe|xls|png|zip|txt|doc|csv|pdf))$)"); //Add here all valid extensions
 
     /* isValidPath validates if path is valid - input string */

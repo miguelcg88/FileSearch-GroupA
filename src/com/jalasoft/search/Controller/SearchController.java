@@ -14,6 +14,7 @@ package src.com.jalasoft.search.Controller;
 //import java.util.logging.Logger;
 import src.com.jalasoft.search.common.Convertor;
 import src.com.jalasoft.search.common.Validator;
+import src.com.jalasoft.search.gui.ErrorDialog;
 import src.com.jalasoft.search.gui.MainFileSearch;
 import src.com.jalasoft.search.gui.ResultsPanel;
 import src.com.jalasoft.search.gui.SimpleSearchPanel;
@@ -42,6 +43,7 @@ public class SearchController {
     private Validator validator = new Validator();
     private Convertor convert = new Convertor();
     private Logger logger = LoggerCreator.getInstance().getLogger();
+    private ErrorDialog error = new ErrorDialog();
 
     /**
      * Search Controller Parameters
@@ -63,55 +65,116 @@ public class SearchController {
      */
     private void FillCriteria() {
         criteria = new SearchCriteria();
-        String fileName = this.view.getFileNameFromSimpleSearch();
-        if (validator.isValidName(fileName)) {
-            this.criteria.setFileName(fileName);
-            if(fileName == null || fileName.isEmpty())fileName="[null]";
-            logger.info("FileName criteria set as: " +fileName);
-        } else {
-            logger.warning("FileName criteria is not valid");
-            // TO DO
-            // Need to pass the error to UI
-            // this.view.setError(fileName+" is an invalid File Name");
+        if(view.panelFlag == "simple") {
+            String fileName = this.view.getFileNameFromSimpleSearch();
+            if (validator.isValidName(fileName)) {
+                this.criteria.setFileName(fileName);
+                if (fileName == null || fileName.isEmpty()) fileName = "[null]";
+                logger.info("FileName criteria set as: " + fileName);
+            } else {
+                logger.warning("FileName criteria is not valid");
+                // TO DO
+                // Need to pass the error to UI
+                // this.view.setError(fileName+" is an invalid File Name");
+            }
+
+            String filePath = this.view.getPathFromSimpleSearch();
+            if (validator.isValidPath(filePath)) {
+                this.criteria.setFolderPath(filePath);
+                logger.info("FilePath criteria set as: " + filePath);
+            } else {
+                logger.warning("FilePath criteria is not valid");
+                // TO DO
+                // Need to pass the error to UI
+                //results.setError(filePath+" is an invalid File Path");
+            }
+
+            Boolean hidden = this.view.getHiddenFromSimpleSearch();
+            this.criteria.setHiddenFlag(hidden);
+            logger.info((hidden == true) ? "Criteria was set to Include Hidden" : "Criteria was set to Exclude hidden");
+
+            String extension = this.view.getExtensionFromSimpleSearch();
+            if (validator.isValidExtension("test." + extension)) {
+                this.criteria.setExtension(extension);
+                logger.info("Extension criteria set as: " + extension);
+            } else {
+                logger.warning("Extension criteria is not valid");
+                // TO DO
+                // Need to pass the error to UI
+                //results.setError(filePath+" is an invalid File Extension");
+            }
         }
 
-        String filePath = this.view.getPathFromSimpleSearch();
-        if (validator.isValidPath(filePath)) {
-            this.criteria.setFolderPath(filePath);
-            logger.info("FilePath criteria set as: "+filePath);
-        } else {
-            logger.warning("FilePath criteria is not valid");
-            // TO DO
-            // Need to pass the error to UI
-            //results.setError(filePath+" is an invalid File Path");
+        if(view.panelFlag == "advanced"){
+            String fileName = this.view.getFileNameFromAdvancedSearch();
+            if (validator.isValidName(fileName)) {
+                this.criteria.setFileName(fileName);
+                if(fileName == null || fileName.isEmpty())fileName="[null]";
+                logger.info("FileName criteria set as: " +fileName);
+            } else {
+                logger.warning("FileName criteria is not valid");
+                // TO DO
+                // Need to pass the error to UI
+                // this.view.setError(fileName+" is an invalid File Name");
+            }
+
+            String filePath = this.view.getPathFromAdvancedSearch();
+            if (validator.isValidPath(filePath)) {
+                this.criteria.setFolderPath(filePath);
+                logger.info("FilePath criteria set as: "+filePath);
+            } else {
+                logger.warning("FilePath criteria is not valid");
+                // TO DO
+                // Need to pass the error to UI
+                //results.setError(filePath+" is an invalid File Path");
+            }
+
+            Boolean hidden = this.view.getHiddenFromAdvancedSearch();
+            this.criteria.setHiddenFlag(hidden);
+            logger.info((hidden==true)? "Criteria was set to Include Hidden" : "Criteria was set to Exclude hidden");
+
+            String extension = this.view.getFileNameFromAdvancedSearch();
+            if (validator.isValidExtension("test." + extension)) {
+                this.criteria.setExtension(extension);
+                logger.info("Extension criteria set as: "+extension);
+            } else {
+                logger.warning("Extension criteria is not valid");
+                // TO DO
+                // Need to pass the error to UI
+                //results.setError(filePath+" is an invalid File Extension");
+            }
+
+            this.criteria.setContent(this.view.getContains());
+            this.criteria.setOwner(this.view.getCreatedBy());
+
+            if(validator.isValidDate(this.view.getCreatedDate1FromAdvancedSearch())){
+                this.criteria.setCreationDateFrom(this.view.getCreatedDate1FromAdvancedSearch());}
+            else {
+                logger.warning("Created Date From criteria is not valid - needed format yyyy-dd-MM");
+                //error.
+            }
+
+            if(validator.isValidDate(this.view.getCreatedDate2FromAdvancedSearch())){
+                this.criteria.setCreationDateTo(this.view.getCreatedDate2FromAdvancedSearch());}
+            else {
+                logger.warning("Created Date From criteria is not valid - needed format yyyy-dd-MM");
+                //error.
+            }
+
+            if(validator.isValidDate(this.view.getModifiedDate1FromAdvancedSearch())){
+                this.criteria.setModificationDateFrom(this.view.getModifiedDate1FromAdvancedSearch());}
+            else {
+                logger.warning("Created Date From criteria is not valid - needed format yyyy-dd-MM");
+                //error.
+            }
+
+            if(validator.isValidDate(this.view.getModifiedDate2FromAdvancedSearch())){
+                this.criteria.setModificationDateTo(this.view.getModifiedDate2FromAdvancedSearch());}
+            else {
+                logger.warning("Created Date From criteria is not valid - needed format yyyy-dd-MM");
+                //error.
+            }
         }
-
-        Boolean hidden = this.view.getHiddenFromSimpleSearch();
-        this.criteria.setHiddenFlag(hidden);
-        logger.info((hidden==true)? "Criteria was set to Include Hidden" : "Criteria was set to Exclude hidden");
-
-        String extension = this.view.getExtensionFromSimpleSearch();
-        if (validator.isValidExtension("test." + extension)) {
-            this.criteria.setExtension(extension);
-            logger.info("Extension criteria set as: "+extension);
-        } else {
-            logger.warning("Extension criteria is not valid");
-            // TO DO
-            // Need to pass the error to UI
-            //results.setError(filePath+" is an invalid File Extension");
-        }
-
-        String owner =this.view.getCreatedBy();
-        this.criteria.setOwner(owner);
-
-        String content = this.view.getContains();
-        this.criteria.setContent(content);
-
-        String creationDate = this.view.getCreatedDate1FromAdvancedSearch();
-        this.criteria.setCreationDate(creationDate);
-
-        String modificationDate = this.view.getModifiedDate1FromAdvancedSearch();
-        this.criteria.setModificationDate(modificationDate);
 
         // Send Search criterial to model.
         logger.info("Sendding Search criteria to model.");

@@ -37,7 +37,7 @@ public class LoggerCreator {
             logger = Logger.getLogger("Test");
             logger.setUseParentHandlers(false);
             logger.setLevel(Level.ALL);
-            fileHandler = new FileHandler("C:/DevFun/FileSearch_GroupA_Log.log", true);
+            fileHandler = new FileHandler("..\\..\\FileSearch_GroupA_Log.log", true);
             fileHandler.setFormatter(new SimpleFormatter());
             logger.addHandler(fileHandler);
             fileHandler.setLevel(Level.ALL);
