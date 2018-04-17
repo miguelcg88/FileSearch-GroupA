@@ -151,6 +151,9 @@ public class MainFileSearch extends JFrame {
     public String getFileNameFromAdvancedSearch(){
         return this.advancedSearchPanel.getFileNameField();
     }
+    public String getPathFromAdvancedSearch(){
+        return this.advancedSearchPanel.getPathNameField();
+    }
     public String getExtensionFromAdvancedSearch(){
         return this.advancedSearchPanel.getExtensionComboBox();
     }

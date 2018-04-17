@@ -8,7 +8,9 @@ package src.com.jalasoft.search.gui;
         */
 
 import javax.swing.*;
-import java.awt.*;;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;;
 
 //Creates panel for advanced search, extend from JPanel
 
@@ -22,6 +24,7 @@ public class AdvancedSearchPanel extends JPanel {
     private  JPanel dateAddedPanel;
     private  JPanel dateModifiedPanel;
     private  JPanel createdByPanel;
+    private  JPanel pathPanel;
     private JLabel advancedSearchLabel;
     private JLabel fileNameLabel;
     private JLabel hiddenLabel;
@@ -32,6 +35,7 @@ public class AdvancedSearchPanel extends JPanel {
     private JLabel dateModifiedFromLabel;
     private JLabel dateModifiedToLabel;
     private JLabel createdByLabel;
+    private JLabel pathLabel;
     private JTextField fileNameField;
     private JTextField dateAddedFromField;
     private JTextField dateAddedToField;
@@ -39,8 +43,11 @@ public class AdvancedSearchPanel extends JPanel {
     private JTextField dateModifiedToField;
     private JTextField containsField;
     private JTextField createdByField;
+    private JTextField pathNameField;
     private JCheckBox hiddenCheckbox ;
     private JComboBox extensionComboBox;
+    private JButton browseButton;
+    private MyFileChooser myFileChooser;
 
 
 
@@ -49,6 +56,7 @@ public class AdvancedSearchPanel extends JPanel {
     //Class constructor, calls methods to make panels, each panel has a component and label
     public AdvancedSearchPanel(){
         makeFileNamePanel();
+        makePathPanel();
         makeDateAddedPanel();
         makeDateModifiedPanel();
         makeHiddenPanel();
@@ -109,7 +117,7 @@ public class AdvancedSearchPanel extends JPanel {
     public void makeExtensionPanel(){
         extensionPanel =new JPanel();
         extensionLabel = new JLabel("Select extension");
-        String[] extensionsList = { "exe", "doc", "xls", "png", "zip" };
+        String[] extensionsList = { "All","exe", "doc", "xls", "png", "zip" };
         extensionComboBox = new JComboBox(extensionsList);
         extensionPanel.setLayout(new BoxLayout(extensionPanel, BoxLayout.X_AXIS));
         extensionPanel.add(extensionLabel);
@@ -137,6 +145,26 @@ public class AdvancedSearchPanel extends JPanel {
         createdByPanel.add(createdByField);
     }
 
+    //Panel that contains textfiled to enter path for search
+    public void makePathPanel(){
+        pathPanel =new JPanel();
+        pathLabel = new JLabel("Path");
+        pathNameField = new JTextField (10);
+        browseButton = new JButton("Browse");
+        browseButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                myFileChooser = new MyFileChooser();
+                pathNameField.setText(myFileChooser.getPath());
+            }
+        });
+        pathPanel.setLayout(new BoxLayout(pathPanel, BoxLayout.X_AXIS));
+        pathPanel.add(pathLabel);
+        pathPanel.add(pathNameField);
+        pathPanel.add(browseButton);
+
+    }
+
 
 
     //Main Panel that contains all other panels,this will be called from main Frame to display "simple search" panel with all their components
@@ -147,6 +175,8 @@ public class AdvancedSearchPanel extends JPanel {
         add(advancedSearchLabel);
         add(Box.createRigidArea(new Dimension(0,6)));
         add(fileNamePanel);
+        add(Box.createRigidArea(new Dimension(0,6)));
+        add(pathPanel);
         add(Box.createRigidArea(new Dimension(0,6)));
         add(dateAddedPanel);
         add(Box.createRigidArea(new Dimension(0,6)));
@@ -162,10 +192,17 @@ public class AdvancedSearchPanel extends JPanel {
 
     }
 
+
+
+
     //get the value in file name field
     public String getFileNameField() {
         return fileNameField.getText();
     }
+
+   public String getPathNameField() {
+       return myFileChooser.getPath();
+   }
 
     //get date created from
     public String getCreatedDateFrom() {
