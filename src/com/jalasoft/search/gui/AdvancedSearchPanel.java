@@ -37,6 +37,7 @@ public class AdvancedSearchPanel extends JPanel {
     private JLabel dateModifiedToLabel;
     private JLabel createdByLabel;
     private JLabel pathLabel;
+    private JLabel saveLabel;
     private JTextField fileNameField;
     private JTextField dateAddedFromField;
     private JTextField dateAddedToField;
@@ -45,6 +46,7 @@ public class AdvancedSearchPanel extends JPanel {
     private JTextField containsField;
     private JTextField createdByField;
     private JTextField pathNameField;
+    private JTextField saveField;
     private JCheckBox hiddenCheckbox ;
     private JComboBox extensionComboBox;
     private JButton browseButton;
@@ -120,7 +122,7 @@ public class AdvancedSearchPanel extends JPanel {
     public void makeExtensionPanel(){
         extensionPanel =new JPanel();
         extensionLabel = new JLabel("Select extension");
-        String[] extensionsList = { "All","exe", "doc", "xls", "png", "zip" };
+        String[] extensionsList = { "All","txt","exe", "doc", "xls", "png", "zip" };
         extensionComboBox = new JComboBox(extensionsList);
         extensionPanel.setLayout(new BoxLayout(extensionPanel, BoxLayout.X_AXIS));
         extensionPanel.add(extensionLabel);
@@ -172,8 +174,13 @@ public class AdvancedSearchPanel extends JPanel {
     public void makeSavePanel(){
         saveSearchPanel =new JPanel();
         saveSearchButton  = new JButton("Save Search");
+        saveField = new JTextField();
+        saveLabel = new JLabel("Enter a name to save");
         saveSearchPanel.setLayout(new BoxLayout(saveSearchPanel, BoxLayout.X_AXIS));
+        saveSearchPanel.add(saveLabel);
+        saveSearchPanel.add(saveField);
         saveSearchPanel.add(saveSearchButton);
+
     }
 
 

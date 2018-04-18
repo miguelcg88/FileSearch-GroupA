@@ -25,9 +25,11 @@ public class SimpleSearchPanel extends JPanel {
     private JLabel pathLabel;
     private JLabel hiddenLabel;
     private JLabel extensionLabel;
+    private JLabel saveLabel;
     private JLabel sizeLabel;
     private JTextField fileNameField;
     private JTextField pathNameField;
+    private JTextField saveField;
     private JCheckBox hiddenCheckbox ;
     private JComboBox<String> extensionComboBox;
     private JComboBox<String> sizeComboBox;
@@ -97,7 +99,11 @@ public class SimpleSearchPanel extends JPanel {
     public void makeSavePanel(){
         saveSearchPanel =new JPanel();
         saveSearchButton  = new JButton("Save Search");
+        saveField = new JTextField();
+        saveLabel = new JLabel("Enter a name to save");
         saveSearchPanel.setLayout(new BoxLayout(saveSearchPanel, BoxLayout.X_AXIS));
+        saveSearchPanel.add(saveLabel);
+        saveSearchPanel.add(saveField);
         saveSearchPanel.add(saveSearchButton);
     }
 
