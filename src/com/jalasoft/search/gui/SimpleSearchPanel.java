@@ -58,7 +58,7 @@ public class SimpleSearchPanel extends JPanel {
     public void makePathPanel(){
         pathPanel =new JPanel();
         pathLabel = new JLabel("Path");
-        pathNameField = new JTextField (10);
+        pathNameField = new JTextField (50);
         browseButton = new JButton("Browse");
         browseButton.addActionListener(new ActionListener() {
             @Override
