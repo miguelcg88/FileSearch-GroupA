@@ -85,6 +85,10 @@ public class SearchController {
      */
     private void FillCriteria() throws SQLException, ClassNotFoundException {
         criteria = new SearchCriteria();
+
+        // Clean table
+        this.view.getTable().setRowCount(0);
+
         if(view.panelFlag == "simple") {
             logger.info("SIMPLE SEARCH");
             String fileName = this.view.getFileNameFromSimpleSearch();
@@ -234,8 +238,8 @@ public class SearchController {
 
         // Set search result in table
         for (int i = 0; i < fileResults.size(); i++) {
-            //String nameText = fileResults.get(i).getFileName().replaceFirst("[.][^.]+$", "");
-            String nameText = fileResults.get(i).getFileName();
+            String nameText = fileResults.get(i).getFileName().replaceFirst("[.][^.]+$", "");
+            //String nameText = fileResults.get(i).getFileName();
             data[0] = nameText;
             data[1] = fileResults.get(i).getFilePath();
 

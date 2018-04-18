@@ -174,7 +174,7 @@ public class Search {
 
     public ArrayList<Asset> getAllFileByPath(String path) {
         ArrayList<Asset> allList = new ArrayList<>();
-        System.out.println(path);
+        //System.out.println(path);
         File file = new File(path);
         listAllFilesByPath(file, allList);
         return allList;

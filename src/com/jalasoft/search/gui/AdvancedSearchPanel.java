@@ -117,7 +117,7 @@ public class AdvancedSearchPanel extends JPanel {
     public void makeExtensionPanel(){
         extensionPanel =new JPanel();
         extensionLabel = new JLabel("Select extension");
-        String[] extensionsList = { "All","exe", "doc", "xls", "png", "zip" };
+        String[] extensionsList = { "All","txt","exe", "doc", "xls", "png", "zip" };
         extensionComboBox = new JComboBox(extensionsList);
         extensionPanel.setLayout(new BoxLayout(extensionPanel, BoxLayout.X_AXIS));
         extensionPanel.add(extensionLabel);

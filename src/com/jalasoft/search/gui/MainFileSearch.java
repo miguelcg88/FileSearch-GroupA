@@ -33,6 +33,7 @@ public class MainFileSearch extends JFrame {
     SimpleSearchPanel simpleSearchPanel;
     AdvancedSearchPanel advancedSearchPanel;
     public String panelFlag = "simple";
+    SavedSearchsPanel savedSearchsPanel;
 
     //Class constructor, calls methods to make panels
     public MainFileSearch(String title) {
