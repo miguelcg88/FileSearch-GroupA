@@ -18,7 +18,7 @@ public class MyFileChooser {
         chooser.setAcceptAllFileFilterUsed(false);
 
         if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-            path  = (chooser.getCurrentDirectory()).toString();
+            path  = (chooser.getSelectedFile().getAbsolutePath()).toString();
 
         } else {
             path = "Empty";
