@@ -12,6 +12,7 @@
 package src.com.jalasoft.search.Controller;
 
 //import java.util.logging.Logger;
+import src.com.jalasoft.search.DB.SearchQuery;
 import src.com.jalasoft.search.common.Convertor;
 import src.com.jalasoft.search.common.Validator;
 import src.com.jalasoft.search.gui.ErrorDialog;
@@ -23,6 +24,7 @@ import src.com.jalasoft.search.model.Search;
 import src.com.jalasoft.search.model.SearchCriteria;
 
 import java.io.File;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
@@ -56,14 +58,32 @@ public class SearchController {
         this.model = model;
         this.view = view;
         this.simpleFilters = simpleFilters;
-        this.view.getSearchButton().addActionListener(e -> FillCriteria());
+        this.view.getSearchButton().addActionListener(e -> {
+            try {
+                FillCriteria();
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            } catch (ClassNotFoundException e1) {
+                e1.printStackTrace();
+            }
+        });
+/*
+        this.view.getRecentSearchaButton().addActionListener(e -> {
+            try {
+                GetSavedCriterias();
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            } catch (ClassNotFoundException e1) {
+                e1.printStackTrace();
+            }
+        });*/
     }
 
     /**
      * Fill Criteria will listen UI and sent Criteria to the Model
      * Retrieve Results from Model and Sent them to UI
      */
-    private void FillCriteria() {
+    private void FillCriteria() throws SQLException, ClassNotFoundException {
         criteria = new SearchCriteria();
         if(view.panelFlag == "simple") {
             logger.info("SIMPLE SEARCH");
@@ -188,8 +208,16 @@ public class SearchController {
         logger.info("Sendding Search criteria to model.");
         model.setSearchCriteria(criteria);
 
-        //Converting criteria to Json string
-        //String jsonString = convert.ObjectToJson(criteria);
+        //save criteria
+        /*
+        if(view.getNameSaveCriteria != null){
+            //Converting criteria to Json string
+            //String jsonString = convert.ObjectToJson(criteria);
+            logger.info("saving criteria in DB");
+            SearchQuery query = new SearchQuery();
+            query.saveCriteria(view.getNameSaveCriteria, criteria);
+        }
+        */
 
         //model.setResults();
         logger.info("Searching");
@@ -224,5 +252,12 @@ public class SearchController {
 
             this.view.getTable().addRow(data);
         }
+
+        /*
+        public void GetSavedCriterias(){
+            SearchQuery query = new SearchQuery();
+            view.PrintResultSet(query.getAllCriteria());
+        }
+        */
     }
 }
