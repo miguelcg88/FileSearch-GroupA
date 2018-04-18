@@ -7,7 +7,7 @@
 package src.com.jalasoft.search.gui;
 
 import javax.swing.*;
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -26,8 +26,10 @@ public class SimpleSearchPanel extends JPanel {
     private JLabel hiddenLabel;
     private JLabel extensionLabel;
     private JLabel sizeLabel;
+    private JLabel saveLabel;
     private JTextField fileNameField;
     private JTextField pathNameField;
+    private JTextField saveField;
     private JCheckBox hiddenCheckbox ;
     private JComboBox<String> extensionComboBox;
     private JComboBox<String> sizeComboBox;
@@ -97,7 +99,11 @@ public class SimpleSearchPanel extends JPanel {
     public void makeSavePanel(){
         saveSearchPanel =new JPanel();
         saveSearchButton  = new JButton("Save Search");
+        saveField = new JTextField();
+        saveLabel = new JLabel();
         saveSearchPanel.setLayout(new BoxLayout(saveSearchPanel, BoxLayout.X_AXIS));
+        saveSearchPanel.add(saveLabel);
+        saveSearchPanel.add(saveField);
         saveSearchPanel.add(saveSearchButton);
     }
 
@@ -151,6 +157,14 @@ public class SimpleSearchPanel extends JPanel {
     //get value selected in extension drop down
     public String getExtensionComboBox() {
         return String.valueOf(extensionComboBox.getSelectedItem());
+    }
+
+    //get save button
+    public JButton getSaveButton(){
+        return saveSearchButton;
+    }
+    public String getSaveField(){
+        return saveField.getText();
     }
 
     //get value selected in size drop down

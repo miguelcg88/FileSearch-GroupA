@@ -37,6 +37,7 @@ public class AdvancedSearchPanel extends JPanel {
     private JLabel dateModifiedToLabel;
     private JLabel createdByLabel;
     private JLabel pathLabel;
+    private JLabel saveLabel;
     private JTextField fileNameField;
     private JTextField dateAddedFromField;
     private JTextField dateAddedToField;
@@ -45,10 +46,12 @@ public class AdvancedSearchPanel extends JPanel {
     private JTextField containsField;
     private JTextField createdByField;
     private JTextField pathNameField;
+    private JTextField saveField;
     private JCheckBox hiddenCheckbox ;
     private JComboBox extensionComboBox;
     private JButton browseButton;
     private JButton saveSearchButton;
+
     private MyFileChooser myFileChooser;
 
 
@@ -172,7 +175,11 @@ public class AdvancedSearchPanel extends JPanel {
     public void makeSavePanel(){
         saveSearchPanel =new JPanel();
         saveSearchButton  = new JButton("Save Search");
+        saveField = new JTextField();
+        saveLabel = new JLabel();
         saveSearchPanel.setLayout(new BoxLayout(saveSearchPanel, BoxLayout.X_AXIS));
+        saveSearchPanel.add(saveLabel);
+        saveSearchPanel.add(saveField);
         saveSearchPanel.add(saveSearchButton);
     }
 
@@ -253,20 +260,13 @@ public class AdvancedSearchPanel extends JPanel {
         return String.valueOf(extensionComboBox.getSelectedItem());
     }
 
-
-   /* public static void main(String[] args) {
-
-
-        JFrame test = new JFrame();
-        JPanel advanced = new AdvancedSearchPanel();
-        test.setLayout(new BorderLayout());
-        test.setPreferredSize(new Dimension(750,280));
-        test.add(advanced,BorderLayout.CENTER);
-        test.pack();
-
-        test.setVisible(true);
-        test.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-    }*/
+    //get save button
+    public JButton getSaveButton(){
+        return saveSearchButton;
+    }
+    public String getSaveField(){
+        return saveField.getText();
+    }
 
 
 
