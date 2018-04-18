@@ -120,12 +120,12 @@ public class SearchCriteria {
         return content;
     }
 
-    public void setCreationDateFrom(String creationDateFrom){
-        this.creationDateFrom = creationDateFrom;
+    public void setCreationDateFrom(String creaFrom){
+        this.creationDateFrom = creaFrom;
     }
 
-    public void setCreationDateTo(String creationDateTo){
-        this.creationDateTo = creationDateTo;
+    public void setCreationDateTo(String creaTo){
+        this.creationDateTo = creaTo;
     }
 
     public String getCreationDateFrom() {
@@ -136,12 +136,12 @@ public class SearchCriteria {
         return creationDateTo;
     }
 
-    public void setModificationDateFrom(String modificationDateFrom){
-        this.modificationDateFrom = modificationDateFrom;
+    public void setModificationDateFrom(String modFrom){
+        this.modificationDateFrom = modFrom;
     }
 
-    public void setModificationDateTo(String modificationDateTo){
-        this.modificationDateTo = modificationDateTo;
+    public void setModificationDateTo(String modTo){
+        this.modificationDateTo = modTo;
     }
 
     public String getModificationDateFrom() {

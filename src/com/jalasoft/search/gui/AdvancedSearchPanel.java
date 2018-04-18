@@ -25,6 +25,7 @@ public class AdvancedSearchPanel extends JPanel {
     private  JPanel dateModifiedPanel;
     private  JPanel createdByPanel;
     private  JPanel pathPanel;
+    private  JPanel saveSearchPanel;
     private JLabel advancedSearchLabel;
     private JLabel fileNameLabel;
     private JLabel hiddenLabel;
@@ -47,6 +48,7 @@ public class AdvancedSearchPanel extends JPanel {
     private JCheckBox hiddenCheckbox ;
     private JComboBox extensionComboBox;
     private JButton browseButton;
+    private JButton saveSearchButton;
     private MyFileChooser myFileChooser;
 
 
@@ -63,6 +65,7 @@ public class AdvancedSearchPanel extends JPanel {
         makeExtensionPanel();
         makeContainsPanel();
         makeCreatedByPanel();
+        makeSavePanel();
         makePrincipalAdvancedSearchPanel();
     }
     //Panel that contains textfiled to enter file name for search
@@ -117,7 +120,7 @@ public class AdvancedSearchPanel extends JPanel {
     public void makeExtensionPanel(){
         extensionPanel =new JPanel();
         extensionLabel = new JLabel("Select extension");
-        String[] extensionsList = { "All","exe", "doc", "xls", "png", "zip" };
+        String[] extensionsList = { "All","txt","exe", "doc", "xls", "png", "zip" };
         extensionComboBox = new JComboBox(extensionsList);
         extensionPanel.setLayout(new BoxLayout(extensionPanel, BoxLayout.X_AXIS));
         extensionPanel.add(extensionLabel);
@@ -149,7 +152,7 @@ public class AdvancedSearchPanel extends JPanel {
     public void makePathPanel(){
         pathPanel =new JPanel();
         pathLabel = new JLabel("Path");
-        pathNameField = new JTextField (10);
+        pathNameField = new JTextField (50);
         browseButton = new JButton("Browse");
         browseButton.addActionListener(new ActionListener() {
             @Override
@@ -163,6 +166,14 @@ public class AdvancedSearchPanel extends JPanel {
         pathPanel.add(pathNameField);
         pathPanel.add(browseButton);
 
+    }
+
+    //Panel that contains button to save search
+    public void makeSavePanel(){
+        saveSearchPanel =new JPanel();
+        saveSearchButton  = new JButton("Save Search");
+        saveSearchPanel.setLayout(new BoxLayout(saveSearchPanel, BoxLayout.X_AXIS));
+        saveSearchPanel.add(saveSearchButton);
     }
 
 
@@ -189,6 +200,8 @@ public class AdvancedSearchPanel extends JPanel {
         add(containsPanel);
         add(Box.createRigidArea(new Dimension(0,6)));
         add(createdByPanel);
+        add(Box.createRigidArea(new Dimension(0,6)));
+        add(saveSearchPanel);
 
     }
 
@@ -201,7 +214,8 @@ public class AdvancedSearchPanel extends JPanel {
     }
 
    public String getPathNameField() {
-       return myFileChooser.getPath();
+        return pathNameField.getText();
+       // return myFileChooser.getPath();
    }
 
     //get date created from
