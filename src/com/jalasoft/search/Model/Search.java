@@ -71,7 +71,7 @@ public class Search {
         ArrayList<Asset>  listByHiddenAttributeSetAsFalse = new ArrayList<>();
         for(Asset f: shortList){
             if (!f.getHiddenFlag()){
-                //System.out.println(f.getFileName() + "FOUND NOT HIDDEN FILEs");
+
                 listByHiddenAttributeSetAsFalse.add(f);
             }
         }
@@ -82,9 +82,10 @@ public class Search {
         //Search all no hidden files
         ArrayList<Asset>  listByHiddenAttributeSetAsTrue = new ArrayList<>();
         for(Asset f: shortList){
-                //System.out.println(f.getFileName() + "FOUND HIDDEN FILEs");
-                listByHiddenAttributeSetAsTrue.add(f);
-            }
+
+            listByHiddenAttributeSetAsTrue.add(f);
+        }
+
         return listByHiddenAttributeSetAsTrue;
     }
 
@@ -95,9 +96,9 @@ public class Search {
         //SearchByName
         ArrayList<Asset>  listByName = new ArrayList<>();
         for(Asset f: shortList){
-            //System.out.println(f.getFileName() +"-----");
+
             if (f.getFileName().contains(fileName)){
-                //System.out.println(f.getFileName() + "FOUND");
+
                 listByName.add(f);
             }
         }
@@ -120,7 +121,7 @@ public class Search {
         }else {
             for (Asset f : shortList) {
                 if (f.getFileName().endsWith("." + this.searchCriteria.getExtension())) {
-                    //System.out.println(f.getFileName() + "FOUND EXTENSION");
+
                     listByExtension.add(f);
                 }
             }
@@ -159,10 +160,12 @@ public class Search {
             searchResult = searchByCreationDateRange(searchCriteria.getModificationDateFrom(),searchCriteria.getModificationDateTo(),searchResult);
         }
 
+
         if(!searchCriteria.getCreationDateFrom().isEmpty() || searchCriteria.getCreationDateFrom() != null || searchCriteria.getCreationDateFrom() != ""){
             searchResult = searchByCreationDateRange(searchCriteria.getCreationDateFrom(),searchCriteria.getCreationDateTo(),searchResult);
         }
 */
+
         return searchResult;
     }
 
@@ -190,15 +193,15 @@ public class Search {
     }
 
     /**
-    * This method is used to get all files that did match by an owner.
-    */
+     * This method is used to get all files that did match by an owner.
+     */
     private ArrayList<Asset> searchByOwner(String owner, ArrayList<Asset> shortList) {
         //SearchByOwner
         ArrayList<Asset>  listByOwner = new ArrayList<>();
         for(Asset f: shortList){
-            //System.out.println(f.getFileName() +"-----");
+
             if (f.getOwner().contains(owner)){
-                //System.out.println(f.getFileName() + "FOUND OWNER");
+
                 listByOwner.add(f);
             }
         }
@@ -212,8 +215,7 @@ public class Search {
         //SearchByOwner
         ArrayList<Asset>  listByContent = new ArrayList<>();
         for(Asset f: shortList){
-            //System.out.println(f.getFileName() +"-----");
-            //System.out.println(f.getFilePath());
+
             try {
                 File Archivo = new File(f.getFilePath());
                 FileReader fr = new FileReader(Archivo);
@@ -222,7 +224,7 @@ public class Search {
                 String line="";
                 while((line=br.readLine())!=null) {
                     if (line.indexOf(content)!= -1) {
-                        //System.out.println(line+ "FOUND line");
+
                         listByContent.add(f);
                     }
                 }br.close();
@@ -255,7 +257,7 @@ public class Search {
         return listByCreationDate;
     }
     /**
-     * This method is used to get all files that did match by content.
+     * This method is used to get all files that did match by Creation Date.
      */
     private ArrayList<Asset> searchByCreationDateRange(String creationDateStart, String creationDateEnd, ArrayList<Asset> shortList) {
         //SearchByCreateDate
@@ -277,9 +279,11 @@ public class Search {
     }
 
     /**
-     * This method is used to get all files that did match by content.
+
+     * This method is used to get all files that did match by modificationDate.
      */
-    private ArrayList<Asset> searchByModificationDateRange(String modDateStart, String modDateEnd, ArrayList<Asset> shortList) {
+    private ArrayList<Asset> searchByModificationDateRange(String modificationDateStart, String modificationDateEnd, ArrayList<Asset> shortList) {
+
         //SearchByCreateDate
         ArrayList<Asset>  listByModificationDateRange = new ArrayList<>();
         for(Asset f: shortList){
@@ -287,7 +291,9 @@ public class Search {
                 BasicFileAttributes bfa = Files.readAttributes(Paths.get(f.getFilePath()), BasicFileAttributes.class);
                 FileTime ft = bfa.creationTime();
                 String date = dateToString(ft);
-                if ((date.compareTo(modDateStart)>0) && (date.compareTo(modDateEnd)<0)) {
+
+                if ((date.compareTo(modificationDateStart)>0) && (date.compareTo(modificationDateEnd)<0)) {
+
                     listByModificationDateRange.add(f);
                 }
             }
@@ -308,11 +314,10 @@ public class Search {
             try {
                 BasicFileAttributes bfa = Files.readAttributes(Paths.get(f.getFilePath()), BasicFileAttributes.class);
                 FileTime ft = bfa.lastModifiedTime();
-                //System.out.println(f.getFileName() + "-----");
+
                 String date = dateToString(ft);
-                //System.out.println(date + " - DATE");
                 if (date.equals(modificationDate)) {
-                    //System.out.println(f.getFileName() + "FOUND BY MODIFICATION DATE");
+
                     listByModificationDate.add(f);
                 }
             }
@@ -324,8 +329,8 @@ public class Search {
     }
 
     private String dateToString(FileTime ft) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-dd-MM");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String dateToCompare = dateFormat.format(ft.toMillis());
         return dateToCompare;
     }
- }
+}

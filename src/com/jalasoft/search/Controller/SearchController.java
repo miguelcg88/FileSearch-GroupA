@@ -175,6 +175,7 @@ public class SearchController {
             this.criteria.setOwner(this.view.getCreatedBy());
             logger.info("Created by criteria set as: "+this.view.getCreatedBy());
 
+
             if(validator.isValidDate(this.view.getCreatedDate1FromAdvancedSearch())){
                 this.criteria.setCreationDateFrom(this.view.getCreatedDate1FromAdvancedSearch());
                 logger.info("CreationDate From criteria set as: "+this.view.getCreatedDate1FromAdvancedSearch());}
@@ -207,6 +208,7 @@ public class SearchController {
                 //error.
             }
         }
+
 
         // Send Search criterial to model.
         logger.info("Sendding Search criteria to model.");
