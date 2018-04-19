@@ -33,7 +33,7 @@ public class MainFileSearch extends JFrame {
     SimpleSearchPanel simpleSearchPanel;
     AdvancedSearchPanel advancedSearchPanel;
     public String panelFlag = "simple";
-    SavedSearchsPanel savedSearchsPanel;
+    //SavedSearchsPanel savedSearchsPanel;
 
     //Class constructor, calls methods to make panels
     public MainFileSearch(String title) {
@@ -141,6 +141,7 @@ public class MainFileSearch extends JFrame {
     public String getPathFromSimpleSearch(){
         return this.simpleSearchPanel.getPathNameField();
     }
+
     public String getExtensionFromSimpleSearch(){
         return this.simpleSearchPanel.getExtensionComboBox();
     }

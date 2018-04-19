@@ -1,4 +1,4 @@
-package src.com.jalasoft.search.Model;
+package src.com.jalasoft.search.model;
 
 import src.com.jalasoft.search.model.FileSearch;
 import src.com.jalasoft.search.model.Asset;

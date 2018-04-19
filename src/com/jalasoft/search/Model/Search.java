@@ -22,7 +22,7 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-import src.com.jalasoft.search.Model.FactoryAsset;
+import src.com.jalasoft.search.model.FactoryAsset;
 import src.com.jalasoft.search.model.Asset;
 import src.com.jalasoft.search.model.*;
 /*import java.sql.ResultSet;
@@ -151,11 +151,10 @@ public class Search {
             searchResult = searchByOwner(searchCriteria.getOwner(),searchResult);
         }
 
-        if(!searchCriteria.getContent().isEmpty()){
+        if(!searchCriteria.getContent().isEmpty()|| (searchCriteria.getContent() != null)){
             searchResult = searchByContent(searchResult, searchCriteria.getContent());
         }
-/*
-        if((!searchCriteria.getModificationDateFrom().isEmpty())|| (searchCriteria.getModificationDateFrom() != null)){
+     /*   if((!searchCriteria.getModificationDateFrom().isEmpty())|| (searchCriteria.getModificationDateFrom() != null)){
 
             searchResult = searchByCreationDateRange(searchCriteria.getModificationDateFrom(),searchCriteria.getModificationDateTo(),searchResult);
         }
@@ -163,8 +162,8 @@ public class Search {
 
         if(!searchCriteria.getCreationDateFrom().isEmpty() || searchCriteria.getCreationDateFrom() != null || searchCriteria.getCreationDateFrom() != ""){
             searchResult = searchByCreationDateRange(searchCriteria.getCreationDateFrom(),searchCriteria.getCreationDateTo(),searchResult);
-        }
-*/
+        }*/
+
 
         return searchResult;
     }
