@@ -201,7 +201,7 @@ public class AdvancedSearchPanel extends JPanel {
     }
 
    public String getPathNameField() {
-       return myFileChooser.getPath();
+       return pathNameField.getText();
    }
 
     //get date created from

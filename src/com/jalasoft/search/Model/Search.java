@@ -140,16 +140,7 @@ public class Search {
         if(searchCriteria.getExtension() != null){
             searchResult = searchByExtension(searchCriteria.getExtension(),searchResult);
         }
-        /*
-        System.out.println(searchCriteria.getFileName()+"--filename");
-        System.out.println(searchCriteria.getFilePath()+"---path");
-        System.out.println(searchCriteria.getExtension()+"--extemdsio");
-        System.out.println(searchCriteria.getContent()+"---content");
-        System.out.println(searchCriteria.getHiddenFlag()+"---hidden");
-        System.out.println(searchCriteria.getCreationDateFrom()+"---creation from date");
-        System.out.println(searchCriteria.getModificationDateFrom()+"---modification from date");
-        System.out.println(searchCriteria.getOwner()+"---Owner");
-*/
+
         if(!searchCriteria.getHiddenFlag()){
             searchResult = searchByHiddenAttributeSetAsFalse(searchResult);
         } else {
@@ -159,16 +150,19 @@ public class Search {
             searchResult = searchByOwner(searchCriteria.getOwner(),searchResult);
         }
 
-        if(searchCriteria.getContent() != null){
+        if(!searchCriteria.getContent().isEmpty()){
             searchResult = searchByContent(searchResult, searchCriteria.getContent());
         }
+/*
+        if((!searchCriteria.getModificationDateFrom().isEmpty())|| (searchCriteria.getModificationDateFrom() != null)){
 
-        if(searchCriteria.getCreationDateFrom() != null){
-            searchResult = searchByCreationDate(searchCriteria.getCreationDateFrom(),searchResult);
+            searchResult = searchByCreationDateRange(searchCriteria.getModificationDateFrom(),searchCriteria.getModificationDateTo(),searchResult);
         }
-        if(searchCriteria.getModificationDateFrom() != null){
-            searchResult = searchByModificationDate(searchCriteria.getModificationDateFrom(),searchResult);
+
+        if(!searchCriteria.getCreationDateFrom().isEmpty() || searchCriteria.getCreationDateFrom() != null || searchCriteria.getCreationDateFrom() != ""){
+            searchResult = searchByCreationDateRange(searchCriteria.getCreationDateFrom(),searchCriteria.getCreationDateTo(),searchResult);
         }
+*/
         return searchResult;
     }
 
@@ -249,11 +243,8 @@ public class Search {
             try {
                 BasicFileAttributes bfa = Files.readAttributes(Paths.get(f.getFilePath()), BasicFileAttributes.class);
                 FileTime ft = bfa.creationTime();
-                //System.out.println(f.getFileName() + "-----");
                 String date = dateToString(ft);
-                //System.out.println(date + " -DATE");
-                if (date.equals(creationDate)) {
-                    //System.out.println(f.getFileName() + "FOUND BY CREATION DATE");
+                if (date.compareTo(creationDate)<0) {
                     listByCreationDate.add(f);
                 }
             }
@@ -262,6 +253,49 @@ public class Search {
             }
         }
         return listByCreationDate;
+    }
+    /**
+     * This method is used to get all files that did match by content.
+     */
+    private ArrayList<Asset> searchByCreationDateRange(String creationDateStart, String creationDateEnd, ArrayList<Asset> shortList) {
+        //SearchByCreateDate
+        ArrayList<Asset>  listByCreationDateRange = new ArrayList<>();
+        for(Asset f: shortList){
+            try {
+                BasicFileAttributes bfa = Files.readAttributes(Paths.get(f.getFilePath()), BasicFileAttributes.class);
+                FileTime ft = bfa.creationTime();
+                String date = dateToString(ft);
+                if ((date.compareTo(creationDateStart)>0) && (date.compareTo(creationDateEnd)<0)) {
+                    listByCreationDateRange.add(f);
+                }
+            }
+            catch(Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return listByCreationDateRange;
+    }
+
+    /**
+     * This method is used to get all files that did match by content.
+     */
+    private ArrayList<Asset> searchByModificationDateRange(String modDateStart, String modDateEnd, ArrayList<Asset> shortList) {
+        //SearchByCreateDate
+        ArrayList<Asset>  listByModificationDateRange = new ArrayList<>();
+        for(Asset f: shortList){
+            try {
+                BasicFileAttributes bfa = Files.readAttributes(Paths.get(f.getFilePath()), BasicFileAttributes.class);
+                FileTime ft = bfa.creationTime();
+                String date = dateToString(ft);
+                if ((date.compareTo(modDateStart)>0) && (date.compareTo(modDateEnd)<0)) {
+                    listByModificationDateRange.add(f);
+                }
+            }
+            catch(Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return listByModificationDateRange;
     }
 
     /**

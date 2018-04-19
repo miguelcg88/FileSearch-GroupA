@@ -72,13 +72,18 @@ public class Validator {
 
     /* isValidDate validates if date is valid - input string */
     public static boolean isValidDate(String date) {
-        try {
-            DateFormat df = new SimpleDateFormat(DATE_FORMAT);
-            df.setLenient(false);
-            df.parse(date);
+        if(date==null || date.isEmpty()){
             return true;
-        } catch (ParseException e) {
-            return false;
+        }
+        else {
+            try {
+                DateFormat df = new SimpleDateFormat(DATE_FORMAT);
+                df.setLenient(false);
+                df.parse(date);
+                return true;
+            } catch (ParseException e) {
+                return false;
+            }
         }
     }
 

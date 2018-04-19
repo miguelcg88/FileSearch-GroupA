@@ -30,7 +30,6 @@ public class SearchCriteria {
     private String modificationDateFrom;
     private String modificationDateTo;
 
-
     /**
      * Set folder/file path
      * @param folderPath

@@ -159,12 +159,12 @@ public class SearchController {
             this.criteria.setHiddenFlag(hidden);
             logger.info((hidden==true)? "Criteria was set to Include Hidden" : "Criteria was set to Exclude hidden");
 
-            String extension = this.view.getFileNameFromAdvancedSearch();
+            String extension = this.view.getExtensionFromAdvancedSearch();
             if (validator.isValidExtension("test." + extension)) {
                 this.criteria.setExtension(extension);
                 logger.info("Extension criteria set as: "+extension);
             } else {
-                logger.warning("Extension criteria is not valid");
+                logger.warning("Extension criteria is not valid ["+extension);
                 // TO DO
                 // Need to pass the error to UI
                 //results.setError(filePath+" is an invalid File Extension");
