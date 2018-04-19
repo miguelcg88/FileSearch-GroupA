@@ -19,20 +19,22 @@ public class SimpleSearchPanel extends JPanel {
     private  JPanel pathPanel;
     private  JPanel hiddenPanel;
     private  JPanel extensionPanel;
-    private  JPanel sizePanel;
-    private  JPanel simpleSearchPrincipalPanel;
+    private  JPanel saveSearchPanel;
     private JLabel simpleSearchPanelLabel;
     private JLabel fileNameLabel;
     private JLabel pathLabel;
     private JLabel hiddenLabel;
     private JLabel extensionLabel;
+    private JLabel saveLabel;
     private JLabel sizeLabel;
     private JTextField fileNameField;
     private JTextField pathNameField;
+    private JTextField saveField;
     private JCheckBox hiddenCheckbox ;
     private JComboBox<String> extensionComboBox;
     private JComboBox<String> sizeComboBox;
     private JButton browseButton;
+    private JButton saveSearchButton;
     private MyFileChooser myFileChooser;
 
     //Class constructor, calls methods to make panels, each panel has a component and label
@@ -42,6 +44,7 @@ public class SimpleSearchPanel extends JPanel {
         makeHiddenPanel();
         makeExtensionPanel();
         //makeSizePanel();
+        makeSavePanel();
         makePrincipalSimpleSearchPanel();
     }
     //Panel that contains textfiled to enter file name for search
@@ -57,7 +60,7 @@ public class SimpleSearchPanel extends JPanel {
     public void makePathPanel(){
         pathPanel =new JPanel();
         pathLabel = new JLabel("Path");
-        pathNameField = new JTextField (10);
+        pathNameField = new JTextField (50);
         browseButton = new JButton("Browse");
         browseButton.addActionListener(new ActionListener() {
             @Override
@@ -89,8 +92,21 @@ public class SimpleSearchPanel extends JPanel {
         extensionComboBox = new JComboBox(extensionsList);
         extensionPanel.setLayout(new BoxLayout(extensionPanel, BoxLayout.X_AXIS));
         extensionPanel.add(extensionLabel);
-       extensionPanel.add(extensionComboBox);
+        extensionPanel.add(extensionComboBox);
     }
+
+    //Panel that contains button to save search
+    public void makeSavePanel(){
+        saveSearchPanel =new JPanel();
+        saveSearchButton  = new JButton("Save Search");
+        saveField = new JTextField();
+        saveLabel = new JLabel("Enter a name to save");
+        saveSearchPanel.setLayout(new BoxLayout(saveSearchPanel, BoxLayout.X_AXIS));
+        saveSearchPanel.add(saveLabel);
+        saveSearchPanel.add(saveField);
+        saveSearchPanel.add(saveSearchButton);
+    }
+
     //Panel that contains drop down to indicate  specific range for file size
     /*public void makeSizePanel(){
         sizePanel =new JPanel();
@@ -118,6 +134,8 @@ public class SimpleSearchPanel extends JPanel {
         add(extensionPanel);
         //add(Box.createRigidArea(new Dimension(0,6)));
         //add(sizePanel);
+        add(Box.createRigidArea(new Dimension(0,6)));
+        add(saveSearchPanel);
     }
 
     //get the value in file name field
@@ -128,6 +146,7 @@ public class SimpleSearchPanel extends JPanel {
     //get the value in path name field
     public String getPathNameField() {
         return pathNameField.getText();
+        //return myFileChooser.getPath();
     }
 
     //get the value of hidden check box, return true or false

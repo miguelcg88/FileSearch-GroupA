@@ -1,11 +1,11 @@
 
 package src.com.jalasoft.search.gui;
-        /*
-        * MainFileSearch.java  1.0  3/16/2018
-        * Copyright (c) 2018  Jalasoft
-        * All rights reserved.
-        *Author : Miguel Calderon
-        */
+/*
+ * MainFileSearch.java  1.0  3/16/2018
+ * Copyright (c) 2018  Jalasoft
+ * All rights reserved.
+ *Author : Miguel Calderon
+ */
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,6 +25,7 @@ public class AdvancedSearchPanel extends JPanel {
     private  JPanel dateModifiedPanel;
     private  JPanel createdByPanel;
     private  JPanel pathPanel;
+    private  JPanel saveSearchPanel;
     private JLabel advancedSearchLabel;
     private JLabel fileNameLabel;
     private JLabel hiddenLabel;
@@ -36,6 +37,7 @@ public class AdvancedSearchPanel extends JPanel {
     private JLabel dateModifiedToLabel;
     private JLabel createdByLabel;
     private JLabel pathLabel;
+    private JLabel saveLabel;
     private JTextField fileNameField;
     private JTextField dateAddedFromField;
     private JTextField dateAddedToField;
@@ -44,9 +46,11 @@ public class AdvancedSearchPanel extends JPanel {
     private JTextField containsField;
     private JTextField createdByField;
     private JTextField pathNameField;
+    private JTextField saveField;
     private JCheckBox hiddenCheckbox ;
     private JComboBox extensionComboBox;
     private JButton browseButton;
+    private JButton saveSearchButton;
     private MyFileChooser myFileChooser;
 
 
@@ -63,6 +67,7 @@ public class AdvancedSearchPanel extends JPanel {
         makeExtensionPanel();
         makeContainsPanel();
         makeCreatedByPanel();
+        makeSavePanel();
         makePrincipalAdvancedSearchPanel();
     }
     //Panel that contains textfiled to enter file name for search
@@ -78,7 +83,7 @@ public class AdvancedSearchPanel extends JPanel {
     //Panel that contains fields to set added dates
     public void makeDateAddedPanel(){
         dateAddedPanel =new JPanel();
-        dateAddedFromLabel = new JLabel("Date created from (yyyy-dd-MM):");
+        dateAddedFromLabel = new JLabel("Date created from:");
         dateAddedFromField = new JTextField (10);
         dateAddedToLabel = new JLabel("To:");
         dateAddedToField = new JTextField (10);
@@ -92,7 +97,7 @@ public class AdvancedSearchPanel extends JPanel {
     //Panel that contains fields to set modify dates
     public void makeDateModifiedPanel(){
         dateModifiedPanel =new JPanel();
-        dateModifiedFromLabel = new JLabel("Date modified from (yyyy-dd-MM):");
+        dateModifiedFromLabel = new JLabel("Date modified from:");
         dateModifiedFromField = new JTextField (10);
         dateModifiedToLabel = new JLabel("To:");
         dateModifiedToField = new JTextField (10);
@@ -149,7 +154,7 @@ public class AdvancedSearchPanel extends JPanel {
     public void makePathPanel(){
         pathPanel =new JPanel();
         pathLabel = new JLabel("Path");
-        pathNameField = new JTextField (10);
+        pathNameField = new JTextField (50);
         browseButton = new JButton("Browse");
         browseButton.addActionListener(new ActionListener() {
             @Override
@@ -162,6 +167,19 @@ public class AdvancedSearchPanel extends JPanel {
         pathPanel.add(pathLabel);
         pathPanel.add(pathNameField);
         pathPanel.add(browseButton);
+
+    }
+
+    //Panel that contains button to save search
+    public void makeSavePanel(){
+        saveSearchPanel =new JPanel();
+        saveSearchButton  = new JButton("Save Search");
+        saveField = new JTextField();
+        saveLabel = new JLabel("Enter a name to save");
+        saveSearchPanel.setLayout(new BoxLayout(saveSearchPanel, BoxLayout.X_AXIS));
+        saveSearchPanel.add(saveLabel);
+        saveSearchPanel.add(saveField);
+        saveSearchPanel.add(saveSearchButton);
 
     }
 
@@ -189,6 +207,8 @@ public class AdvancedSearchPanel extends JPanel {
         add(containsPanel);
         add(Box.createRigidArea(new Dimension(0,6)));
         add(createdByPanel);
+        add(Box.createRigidArea(new Dimension(0,6)));
+        add(saveSearchPanel);
 
     }
 
@@ -200,9 +220,10 @@ public class AdvancedSearchPanel extends JPanel {
         return fileNameField.getText();
     }
 
-   public String getPathNameField() {
-       return pathNameField.getText();
-   }
+    public String getPathNameField() {
+        return pathNameField.getText();
+        // return myFileChooser.getPath();
+    }
 
     //get date created from
     public String getCreatedDateFrom() {
