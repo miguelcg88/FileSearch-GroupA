@@ -25,7 +25,8 @@ public class SearchCriteria {
     private String extension;
     private String owner;
     private String content;
-    private String creationDate;
+    private String creationDateStart;
+    private String creationDateEnd;
     private String modificationDate;
 
 
@@ -118,12 +119,19 @@ public class SearchCriteria {
         return content;
     }
 
-    public void setCreationDate(String creationDate){
-        this.creationDate = creationDate;
+    public void setCreationDateStart(String creationDateStart){
+        this.creationDateStart = creationDateStart;
     }
 
-    public String getCreationDate() {
-        return creationDate;
+    public String getCreationDateStart() {
+        return creationDateStart;
+    }
+    public void setCreationDateEnd(String creationDateEnd){
+        this.creationDateEnd = creationDateEnd;
+    }
+
+    public String getCreationDateEnd() {
+        return creationDateEnd;
     }
 
     public void setModificationDate(String modificationDate){

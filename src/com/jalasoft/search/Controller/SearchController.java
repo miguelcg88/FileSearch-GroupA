@@ -107,8 +107,11 @@ public class SearchController {
         String content = this.view.getContains();
         this.criteria.setContent(content);
 
-        String creationDate = this.view.getCreatedDate1FromAdvancedSearch();
-        this.criteria.setCreationDate(creationDate);
+        String creationDateStart = this.view.getCreatedDate1FromAdvancedSearch();
+        this.criteria.setCreationDateStart(creationDateStart);
+
+        String creationDateEnd= this.view.getCreatedDate2FromAdvancedSearch();
+        this.criteria.setCreationDateEnd(creationDateEnd);
 
         String modificationDate = this.view.getModifiedDate1FromAdvancedSearch();
         this.criteria.setModificationDate(modificationDate);

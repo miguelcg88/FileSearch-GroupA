@@ -145,7 +145,9 @@ public class Search {
         System.out.println(searchCriteria.getExtension()+"--extemdsio");
         System.out.println(searchCriteria.getContent()+"---content");
         System.out.println(searchCriteria.getHiddenFlag()+"---hidden");
-        System.out.println(searchCriteria.getCreationDate()+"---creation date");
+
+        System.out.println(searchCriteria.getCreationDateStart()+"---creation date");
+        System.out.println(searchCriteria.getCreationDateEnd()+"---creation date");
         System.out.println(searchCriteria.getModificationDate()+"---modification date");
         System.out.println(searchCriteria.getOwner()+"---Owner");
 
@@ -158,16 +160,18 @@ public class Search {
             searchResult = searchByOwner(searchCriteria.getOwner(),searchResult);
         }
 
-        if(searchCriteria.getContent() != null){
+        if(!searchCriteria.getContent().isEmpty()){
+            System.out.println("SIIIIIIIIIIIII" + searchCriteria.getContent().isEmpty());
             searchResult = searchByContent(searchResult, searchCriteria.getContent());
         }
 
-        if(searchCriteria.getCreationDate() != null){
-            searchResult = searchByCreationDate(searchCriteria.getCreationDate(),searchResult);
+        if((!searchCriteria.getCreationDateStart().isEmpty())|| (searchCriteria.getCreationDateStart() != null)){
+            System.out.println("ENTRO POR FECHAS");
+            searchResult = searchByCreationDateRange(searchCriteria.getCreationDateStart(),searchCriteria.getCreationDateEnd(),searchResult);
         }
-        if(searchCriteria.getModificationDate() != null){
+        /*if(searchCriteria.getModificationDate() != null){
             searchResult = searchByModificationDate(searchCriteria.getModificationDate(),searchResult);
-        }
+        }*/
         return searchResult;
     }
 
@@ -250,7 +254,7 @@ public class Search {
                 System.out.println(f.getFileName() + "-----");
                 String date = dateToString(ft);
                 System.out.println(date + " -DATE");
-                if (date.equals(creationDate)) {
+                if (date.compareTo(creationDate)<0) {
                     System.out.println(f.getFileName() + "FOUND BY CREATION DATE");
                     listByCreationDate.add(f);
                 }
@@ -260,6 +264,33 @@ public class Search {
             }
         }
         return listByCreationDate;
+    }
+    /**
+     * This method is used to get all files that did match by content.
+     */
+    private ArrayList<Asset> searchByCreationDateRange(String creationDateStart, String creationDateEnd, ArrayList<Asset> shortList) {
+        //SearchByCreateDate
+        ArrayList<Asset>  listByCreationDateRange = new ArrayList<>();
+        System.out.println("************************DATOS**************************");
+        for(Asset f: shortList){
+            try {
+                BasicFileAttributes bfa = Files.readAttributes(Paths.get(f.getFilePath()), BasicFileAttributes.class);
+                FileTime ft = bfa.creationTime();
+                System.out.println(f.getFileName() + "-----");
+                String date = dateToString(ft);
+                System.out.println(date + " -DATE");
+                System.out.println(date.compareTo(creationDateStart)>0);
+                System.out.println(date.compareTo(creationDateEnd)<0);
+                if ((date.compareTo(creationDateStart)>0) && (date.compareTo(creationDateEnd)<0)) {
+                    System.out.println(f.getFileName() + "FOUND BY CREATION DATE DATE");
+                    listByCreationDateRange.add(f);
+                }
+            }
+            catch(Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return listByCreationDateRange;
     }
 
     /**
