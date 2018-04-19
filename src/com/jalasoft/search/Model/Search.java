@@ -71,7 +71,6 @@ public class Search {
         ArrayList<Asset>  listByHiddenAttributeSetAsFalse = new ArrayList<>();
         for(Asset f: shortList){
             if (!f.getHiddenFlag()){
-                System.out.println(f.getFileName() + "FOUND NOT HIDDEN FILEs");
                 listByHiddenAttributeSetAsFalse.add(f);
             }
         }
@@ -82,9 +81,8 @@ public class Search {
         //Search all no hidden files
         ArrayList<Asset>  listByHiddenAttributeSetAsTrue = new ArrayList<>();
         for(Asset f: shortList){
-                System.out.println(f.getFileName() + "FOUND HIDDEN FILEs");
-                listByHiddenAttributeSetAsTrue.add(f);
-            }
+            listByHiddenAttributeSetAsTrue.add(f);
+        }
         return listByHiddenAttributeSetAsTrue;
     }
 
@@ -95,9 +93,7 @@ public class Search {
         //SearchByName
         ArrayList<Asset>  listByName = new ArrayList<>();
         for(Asset f: shortList){
-            System.out.println(f.getFileName() +"-----");
             if (f.getFileName().contains(fileName)){
-                System.out.println(f.getFileName() + "FOUND");
                 listByName.add(f);
             }
         }
@@ -120,7 +116,6 @@ public class Search {
         }else {
             for (Asset f : shortList) {
                 if (f.getFileName().endsWith("." + this.searchCriteria.getExtension())) {
-                    System.out.println(f.getFileName() + "FOUND EXTENSION");
                     listByExtension.add(f);
                 }
             }
@@ -140,17 +135,6 @@ public class Search {
         if(searchCriteria.getExtension() != null){
             searchResult = searchByExtension(searchCriteria.getExtension(),searchResult);
         }
-        System.out.println(searchCriteria.getFileName()+"--filename");
-        System.out.println(searchCriteria.getFilePath()+"---path");
-        System.out.println(searchCriteria.getExtension()+"--extemdsio");
-        System.out.println(searchCriteria.getContent()+"---content");
-        System.out.println(searchCriteria.getHiddenFlag()+"---hidden");
-
-        System.out.println(searchCriteria.getCreationDateStart()+"---creation date");
-        System.out.println(searchCriteria.getCreationDateEnd()+"---creation date");
-        System.out.println(searchCriteria.getModificationDate()+"---modification date");
-        System.out.println(searchCriteria.getOwner()+"---Owner");
-
         if(!searchCriteria.getHiddenFlag()){
             searchResult = searchByHiddenAttributeSetAsFalse(searchResult);
         } else {
@@ -161,16 +145,14 @@ public class Search {
         }
 
         if(!searchCriteria.getContent().isEmpty()){
-            System.out.println("SIIIIIIIIIIIII" + searchCriteria.getContent().isEmpty());
             searchResult = searchByContent(searchResult, searchCriteria.getContent());
         }
 
-        if((!searchCriteria.getCreationDateStart().isEmpty())|| (searchCriteria.getCreationDateStart() != null)){
-            System.out.println("ENTRO POR FECHAS");
+        /*if(!searchCriteria.getCreationDateStart().isEmpty()){
             searchResult = searchByCreationDateRange(searchCriteria.getCreationDateStart(),searchCriteria.getCreationDateEnd(),searchResult);
         }
-        /*if(searchCriteria.getModificationDate() != null){
-            searchResult = searchByModificationDate(searchCriteria.getModificationDate(),searchResult);
+        if(searchCriteria.getModificationDateStart().isEmpty()){
+            searchResult = searchByModificationDateRange(searchCriteria.getModificationDateStart(),searchCriteria.getModificationDateEnd(),searchResult);
         }*/
         return searchResult;
     }
@@ -198,15 +180,13 @@ public class Search {
     }
 
     /**
-    * This method is used to get all files that did match by an owner.
-    */
+     * This method is used to get all files that did match by an owner.
+     */
     private ArrayList<Asset> searchByOwner(String owner, ArrayList<Asset> shortList) {
         //SearchByOwner
         ArrayList<Asset>  listByOwner = new ArrayList<>();
         for(Asset f: shortList){
-            System.out.println(f.getFileName() +"-----");
             if (f.getOwner().contains(owner)){
-                System.out.println(f.getFileName() + "FOUND OWNER");
                 listByOwner.add(f);
             }
         }
@@ -220,8 +200,6 @@ public class Search {
         //SearchByOwner
         ArrayList<Asset>  listByContent = new ArrayList<>();
         for(Asset f: shortList){
-            System.out.println(f.getFileName() +"-----");
-            System.out.println(f.getFilePath());
             try {
                 File Archivo = new File(f.getFilePath());
                 FileReader fr = new FileReader(Archivo);
@@ -230,7 +208,6 @@ public class Search {
                 String line="";
                 while((line=br.readLine())!=null) {
                     if (line.indexOf(content)!= -1) {
-                        System.out.println(line+ "FOUND line");
                         listByContent.add(f);
                     }
                 }br.close();
@@ -251,11 +228,8 @@ public class Search {
             try {
                 BasicFileAttributes bfa = Files.readAttributes(Paths.get(f.getFilePath()), BasicFileAttributes.class);
                 FileTime ft = bfa.creationTime();
-                System.out.println(f.getFileName() + "-----");
                 String date = dateToString(ft);
-                System.out.println(date + " -DATE");
                 if (date.compareTo(creationDate)<0) {
-                    System.out.println(f.getFileName() + "FOUND BY CREATION DATE");
                     listByCreationDate.add(f);
                 }
             }
@@ -266,23 +240,17 @@ public class Search {
         return listByCreationDate;
     }
     /**
-     * This method is used to get all files that did match by content.
+     * This method is used to get all files that did match by Creation Date.
      */
     private ArrayList<Asset> searchByCreationDateRange(String creationDateStart, String creationDateEnd, ArrayList<Asset> shortList) {
         //SearchByCreateDate
         ArrayList<Asset>  listByCreationDateRange = new ArrayList<>();
-        System.out.println("************************DATOS**************************");
         for(Asset f: shortList){
             try {
                 BasicFileAttributes bfa = Files.readAttributes(Paths.get(f.getFilePath()), BasicFileAttributes.class);
                 FileTime ft = bfa.creationTime();
-                System.out.println(f.getFileName() + "-----");
                 String date = dateToString(ft);
-                System.out.println(date + " -DATE");
-                System.out.println(date.compareTo(creationDateStart)>0);
-                System.out.println(date.compareTo(creationDateEnd)<0);
                 if ((date.compareTo(creationDateStart)>0) && (date.compareTo(creationDateEnd)<0)) {
-                    System.out.println(f.getFileName() + "FOUND BY CREATION DATE DATE");
                     listByCreationDateRange.add(f);
                 }
             }
@@ -291,6 +259,28 @@ public class Search {
             }
         }
         return listByCreationDateRange;
+    }
+
+    /**
+     * This method is used to get all files that did match by modificationDate.
+     */
+    private ArrayList<Asset> searchByModificationDateRange(String modificationDateStart, String modificationDateEnd, ArrayList<Asset> shortList) {
+        //SearchByCreateDate
+        ArrayList<Asset>  listByModificationDateRange = new ArrayList<>();
+        for(Asset f: shortList){
+            try {
+                BasicFileAttributes bfa = Files.readAttributes(Paths.get(f.getFilePath()), BasicFileAttributes.class);
+                FileTime ft = bfa.creationTime();
+                String date = dateToString(ft);
+                if ((date.compareTo(modificationDateStart)>0) && (date.compareTo(modificationDateEnd)<0)) {
+                    listByModificationDateRange.add(f);
+                }
+            }
+            catch(Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return listByModificationDateRange;
     }
 
     /**
@@ -303,11 +293,8 @@ public class Search {
             try {
                 BasicFileAttributes bfa = Files.readAttributes(Paths.get(f.getFilePath()), BasicFileAttributes.class);
                 FileTime ft = bfa.lastModifiedTime();
-                System.out.println(f.getFileName() + "-----");
                 String date = dateToString(ft);
-                System.out.println(date + " - DATE");
                 if (date.equals(modificationDate)) {
-                    System.out.println(f.getFileName() + "FOUND BY MODIFICATION DATE");
                     listByModificationDate.add(f);
                 }
             }
@@ -319,8 +306,8 @@ public class Search {
     }
 
     private String dateToString(FileTime ft) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-dd-MM");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String dateToCompare = dateFormat.format(ft.toMillis());
         return dateToCompare;
     }
- }
+}

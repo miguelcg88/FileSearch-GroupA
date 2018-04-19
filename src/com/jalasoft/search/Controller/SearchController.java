@@ -113,8 +113,11 @@ public class SearchController {
         String creationDateEnd= this.view.getCreatedDate2FromAdvancedSearch();
         this.criteria.setCreationDateEnd(creationDateEnd);
 
-        String modificationDate = this.view.getModifiedDate1FromAdvancedSearch();
-        this.criteria.setModificationDate(modificationDate);
+        String modificationDateStart = this.view.getModifiedDate1FromAdvancedSearch();
+        this.criteria.setModificationDateStart(modificationDateStart);
+
+        String modificationDateEnd = this.view.getModifiedDate2FromAdvancedSearch();
+        this.criteria.setModificationDateEnd(modificationDateEnd);
 
         // Send Search criterial to model.
         logger.info("Sendding Search criteria to model.");
