@@ -32,8 +32,8 @@ public class MainFileSearch extends JFrame {
     private ResultsPanel resultsPanel;
     SimpleSearchPanel simpleSearchPanel;
     AdvancedSearchPanel advancedSearchPanel;
+    public String panelFlag = "simple";
     SavedSearchsPanel savedSearchsPanel;
-    private String panelFlag;
 
     //Class constructor, calls methods to make panels
     public MainFileSearch(String title) {
@@ -46,7 +46,6 @@ public class MainFileSearch extends JFrame {
         pack();
         setLayout(new BorderLayout());
         resultsPanel = new ResultsPanel();
-        savedSearchsPanel = new SavedSearchsPanel();
         add(resultsPanel);
         add(northPanel,BorderLayout.NORTH);
         add(resultsPanel,BorderLayout.CENTER );
@@ -94,10 +93,10 @@ public class MainFileSearch extends JFrame {
         simpleSearchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 northPanel.remove(advancedSearchPanel);
                 northPanel.repaint();
                 northPanel.revalidate();
+
                 northPanel.add(simpleSearchPanel);
                 northPanel.repaint();
                 northPanel.revalidate();
@@ -111,10 +110,10 @@ public class MainFileSearch extends JFrame {
         advancedSearchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 northPanel.remove(simpleSearchPanel);
                 northPanel.repaint();
                 northPanel.revalidate();
+
                 northPanel.add(advancedSearchPanel);
                 northPanel.repaint();
                 northPanel.revalidate();
@@ -124,21 +123,6 @@ public class MainFileSearch extends JFrame {
         videoSearchButton = new JButton("Video");
         musicSearchButton = new JButton("Music");
         recentSearchsButton = new JButton("Recent Searchs");
-        recentSearchsButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                resultsPanel.remove(resultsPanel);
-                resultsPanel.repaint();
-                resultsPanel.revalidate();
-                resultsPanel.add(savedSearchsPanel);
-                resultsPanel.repaint();
-                resultsPanel.revalidate();
-                //aqui debo agregar al frame en vez del resultspanel
-            }
-        });
-
-
         leftPanel.setLayout(new GridLayout(5,1));
         leftPanel.setBackground(Color.darkGray);
         leftPanel.add(simpleSearchButton);
@@ -185,11 +169,6 @@ public class MainFileSearch extends JFrame {
     public String getCreatedBy(){return this.advancedSearchPanel.getCreatedByText();}
 
     public String getPanelFlag(){return this.panelFlag;}
-
-    public void setSavedSearchs(){ //to do
-
-    }
-
 
 
 

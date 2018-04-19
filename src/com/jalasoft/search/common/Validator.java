@@ -30,7 +30,7 @@ public class Validator {
      DATE_FORMAT has the format wanted
      Petterm fileExtnPtrn has the valid format*/
 
-    final static String DATE_FORMAT = "MM/dd/yyyy";
+    final static String DATE_FORMAT = "yyyy-dd-MM";
     private static Pattern fileExtnPtrn = Pattern.compile("([^\\s]+(\\.(?i)(exe|xls|png|zip|txt|doc|csv|pdf))$)"); //Add here all valid extensions
 
     /* isValidPath validates if path is valid - input string */
@@ -72,13 +72,18 @@ public class Validator {
 
     /* isValidDate validates if date is valid - input string */
     public static boolean isValidDate(String date) {
-        try {
-            DateFormat df = new SimpleDateFormat(DATE_FORMAT);
-            df.setLenient(false);
-            df.parse(date);
+        if(date==null || date.isEmpty()){
             return true;
-        } catch (ParseException e) {
-            return false;
+        }
+        else {
+            try {
+                DateFormat df = new SimpleDateFormat(DATE_FORMAT);
+                df.setLenient(false);
+                df.parse(date);
+                return true;
+            } catch (ParseException e) {
+                return false;
+            }
         }
     }
 
