@@ -35,6 +35,6 @@ public class MVCSearch {
         SimpleSearchPanel simpleFilters = new SimpleSearchPanel();
         ResultsPanel results = new ResultsPanel();
         SearchController controller = new SearchController(model, view, simpleFilters, results);
-        SearchQuery sQuery = new SearchQuery();
+        //SearchQuery sQuery = new SearchQuery();
     }
 }

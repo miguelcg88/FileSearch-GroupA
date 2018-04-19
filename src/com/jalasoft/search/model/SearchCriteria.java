@@ -25,10 +25,10 @@ public class SearchCriteria {
     private String extension;
     private String owner;
     private String content;
-    private String creationDateStart;
-    private String creationDateEnd;
-    private String modificationDate;
-
+    private String creationDateFrom;
+    private String creationDateTo;
+    private String modificationDateFrom;
+    private String modificationDateTo;
 
     /**
      * Set folder/file path
@@ -119,26 +119,35 @@ public class SearchCriteria {
         return content;
     }
 
-    public void setCreationDateStart(String creationDateStart){
-        this.creationDateStart = creationDateStart;
+    public void setCreationDateFrom(String creaFrom){
+        this.creationDateFrom = creaFrom;
     }
 
-    public String getCreationDateStart() {
-        return creationDateStart;
-    }
-    public void setCreationDateEnd(String creationDateEnd){
-        this.creationDateEnd = creationDateEnd;
+    public void setCreationDateTo(String creaTo){
+        this.creationDateTo = creaTo;
     }
 
-    public String getCreationDateEnd() {
-        return creationDateEnd;
+    public String getCreationDateFrom() {
+        return creationDateFrom;
     }
 
-    public void setModificationDate(String modificationDate){
-        this.modificationDate = modificationDate;
+    public String getCreationDateTo() {
+        return creationDateTo;
     }
 
-    public String getModificationDate() {
-        return modificationDate;
+    public void setModificationDateFrom(String modFrom){
+        this.modificationDateFrom = modFrom;
+    }
+
+    public void setModificationDateTo(String modTo){
+        this.modificationDateTo = modTo;
+    }
+
+    public String getModificationDateFrom() {
+        return modificationDateFrom;
+    }
+
+    public String getModificationDateTo() {
+        return modificationDateTo;
     }
 }

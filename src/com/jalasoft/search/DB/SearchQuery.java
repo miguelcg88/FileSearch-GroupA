@@ -56,15 +56,17 @@ public class SearchQuery {
         return  result;
     }
 /*
-    public String saveCriteria(SearchCriteria criteria){
+    public String saveCriteria(String name, SearchCriteria criteria){
         try{
             SearchQuery dbh = new SearchQuery();
             Convertor convertor = new Convertor();
             String jsonString = convertor.ObjectToJson(criteria);
-            dbh.AddCriteria(jsonString);
+            dbh.AddCriteria(name, jsonString);
         }
         catch(SQLException e){
             return "error";
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
         return "success";
     }
