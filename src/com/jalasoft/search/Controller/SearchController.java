@@ -177,7 +177,7 @@ public class SearchController {
 
 
             if(validator.isValidDate(this.view.getCreatedDate1FromAdvancedSearch())){
-                this.criteria.setCreationDateFrom(this.view.getCreatedDate1FromAdvancedSearch());
+                this.criteria.setCreatedDateStart(this.view.getCreatedDate1FromAdvancedSearch());
                 logger.info("CreationDate From criteria set as: "+this.view.getCreatedDate1FromAdvancedSearch());}
             else {
                 logger.warning("Created Date From criteria is not valid - needed format yyyy-dd-MM");
@@ -185,7 +185,7 @@ public class SearchController {
             }
 
             if(validator.isValidDate(this.view.getCreatedDate2FromAdvancedSearch())){
-                this.criteria.setCreationDateTo(this.view.getCreatedDate2FromAdvancedSearch());
+                this.criteria.setCreatedDateEnd(this.view.getCreatedDate2FromAdvancedSearch());
                 logger.info("Creation Date To criteria set as: "+this.view.getCreatedDate2FromAdvancedSearch());}
             else {
                 logger.warning("Created Date From criteria is not valid - needed format yyyy-dd-MM");
@@ -193,7 +193,7 @@ public class SearchController {
             }
 
             if(validator.isValidDate(this.view.getModifiedDate1FromAdvancedSearch())){
-                this.criteria.setModificationDateFrom(this.view.getModifiedDate1FromAdvancedSearch());
+                this.criteria.setModifiedDateStart(this.view.getModifiedDate1FromAdvancedSearch());
                 logger.info("Modification Date From criteria set as: "+this.view.getModifiedDate1FromAdvancedSearch());}
             else {
                 logger.warning("Created Date From criteria is not valid - needed format yyyy-dd-MM");
@@ -201,7 +201,7 @@ public class SearchController {
             }
 
             if(validator.isValidDate(this.view.getModifiedDate2FromAdvancedSearch())){
-                this.criteria.setModificationDateTo(this.view.getModifiedDate2FromAdvancedSearch());
+                this.criteria.setModifiedDateEnd(this.view.getModifiedDate2FromAdvancedSearch());
                 logger.info("Modification Date To criteria set as: "+this.view.getModifiedDate2FromAdvancedSearch());}
             else {
                 logger.warning("Created Date From criteria is not valid - needed format yyyy-dd-MM");

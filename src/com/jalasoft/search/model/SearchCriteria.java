@@ -30,6 +30,10 @@ public class SearchCriteria {
     private String creationDateEnd;
     private String modificationDateStart;
     private String modificationDateEnd;
+    private String createdDateStart;
+    private String createdDateEnd;
+    private String modifiedDateStart;
+    private String modifiedDateEnd;
 
 
 
@@ -122,11 +126,39 @@ public class SearchCriteria {
         return content;
     }
 
-    public void setCreationDateFrom(String creaFrom){
-        this.creationDateStart = creaFrom;
+    public void setCreatedDateStart(String createdDateStart){
+        //System.out.println(createdDateStart + "SETT");
+        this.createdDateStart = createdDateStart;
     }
 
-    public void setCreationDateTo(String creaTo){
+    public String getCreatedDateStart() {
+        return createdDateStart;
+    }
+
+    public void setCreatedDateEnd(String createdDateEnd){
+        this.createdDateEnd = createdDateEnd;
+    }
+
+    public String getCreatedDateEnd() {
+        return createdDateEnd;
+    }
+    public void setModifiedDateStart(String modifiedDateStart){
+        this.modifiedDateStart = modifiedDateStart;
+    }
+
+    public String getModifiedDateStart() {
+        return modifiedDateStart;
+    }
+
+    public void setModifiedDateEnd(String modifiedDateEnd){
+        this.modifiedDateEnd = modifiedDateEnd;
+    }
+
+    public String getModifiedDateEnd() {
+        return modifiedDateEnd;
+    }
+
+    /*public void setCreationDateTo(String creaTo){
         this.creationDateEnd = creaTo;
     }
 
@@ -175,6 +207,6 @@ public class SearchCriteria {
     public String getModificationDateEnd() {
         return modificationDateEnd;
     }
-
+*/
 
 }

@@ -22,6 +22,7 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import src.com.jalasoft.search.common.Validator;
 import src.com.jalasoft.search.model.FactoryAsset;
 import src.com.jalasoft.search.model.Asset;
 import src.com.jalasoft.search.model.*;
@@ -51,6 +52,7 @@ public class Search {
     private SearchCriteria searchCriteria;
     private ArrayList<Asset> shortList = new ArrayList<Asset>();
     private Asset asset;
+    private Validator validator = new Validator();
 
     public Search() throws SQLException, ClassNotFoundException {
     }
@@ -151,19 +153,22 @@ public class Search {
             searchResult = searchByOwner(searchCriteria.getOwner(),searchResult);
         }
 
-        if(!searchCriteria.getContent().isEmpty()|| (searchCriteria.getContent() != null)){
+        if(searchCriteria.getContent().length() != 0){
+            System.out.println("searching by Content");
             searchResult = searchByContent(searchResult, searchCriteria.getContent());
         }
-     /*   if((!searchCriteria.getModificationDateFrom().isEmpty())|| (searchCriteria.getModificationDateFrom() != null)){
-
-            searchResult = searchByCreationDateRange(searchCriteria.getModificationDateFrom(),searchCriteria.getModificationDateTo(),searchResult);
+        System.out.println(searchCriteria.getCreatedDateStart() + "---->START");
+        System.out.println(searchCriteria.getCreatedDateEnd()+"------>END");
+        if((searchCriteria.getCreatedDateStart().length() != 0)&&(searchCriteria.getCreatedDateEnd().length() != 0)){
+              System.out.println("Searching by CreateDate");
+                searchResult = searchByCreationDateRange(searchCriteria.getCreatedDateStart(), searchCriteria.getCreatedDateEnd(), searchResult);
         }
+        System.out.println(searchCriteria.getCreatedDateStart());
 
-
-        if(!searchCriteria.getCreationDateFrom().isEmpty() || searchCriteria.getCreationDateFrom() != null || searchCriteria.getCreationDateFrom() != ""){
-            searchResult = searchByCreationDateRange(searchCriteria.getCreationDateFrom(),searchCriteria.getCreationDateTo(),searchResult);
-        }*/
-
+        if((searchCriteria.getModifiedDateStart().length() != 0)&&(searchCriteria.getModifiedDateEnd().length() != 0)){
+            System.out.println("Searching by Modified Date");
+            searchResult = searchByModificationDateRange(searchCriteria.getModifiedDateStart(), searchCriteria.getModifiedDateEnd(), searchResult);
+        }
 
         return searchResult;
     }
@@ -266,6 +271,10 @@ public class Search {
                 BasicFileAttributes bfa = Files.readAttributes(Paths.get(f.getFilePath()), BasicFileAttributes.class);
                 FileTime ft = bfa.creationTime();
                 String date = dateToString(ft);
+                System.out.println("DATE FILE->" + date);
+                System.out.println(" From->  " + creationDateStart + " To  " + creationDateEnd);
+                System.out.println(date.compareTo(creationDateStart)>0);
+                System.out.println(date.compareTo(creationDateEnd)<0);
                 if ((date.compareTo(creationDateStart)>0) && (date.compareTo(creationDateEnd)<0)) {
                     listByCreationDateRange.add(f);
                 }
@@ -288,7 +297,7 @@ public class Search {
         for(Asset f: shortList){
             try {
                 BasicFileAttributes bfa = Files.readAttributes(Paths.get(f.getFilePath()), BasicFileAttributes.class);
-                FileTime ft = bfa.creationTime();
+                FileTime ft = bfa.lastModifiedTime();
                 String date = dateToString(ft);
 
                 if ((date.compareTo(modificationDateStart)>0) && (date.compareTo(modificationDateEnd)<0)) {
@@ -328,7 +337,7 @@ public class Search {
     }
 
     private String dateToString(FileTime ft) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-dd-MM");
         String dateToCompare = dateFormat.format(ft.toMillis());
         return dateToCompare;
     }
