@@ -44,8 +44,8 @@ import javax.tools.FileObject;
  * 2. FILE NAME
  * 3. EXTENSION
  * 4. HIDDEN
- * @version 1.0
- * @author Jonas Aramayo
+ * @version 11.0
+ * @author Jonas Aramayo Achabal
  */
 
 public class Search {
@@ -154,19 +154,12 @@ public class Search {
         }
 
         if(searchCriteria.getContent().length() != 0){
-            System.out.println("searching by Content");
             searchResult = searchByContent(searchResult, searchCriteria.getContent());
         }
-        System.out.println(searchCriteria.getCreatedDateStart() + "---->START");
-        System.out.println(searchCriteria.getCreatedDateEnd()+"------>END");
         if((searchCriteria.getCreatedDateStart().length() != 0)&&(searchCriteria.getCreatedDateEnd().length() != 0)){
-              System.out.println("Searching by CreateDate");
-                searchResult = searchByCreationDateRange(searchCriteria.getCreatedDateStart(), searchCriteria.getCreatedDateEnd(), searchResult);
+            searchResult = searchByCreationDateRange(searchCriteria.getCreatedDateStart(), searchCriteria.getCreatedDateEnd(), searchResult);
         }
-        System.out.println(searchCriteria.getCreatedDateStart());
-
         if((searchCriteria.getModifiedDateStart().length() != 0)&&(searchCriteria.getModifiedDateEnd().length() != 0)){
-            System.out.println("Searching by Modified Date");
             searchResult = searchByModificationDateRange(searchCriteria.getModifiedDateStart(), searchCriteria.getModifiedDateEnd(), searchResult);
         }
 
@@ -175,7 +168,6 @@ public class Search {
 
     public ArrayList<Asset> getAllFileByPath(String path) {
         ArrayList<Asset> allList = new ArrayList<>();
-        //System.out.println(path);
         File file = new File(path);
         listAllFilesByPath(file, allList);
         return allList;
@@ -271,10 +263,6 @@ public class Search {
                 BasicFileAttributes bfa = Files.readAttributes(Paths.get(f.getFilePath()), BasicFileAttributes.class);
                 FileTime ft = bfa.creationTime();
                 String date = dateToString(ft);
-                System.out.println("DATE FILE->" + date);
-                System.out.println(" From->  " + creationDateStart + " To  " + creationDateEnd);
-                System.out.println(date.compareTo(creationDateStart)>0);
-                System.out.println(date.compareTo(creationDateEnd)<0);
                 if ((date.compareTo(creationDateStart)>0) && (date.compareTo(creationDateEnd)<0)) {
                     listByCreationDateRange.add(f);
                 }
